@@ -1,5 +1,5 @@
 This is a React Native app designed to produce all of the event types in the New
-Relic Mobile Agent.
+Relic Mobile Agent. It now lives in the public Github.
 
 ## Entities:
 
@@ -109,3 +109,4 @@ Per LambdaTest's data retention policy, applications are automatically deleted e
 To generate data and run tests locally, create a `.env` file and add your `LT_USERNAME` and `LT_ACCESSKEY`. These values can be found in your LambdaTest account under [Account Settings -> Password and Security](https://accounts.lambdatest.com/security/username-accesskey).
 
 From the root of main-agent-test-app run: `npm run test:wdio-ios` or `npm run test:wdio-android` This will launch the webdriver local-runner and you can watch the test run. Check the data you’ve run is showing up in New Relic [here](https://staging-one.newrelic.com/mobile/home/MTIxNDgyNzF8TU9CSUxFfEFQUExJQ0FUSU9OfDY0MzkyODIz) for iOS, [here](https://staging-one.newrelic.com/mobile/home/MTIxNDgyNzF8TU9CSUxFfEFQUExJQ0FUSU9OfDY0MzkyODE2) for Android and [here](https://appautomation.lambdatest.com/build?pageType=build) for LambdaTest.
+
