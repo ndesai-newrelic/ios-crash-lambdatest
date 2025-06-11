@@ -2,7 +2,7 @@
   # main-agent-test-app-ios: https://staging.onenr.io/07jbMl8KnRy
   # main-agent-test-app-android: https://staging.onenr.io/0EjOeXJOOw6
 
-# This is accomplished by triggering npm scripts that run a suite of tests executed with WDIO
+# This is accomplished by triggering npm scripts that execute a suite of tests in parallel
 # The tests spin up simulated iOS and Android devices on LambdaTest that are instrumented with the Mobile agent
 
 name: 'WDIO: automate iOS and Android tests'
@@ -19,14 +19,48 @@ env:
   LT_USERNAME: ${{ secrets.LAMBDA_USERNAME }}
   LT_ACCESSKEY: ${{ secrets.LAMBDA_ACCESS_KEY }}
 jobs:
-  wdio:
-    name: Generate iOS and Android data
+  install-dependencies:
+    name: Install dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: install dependencies
-        run:  npm i
-      - name: Generate iOS data
+        run:  nvm use & npm ci
+        
+      - name: Log success
+        if: successful()
+        run: echo "[ WORKER ] - successfully installed packages" 
+        
+      - name: Log failure
+        if: failure()
+        run: echo "[ WORKER ] - failed to install packages" 
+  ios-data:
+    name: Generate iOS data
+    runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
+      - name: Execute iOS tests
         run: for i in {1..5}; do npm run test:wdio-ios; done
-      - name: Generate Android data
+        
+      - name: Log success
+        if: successful()
+        run: echo "[ WORKER ] - successfully executed iOS tests" 
+        
+      - name: Log failure
+        if: failure()
+        run: echo "[ WORKER ] - failed to execute iOS tests" 
+  android-data:
+    name: Generate Android data
+    runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
+      - name: Execute Android tests
         run:  for i in {1..5}; do npm run test:wdio-android; done
+        
+      - name: Log success
+        if: successful()
+        run: echo "[ WORKER ] - successfully executed Android tests" 
+        
+      - name: Log failure
+        if: failure()
+        run: echo "[ WORKER ] - failed to execute Android tests" 
