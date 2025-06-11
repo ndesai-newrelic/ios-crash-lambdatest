@@ -28,11 +28,11 @@ jobs:
         run:  nvm use & npm ci
         
       - name: Log success
-        if: successful()
+        if: ${{ successful() }}
         run: echo "[ WORKER ] - successfully installed packages" 
         
       - name: Log failure
-        if: failure()
+        if: ${{ failure() }}
         run: echo "[ WORKER ] - failed to install packages" 
   ios-data:
     name: Generate iOS data
@@ -43,11 +43,11 @@ jobs:
         run: for i in {1..5}; do npm run test:wdio-ios; done
         
       - name: Log success
-        if: successful()
+        if: ${{ successful() }}
         run: echo "[ WORKER ] - successfully executed iOS tests" 
         
       - name: Log failure
-        if: failure()
+        if: ${{ failure() }}
         run: echo "[ WORKER ] - failed to execute iOS tests" 
   android-data:
     name: Generate Android data
@@ -58,9 +58,9 @@ jobs:
         run:  for i in {1..5}; do npm run test:wdio-android; done
         
       - name: Log success
-        if: successful()
+        if: ${{ successful() }}
         run: echo "[ WORKER ] - successfully executed Android tests" 
         
       - name: Log failure
-        if: failure()
+        if: ${{ failure() }}
         run: echo "[ WORKER ] - failed to execute Android tests" 
