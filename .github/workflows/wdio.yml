@@ -1,7 +1,14 @@
+# The purpose of this GitHub action is to have a constant stream of data reporting to the following entities:
+  # main-agent-test-app-ios: https://staging.onenr.io/07jbMl8KnRy
+  # main-agent-test-app-android: https://staging.onenr.io/0EjOeXJOOw6
+
+# This is accomplished by triggering npm scripts that run a suite of tests executed with WDIO
+# The tests spin up simulated iOS and Android devices on LambdaTest that are instrumented with the Mobile agent
+
 name: 'WDIO: automate iOS and Android tests'
 
 on:
-  # allows option to trigger workflow manually
+  # enables option for workflow to be manually executed in Github UI
   workflow_dispatch:
   
   # TODO: add scheduled execution of workflow once confirmed it's working manually
@@ -20,6 +27,6 @@ jobs:
       - name: install dependencies
         run:  npm i
       - name: Generate iOS data
-        run: npm run test:wdio-ios
+        run: for i in {1..5}; do npm run test:wdio-ios; done
       - name: Generate Android data
-        run: npm run test:wdio-android
+        run:  for i in {1..5}; do npm run test:wdio-android; done
