@@ -8,7 +8,16 @@ on:
   # schedule:
   #   - cron: '0 * * * *' # runs hourly
 
-# TODO: set env vars
-# env:
-# TODO: add steps for installing packages and running npm script
-# jobs:
+env:
+  LT_USERNAME: ${{ secrets.LAMBDA_USERNAME }}
+  LT_ACCESSKEY: ${{ secrets.LAMBDA_ACCESS_KEY }}
+jobs:
+  wdio:
+    name: Generate iOS and Android data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install dependencies
+        run:  npm i
+      - name: Generate data
+        run: npm run test:wdio-ios
