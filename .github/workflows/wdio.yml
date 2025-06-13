@@ -24,8 +24,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.5.1
       - name: install dependencies
-        run:  nvm use & npm i
+        run: npm ci
         
       - name: Log success
         if: ${{ success() }}
