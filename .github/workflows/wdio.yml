@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup environment
-        uses: ./.github/actions/env-setup.yml
+        uses: ./.github/actions/env-setup
         
       - name: Execute iOS tests
         run: for i in {1..5}; do npm run test:wdio-ios; done
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup environment
-        uses: ./.github/actions/env-setup.yml
+        uses: ./.github/actions/env-setup
         
       - name: Execute Android tests
         run:  for i in {1..5}; do npm run test:wdio-android; done
