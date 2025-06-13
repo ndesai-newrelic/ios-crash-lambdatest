@@ -19,29 +19,29 @@ env:
   LT_USERNAME: ${{ secrets.LAMBDA_USERNAME }}
   LT_ACCESSKEY: ${{ secrets.LAMBDA_ACCESS_KEY }}
 jobs:
-  install-dependencies:
-    name: Install dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20.5.1
-      - name: install dependencies
-        run: npm ci
+  # install-dependencies:
+  #   name: Install dependencies
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20.5.1
+  #     - name: install dependencies
+  #       run: npm ci
         
-      - name: Log success
-        if: ${{ success() }}
-        run: echo "[ WORKER ] - successfully installed packages" 
+  #     - name: Log success
+  #       if: ${{ success() }}
+  #       run: echo "[ WORKER ] - successfully installed packages" 
         
-      - name: Log failure
-        if: ${{ failure() }}
-        run: echo "[ WORKER ] - failed to install packages" 
+  #     - name: Log failure
+  #       if: ${{ failure() }}
+  #       run: echo "[ WORKER ] - failed to install packages" 
   ios-data:
     name: Generate iOS data
     runs-on: ubuntu-latest
-    needs: install-dependencies
     steps:
+      - uses: ./.github/workflows/env-setup.yml
       - name: Execute iOS tests
         run: for i in {1..5}; do npm run test:wdio-ios; done
         
@@ -55,8 +55,8 @@ jobs:
   android-data:
     name: Generate Android data
     runs-on: ubuntu-latest
-    needs: install-dependencies
     steps:
+      - uses: ./.github/workflows/env-setup.yml
       - name: Execute Android tests
         run:  for i in {1..5}; do npm run test:wdio-android; done
         
