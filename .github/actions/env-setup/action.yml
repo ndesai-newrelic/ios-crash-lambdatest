@@ -15,7 +15,9 @@ runs:
       shell: bash
     - name: Log success
       if: ${{ success() }}
-      run: echo "[ RUNNER ] - successfully installed packages"      
+      run: echo "[ RUNNER ] - successfully installed packages"    
+      shell: bash
     - name: Log failure
       if: ${{ failure() }}
       run: echo "[ RUNNER ] - failed to install packages" 
+      shell: bash
