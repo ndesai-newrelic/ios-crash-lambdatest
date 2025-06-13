@@ -41,7 +41,9 @@ jobs:
     name: Generate iOS data
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/env-setup.yml
+      - name: Setup environment
+        uses: ./.github/actions/env-setup.yml
+        
       - name: Execute iOS tests
         run: for i in {1..5}; do npm run test:wdio-ios; done
         
@@ -56,7 +58,9 @@ jobs:
     name: Generate Android data
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/env-setup.yml
+      - name: Setup environment
+        uses: ./.github/actions/env-setup.yml
+        
       - name: Execute Android tests
         run:  for i in {1..5}; do npm run test:wdio-android; done
         
