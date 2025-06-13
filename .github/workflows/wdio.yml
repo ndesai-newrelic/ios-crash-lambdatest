@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: install dependencies
-        run:  nvm use & npm ci
+        run:  nvm use & npm i
         
       - name: Log success
         if: ${{ success() }}
