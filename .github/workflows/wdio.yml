@@ -28,7 +28,7 @@ jobs:
         run:  nvm use & npm ci
         
       - name: Log success
-        if: ${{ successful() }}
+        if: ${{ success() }}
         run: echo "[ WORKER ] - successfully installed packages" 
         
       - name: Log failure
@@ -43,7 +43,7 @@ jobs:
         run: for i in {1..5}; do npm run test:wdio-ios; done
         
       - name: Log success
-        if: ${{ successful() }}
+        if: ${{ success() }}
         run: echo "[ WORKER ] - successfully executed iOS tests" 
         
       - name: Log failure
@@ -58,7 +58,7 @@ jobs:
         run:  for i in {1..5}; do npm run test:wdio-android; done
         
       - name: Log success
-        if: ${{ successful() }}
+        if: ${{ success() }}
         run: echo "[ WORKER ] - successfully executed Android tests" 
         
       - name: Log failure
