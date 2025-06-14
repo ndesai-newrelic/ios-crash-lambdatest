@@ -11,9 +11,9 @@ on:
   # enables option for workflow to be manually executed in Github UI
   workflow_dispatch:
   
-  # TODO: add scheduled execution of workflow once confirmed it's working manually
-  # schedule:
-  #   - cron: '*/30 * * * *' # run every 30 min
+  # enables scheduled execution every 30 minutes
+  schedule:
+    - cron: '*/30 * * * *'
 env:
   # TODO: get team sso access to log into service account
   LT_USERNAME: ${{ secrets.LAMBDA_USERNAME }}
