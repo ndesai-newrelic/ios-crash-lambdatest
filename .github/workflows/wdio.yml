@@ -13,7 +13,7 @@ on:
   
   # TODO: add scheduled execution of workflow once confirmed it's working manually
   # schedule:
-  #   - cron: '0 * * * *' # runs hourly
+  #   - cron: '*/30 * * * *' # run every 30 min
 env:
   # TODO: get team sso access to log into service account
   LT_USERNAME: ${{ secrets.LAMBDA_USERNAME }}
@@ -28,15 +28,15 @@ jobs:
         uses: ./.github/actions/env-setup
         
       - name: Execute iOS tests
-        run: for i in {1..5}; do npm run test:wdio-ios; done
+        run: for i in {1..10}; do npm run test:wdio-ios; done
         
       - name: Log success
         if: ${{ success() }}
-        run: echo "[ WORKER ] - successfully executed iOS tests" 
+        run: echo "[ RUNNER ] - successfully executed iOS tests" 
         
       - name: Log failure
         if: ${{ failure() }}
-        run: echo "[ WORKER ] - failed to execute iOS tests" 
+        run: echo "[ RUNNER ] - failed to execute iOS tests" 
   android-data:
     name: Generate Android data
     runs-on: ubuntu-latest
@@ -46,12 +46,12 @@ jobs:
         uses: ./.github/actions/env-setup
         
       - name: Execute Android tests
-        run:  for i in {1..5}; do npm run test:wdio-android; done
+        run:  for i in {1..10}; do npm run test:wdio-android; done
         
       - name: Log success
         if: ${{ success() }}
-        run: echo "[ WORKER ] - successfully executed Android tests" 
+        run: echo "[ RUNNER ] - successfully executed Android tests" 
         
       - name: Log failure
         if: ${{ failure() }}
-        run: echo "[ WORKER ] - failed to execute Android tests" 
+        run: echo "[ RUNNER ] - failed to execute Android tests" 
