@@ -41,7 +41,7 @@ jobs:
         
       - name: Noftify failure
         if: ${{ failure() || cancelled() }}
-        uses: ravsamhq/notify-slack-action@be814b201e233b2dc673608aa46e5447c8ab13f2
+        uses: ravsamhq/notify-slack-action@v1
         with:
           status: ${{ job.status }}
           notify_when: 'failure,cancelled'
