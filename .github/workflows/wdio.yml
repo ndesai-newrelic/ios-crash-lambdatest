@@ -41,11 +41,12 @@ jobs:
         
       - name: Noftify failure
         if: ${{ failure() || cancelled() }}
-        uses: ravsamhq/notify-slack-action@v1
-        with:
-          status: ${{ job.status }}
-          notify_when: 'failure,cancelled'
-          notification_title: "TESTING: {workflow} has {status_message}"
+        uses: rtCamp/action-slack-notify@v2
+        # uses: ravsamhq/notify-slack-action@v1
+        # with:
+        #   status: ${{ job.status }}
+        #   notify_when: 'failure,cancelled'
+        #   notification_title: "TESTING: {workflow} has {status_message}"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           
