@@ -46,7 +46,6 @@ jobs:
           payload: |
             {
               "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
-              "test": "job - ${{job}} step = ${{steps}}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
