@@ -43,15 +43,13 @@ jobs:
         if: ${{ failure() || cancelled() }}
         uses: slackapi/slack-github-action@6c661ce58804a1a20f6dc5fbee7f0381b469e001 # pin@v1.25.0
         with:
-          webhookUrl: ${{ secrets.SLACK_WEBHOOK_URL }}
-          webhook-type: incoming-webhook
           payload: |
             {
               "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
               "test": "job - ${{job}} step = ${{steps}}"
             }
-        # env:
-        #   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           
   android-data:
     name: Generate Android data
