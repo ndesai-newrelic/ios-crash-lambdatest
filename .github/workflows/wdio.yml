@@ -46,7 +46,7 @@ jobs:
           webhook-type: incoming-webhook
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           payload: |
-            text: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            text: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} AND ${{jobs.ios-data}}/${{steps[1]}}"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           
