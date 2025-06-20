@@ -49,9 +49,9 @@ jobs:
             text: "TEST FAILURE"
             blocks:
               - type: "header"
-                  text:
-                    type: "plain_text"
-                    text: ":rotating_light: GitHub Workflow Failure"
+                text:
+                  type: "plain_text"
+                  text: ":rotating_light: GitHub Workflow Failure"
               - type: "divider"
               - type: "header"
                 text:
