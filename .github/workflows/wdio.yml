@@ -68,7 +68,7 @@ jobs:
                   text: 
                     type: "plain_text"
                     text: "View logs"
-                  url: "https://${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                  url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
