@@ -49,15 +49,15 @@ jobs:
             text: "TEST FAILURE"
             blocks:
               - type: "header"
-                 text:
+                  text:
                     type: "plain_text"
                     text: ":rotating_light: GitHub Workflow Failure"
               - type: "divider"
               - type: "header"
                 text:
                   type: "plain_text"
-                  text: ":apple: Generate iOS data"
-                  emoji: true
+                    text: ":apple: Generate iOS data"
+                    emoji: true
               - type: "section"
                 text:
                   type: "mrkdwn"
