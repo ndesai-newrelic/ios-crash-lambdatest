@@ -58,6 +58,10 @@ jobs:
                   type: "plain_text"
                   text: ":apple: Generate iOS data"
                   emoji: true
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "Failed step: *Setup environment*"     
               - type: "actions"
                 elements:
                   type: "button"
