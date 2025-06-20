@@ -47,7 +47,7 @@ jobs:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           payload: |
             blocks:
-               - type: "header"
+              - type: "header"
                  text:
                     type: "plain_text"
                     text: ":rotating_light: GitHub Workflow Failure"
