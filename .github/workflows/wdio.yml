@@ -56,8 +56,8 @@ jobs:
               - type: "header"
                 text:
                   type: "plain_text"
-                    text: ":apple: Generate iOS data"
-                    emoji: true
+                  text: ":apple: Generate iOS data"
+                  emoji: true
               - type: "section"
                 text:
                   type: "mrkdwn"
