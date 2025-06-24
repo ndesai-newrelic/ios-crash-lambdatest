@@ -17,8 +17,7 @@ on:
 env:
   # TODO: get team sso access to log into service account
   LT_USERNAME: ${{ secrets.LAMBDA_USERNAME }}
-  # TODO: commenting out temporarily to test slack failure notifications
-  # LT_ACCESSKEY: ${{ secrets.LAMBDA_ACCESS_KEY }}
+  LT_ACCESSKEY: ${{ secrets.LAMBDA_ACCESS_KEY }}
 jobs:
   ios-data:
     name: Generate iOS data
@@ -39,14 +38,13 @@ jobs:
         if: ${{ failure() || cancelled() }}
         run: echo "[ RUNNER ] - failed to execute iOS tests"
 
-      - name: Notify failure
+      - name: Notify failure # TODO: pass failed step dynamically
         if: ${{ failure() || cancelled() }}
         uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
         with:
           webhook-type: incoming-webhook
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           payload: |
-            text: "TEST FAILURE"
             blocks:
               - type: "header"
                 text:
@@ -90,5 +88,39 @@ jobs:
         run: echo "[ RUNNER ] - successfully executed Android tests"
 
       - name: Log failure
-        if: ${{ failure() }}
+        if: ${{ failure() || cancelled() }}
         run: echo "[ RUNNER ] - failed to execute Android tests"
+
+      - name: Notify failure # TODO: pass failed step dynamically
+        if: ${{ failure() || cancelled() }}
+        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
+        with:
+          webhook-type: incoming-webhook
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            blocks:
+              - type: "header"
+                text:
+                  type: "plain_text"
+                  text: ":rotating_light: GitHub Workflow Failure"
+              - type: "divider"
+              - type: "header"
+                text:
+                  type: "plain_text"
+                  text: ":robot: Generate Android data"
+                  emoji: true
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "Failed step: *Setup environment*" 
+                accessory:
+                  type: "button"
+                  text:
+                    type: "plain_text"
+                    text: "View logs"
+                    emoji: true
+                  value: "view_logs"
+                  url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                  action_id: "button-action"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
