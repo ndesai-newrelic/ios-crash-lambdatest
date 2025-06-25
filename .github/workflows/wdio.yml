@@ -14,14 +14,15 @@ on:
   # enables scheduled execution every 30 minutes
   schedule:
     - cron: "*/30 * * * *"
-env:
-  # TODO: get team sso access to log into service account
-  LT_USERNAME: ${{ secrets.LAMBDA_USERNAME }}
-  LT_ACCESSKEY: ${{ secrets.LAMBDA_ACCESS_KEY }}
+
 jobs:
   ios-data:
     name: Generate iOS data
     runs-on: ubuntu-latest
+    env:
+      # TODO: get team sso access to log into service account
+      LT_USERNAME: ${{ secrets.LAMBDA_USERNAME }}
+      LT_ACCESSKEY: ${{ secrets.LAMBDA_ACCESS_KEY }}
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
       - name: Setup environment
@@ -70,15 +71,17 @@ jobs:
   android-data:
     name: Generate Android data
     runs-on: ubuntu-latest
+    env:
+      # TODO: get team sso access to log into service account
+      LT_USERNAME: ${{ secrets.LAMBDA_USERNAME }}
+      LT_ACCESSKEY: ${{ secrets.LAMBDA_ACCESS_KEY }}
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
       - name: Execute Android tests
-        run: for i in {1..10}; do npm run wdio; done
-        # TODO: revert after failure testing
-        # run: for i in {1..10}; do npm run test:wdio-android; done
+        run: for i in {1..10}; do npm run test:wdio-android; done
 
       - name: Log success
         if: ${{ success() }}
