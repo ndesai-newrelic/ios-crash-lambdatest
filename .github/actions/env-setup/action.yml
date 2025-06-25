@@ -5,8 +5,9 @@ description: Reusable action to setup environment
 runs:
   using: "composite"
   steps:
-    - name: Checkout repo
-      uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+    # TODO: commented out to test failure
+    # - name: Checkout repo
+    #   uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
     - name: Set up Node.js
       uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # pin@v4
       with:

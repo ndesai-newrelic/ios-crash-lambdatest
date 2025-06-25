@@ -91,7 +91,7 @@ jobs:
         if: ${{ failure() || cancelled() }}
         run: echo "[ RUNNER ] - failed to execute Android tests"
 
-      - name: Notify failure # TODO: pass failed step dynamically
+      - name: Notify failure
         if: ${{ failure() || cancelled() }}
         uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
         with:
@@ -104,15 +104,10 @@ jobs:
                   type: "plain_text"
                   text: ":rotating_light: GitHub Workflow Failure"
               - type: "divider"
-              - type: "header"
-                text:
-                  type: "plain_text"
-                  text: ":robot: Generate Android data"
-                  emoji: true
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: "Failed step: *Setup environment*" 
+                  text: ":robot: Failed to generate *Android* data" 
                 accessory:
                   type: "button"
                   text:
