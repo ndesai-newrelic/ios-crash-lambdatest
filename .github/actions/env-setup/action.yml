@@ -10,8 +10,7 @@ runs:
       with:
         node-version: 20.5.1
     - name: Install dependencies
-      # TODO: revert npm ci after failure testing
-      run: npmslkdjf ci
+      run: npm ci
       shell: bash
     - name: Log success
       if: ${{ success() }}

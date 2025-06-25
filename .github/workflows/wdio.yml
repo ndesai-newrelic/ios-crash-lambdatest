@@ -17,7 +17,8 @@ on:
 env:
   # TODO: get team sso access to log into service account
   LT_USERNAME: ${{ secrets.LAMBDA_USERNAME }}
-  LT_ACCESSKEY: ${{ secrets.LAMBDA_ACCESS_KEY }}
+  # TODO: revert after failure testing
+  # LT_ACCESSKEY: ${{ secrets.LAMBDA_ACCESS_KEY }}
 jobs:
   ios-data:
     name: Generate iOS data
