@@ -107,11 +107,10 @@ describe("main agent test app - ios", () => {
     await badRequest.waitForExist({ timeout: 30000 });
     await badRequest.click();
 
-    // Uncomment when we can build a new iOS app in Xcode
-    // const delayedRequest = await driver.$("accessibility id:Delayed Http Request");
-    // await delayedRequest.waitForExist({ timeout: 30000 });
-    // await delayedRequest.click();
-    // await driver.setTimeouts(5000);
+    const delayedRequest = await driver.$("accessibility id:Delayed Http Request");
+    await delayedRequest.waitForExist({ timeout: 30000 });
+    await delayedRequest.click();
+    await driver.setTimeouts(5000);
 
     await badRequest.click();
     await badRequest.click();
@@ -121,6 +120,11 @@ describe("main agent test app - ios", () => {
     await badRequest.click();
     await badRequest.click();
     await badRequest.click();
+
+    await delayedRequest.click();
+    await driver.setTimeouts(5000);
+    await delayedRequest.click();
+    await driver.setTimeouts(5000);
 
     await driver.executeScript("mobile:pressButton", [{ name: "home" }]);
     await driver.setTimeouts(5000);
@@ -133,6 +137,11 @@ describe("main agent test app - ios", () => {
     await goodRequest.click();
     await goodRequest.click();
     await goodRequest.click();
+
+    await delayedRequest.click();
+    await driver.setTimeouts(5000);
+    await delayedRequest.click();
+    await driver.setTimeouts(5000);
 
     await driver.executeScript("mobile:pressButton", [{ name: "home" }]);
     await driver.setTimeouts(5000);
