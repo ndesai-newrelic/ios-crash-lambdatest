@@ -2,8 +2,8 @@ import fs from "fs";
 import path from "path";
 import url from "url";
 
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const targetDir = path.resolve(__dirname, "../builds");
@@ -24,7 +24,7 @@ function uploadFileToLambdaTest(name, path, customId) {
     headers: {
       Authorization:
         "Basic " +
-        btoa(`${process.env.LAMBDA_USERNAME}:${process.env.LAMBDA_ACCESS_KEY}`),
+        btoa(`${secrets.LAMBDA_USERNAME}:${secrets.LAMBDA_ACCESS_KEY}`),
 
     },
     body: form,
