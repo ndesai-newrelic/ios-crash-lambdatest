@@ -41,8 +41,9 @@ Promise.all([
     "ANDROIDAPP"
   ),
 ])
-  .then(() => {
-    console.log("Uploaded android and ios assets");
+.then(([iosResponse, androidResponse]) => Promise.all([iosResponse.json(), androidResponse.json()]))
+  .then((iosResponse, androidResponse) => {
+    console.log(iosResponse, androidResponse, "Uploaded android and ios assets");
   })
   .catch((errorMessage) => {
     console.log(errorMessage);

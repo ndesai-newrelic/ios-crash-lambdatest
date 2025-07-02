@@ -6,7 +6,7 @@
 # This action triggers a node.js function that uploads the app to LambdaTest.
 # The function uses a `custom_id` to identify that app with a specific name rather than the default names provided upon upload, which will change per upload.
 
-name: "Upload iOS and Android apps to LambdaTest"
+name: Upload iOS and Android apps to LambdaTest
 
 on:
   # enables option for workflow to be manually executed in Github UI
