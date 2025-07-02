@@ -19,13 +19,15 @@ function uploadFileToLambdaTest(name, path, customId) {
   form.append("custom_id", customId);
 
   //Upload the file to LT
-  return fetch('https://manual-api.lambdatest.com/app/upload/virtualDevice', {
-    method: 'POST',
+  return fetch("https://manual-api.lambdatest.com/app/upload/virtualDevice", {
+    method: "POST",
     headers: {
-      Authorization: 'Basic ' + btoa(`${process.env.LAMBDA_USERNAME}:${process.env.LAMBDA_ACCESS_KEY}`)
+      Authorization:
+        "Basic " +
+        btoa(`${process.env.LAMBDA_USERNAME}:${process.env.LAMBDA_ACCESS_KEY}`),
     },
-    body: form
-  })
+    body: form,
+  });
 }
 Promise.all([
   uploadFileToLambdaTest(
@@ -43,17 +45,12 @@ Promise.all([
     Promise.all([iosResponse.json(), androidResponse.json()])
   )
   .then(([iosResponse, androidResponse]) => {
-    console.log(iosResponse, androidResponse)
     if (iosResponse.err || androidResponse.err) {
       throw new Error(
         `Error uploading apps: iOS: ${iosResponse.err}, Android: ${androidResponse.err}`
       );
     } else {
-      console.log(
-        iosResponse,
-        androidResponse,
-        "Uploaded android and ios assets"
-      );
+      console.log("Uploaded android and ios assets");
     }
   })
   .catch((errorMessage) => {
