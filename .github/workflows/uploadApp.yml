@@ -50,23 +50,22 @@ jobs:
           payload: |
             blocks:
               - type: "header"
-                test: 
+                text:
                   type: "plain_text"
-                  text: "🤦🏻‍♀️ LambdaTest Upload Failed"
+                  text: ":woman-shrugging: LambdaTest Upload Failed"
               - type: "divider"
               - type: "section"
-                text: 
+                text:
                   type: "mrkdwn"
-                  text: "The upload of the main agent test app to LambdaTest has failed. Please check the logs for more details."
+                  text: "Something went wrong while uploading the apps to LambdaTest. Please check the logs for more details." 
                 accessory:
                   type: "button"
                   text:
                     type: "plain_text"
-                    text: "View Logs"
+                    text: "View logs"
                     emoji: true
+                  value: "view_logs"
                   url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   action_id: "button-action"
-        env: 
+        env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
-
