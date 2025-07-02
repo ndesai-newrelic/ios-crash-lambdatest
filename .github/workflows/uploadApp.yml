@@ -1,0 +1,6 @@
+
+name: 'Upload iOS and Android apps to LambdaTest'
+
+on:
+  # allows option to trigger workflow manually
+  workflow_dispatch:
