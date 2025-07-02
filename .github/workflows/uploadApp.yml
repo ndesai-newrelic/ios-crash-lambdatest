@@ -18,7 +18,7 @@ on:
 
 jobs:
   upload-apps:
-    name: Upload apps
+    name: Upload main agent test apps to LT
     runs-on: ubuntu-latest
     env:
       # TODO: get team sso access to log into service account

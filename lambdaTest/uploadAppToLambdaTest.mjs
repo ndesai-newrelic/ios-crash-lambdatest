@@ -25,6 +25,7 @@ function uploadFileToLambdaTest(name, path, customId) {
       Authorization:
         "Basic " +
         btoa(`${process.env.LAMBDA_USERNAME}:${process.env.LAMBDA_ACCESS_KEY}`),
+
     },
     body: form,
   });
@@ -44,7 +45,7 @@ Promise.all([
   .then(([iosResponse, androidResponse]) =>
     Promise.all([iosResponse.json(), androidResponse.json()])
   )
-  .then((iosResponse, androidResponse) => {
+  .then(([iosResponse, androidResponse]) => {
     if (iosResponse.err || androidResponse.err) {
       throw new Error(
         `Error uploading apps: iOS: ${iosResponse.err}, Android: ${androidResponse.err}`
