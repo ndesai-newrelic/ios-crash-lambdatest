@@ -46,6 +46,7 @@ Promise.all([
     Promise.all([iosResponse.json(), androidResponse.json()])
   )
   .then(([iosResponse, androidResponse]) => {
+    console.log(iosResponse, androidResponse)
     if (iosResponse.err || androidResponse.err) {
       throw new Error(
         `Error uploading apps: iOS: ${iosResponse.err}, Android: ${androidResponse.err}`

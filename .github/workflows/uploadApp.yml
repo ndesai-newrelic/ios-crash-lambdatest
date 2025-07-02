@@ -52,7 +52,7 @@ jobs:
               - type: "header"
                 text:
                   type: "plain_text"
-                  text: ":woman-shrugging: LambdaTest Upload Failed"
+                  text: ":crying-sunglasses-cowboy: LambdaTest Upload Failed"
               - type: "divider"
               - type: "section"
                 text:
