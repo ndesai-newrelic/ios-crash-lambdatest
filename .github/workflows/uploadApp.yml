@@ -31,7 +31,7 @@ jobs:
         uses: ./.github/actions/env-setup
 
       - name: Run upload script
-        run: node lambdaTest/uploadAppToLT.mjs
+        run: node lambdaTest/uploadAppToLambdaTest.mjs
 
       - name: Log success
         if: ${{ success() }}
