@@ -19,16 +19,13 @@ function uploadFileToLambdaTest(name, path, customId) {
   form.append("custom_id", customId);
 
   //Upload the file to LT
-  return fetch("https://manual-api.lambdatest.com/app/upload/virtualDevice", {
-    method: "POST",
+  return fetch('https://manual-api.lambdatest.com/app/upload/virtualDevice', {
+    method: 'POST',
     headers: {
-      Authorization:
-        "Basic " +
-        btoa(`${process.env.LAMBDA_USERNAME}:${process.env.LAMBDA_ACCESS_KEY}`),
-
+      Authorization: 'Basic ' + btoa(`${process.env.LAMBDA_USERNAME}:${process.env.LAMBDA_ACCESS_KEY}`)
     },
-    body: form,
-  });
+    body: form
+  })
 }
 Promise.all([
   uploadFileToLambdaTest(
