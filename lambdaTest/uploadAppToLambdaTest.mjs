@@ -41,9 +41,21 @@ Promise.all([
     "ANDROIDAPP"
   ),
 ])
-.then(([iosResponse, androidResponse]) => Promise.all([iosResponse.json(), androidResponse.json()]))
+  .then(([iosResponse, androidResponse]) =>
+    Promise.all([iosResponse.json(), androidResponse.json()])
+  )
   .then((iosResponse, androidResponse) => {
-    console.log(iosResponse, androidResponse, "Uploaded android and ios assets");
+    if (iosResponse.err || androidResponse.err) {
+      throw new Error(
+        `Error uploading apps: iOS: ${iosResponse.err}, Android: ${androidResponse.err}`
+      );
+    } else {
+      console.log(
+        iosResponse,
+        androidResponse,
+        "Uploaded android and ios assets"
+      );
+    }
   })
   .catch((errorMessage) => {
     console.log(errorMessage);
