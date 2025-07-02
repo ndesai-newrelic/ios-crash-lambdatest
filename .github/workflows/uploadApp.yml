@@ -53,7 +53,16 @@ jobs:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: "Congrats! We survived another month to claim victory over LambdaTest's retention policy. The apps have been successfully uploaded and are ready for testing." 
+                  text: Congrats! We survived another month to claim victory over LambdaTest's retention policy. The apps have been successfully uploaded and are ready for testing.
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "You can view the apps here:"
+                fields:
+                  - type: "mrkdwn"
+                    text: *iOS App:* (main-agent-test-app Android)[https://staging-one.newrelic.com/nr1-core/mobile/home/MTIxNDgyNzF8TU9CSUxFfEFQUExJQ0FUSU9OfDY0MzkyODE2?duration=1800000]
+                  - type: "mrkdwn"
+                    text: *Android App:* (main-agent-test-app iOS)[https://staging-one.newrelic.com/nr1-core/mobile/home/MTIxNDgyNzF8TU9CSUxFfEFQUExJQ0FUSU9OfDY0MzkyODIz?duration=1800000]
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
