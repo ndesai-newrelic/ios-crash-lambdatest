@@ -100,9 +100,19 @@ Confirm the applications were uploaded by navigating to the [Virtual Mobile App 
 {"app_id":"APP123456789","name":"Ios_App","type":"simulator","app_url":"lt://APP123456789","url":"https://prod-falcon-lt-app-artefacts-v1.s3-accelerate.amazonaws.com/prod/1413189/2025/05/23/mainagenttestappzip-1748034846399.zip","custom_id":"IOSAPP","ios_keychain_enabled":"false"}%
 ```
 
-### Note on uploading
+### GitHub Action for Re-Uploading
 
 Per LambdaTest's data retention policy, applications are automatically deleted every 60 days. It is ok if there is overlap and two iOS or two Android applications are uploaded at the same time. LambdaTest will automatically use the most recently uploaded application for testing and the old application will age out at 60 days.
+
+Because of this retention policy, we have created a GitHub Action that automates uploading the apps on the first of every month. 
+
+You can find the action UI [here](https://github.com/newrelic/main-agent-test-app/actions/workflows/uploadApp.yml). 
+
+You will find the uploaded apps here - [Virtual Mobile App Testing](https://app.lambdatest.com/console/realtime/app). This link requires authentication.
+
+Failures of this GitHub Action are sent to the `dem-experience-alerts` channel in Slack. If this GitHub action fails, please check the response body for the upload fetch, which you can find in the GH action UI for the run that failed. That response body should include the error message.
+
+
 
 ## To generate data
 
