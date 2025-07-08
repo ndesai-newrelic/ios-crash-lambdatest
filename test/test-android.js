@@ -172,13 +172,14 @@ describe("main agent test app - android", () => {
     const clickSimulateANR = await driver.$('-android uiautomator:new UiSelector().text("SIMULATE ANR")');
     await clickSimulateANR.waitForExist({ timeout: 30000 });
     await clickSimulateANR.click();
-    await driver.pause(30000);
+    await driver.pause(30000); // required to simulate ANR
 
-    await driver.activateApp("com.anonymous.mainagenttestapp");
+    await driver.pressKeyCode(82); //background the app
     await driver.setTimeouts(5000);
 
-    await driver.terminateApp("com.anonymous.mainagenttestapp");
-    await driver.setTimeouts(5000);
+    const closeToast = await driver.$("id:android:id/aerr_close");
+    await closeToast.waitForExist({ timeout: 30000 });
+    await closeToast.click();
     await driver.activateApp("com.anonymous.mainagenttestapp");
   });
 
