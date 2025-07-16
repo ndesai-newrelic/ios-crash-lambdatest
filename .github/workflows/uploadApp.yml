@@ -53,7 +53,7 @@ jobs:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: Congrats! We survived another month to claim victory over LambdaTest's retention policy. The apps have been successfully uploaded and are ready for testing.
+                  text: Congrats! We survived another month to claim victory over LambdaTest's retention policy. The main-agent-test-apps have been successfully uploaded and are ready for testing.
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
@@ -77,7 +77,7 @@ jobs:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: "Something went wrong while uploading the apps to LambdaTest. Please check the logs for more details." 
+                  text: "Something went wrong while uploading the main-agent-test-apps to LambdaTest. Please check the logs for more details." 
                 accessory:
                   type: "button"
                   text:
