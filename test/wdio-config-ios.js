@@ -1,13 +1,12 @@
-const moment = require("moment");
+const dayjs = require("dayjs");
 
 function generateDynamicBuildName() {
-  const now = moment();
-  const minutes = now.minutes();
-  const roundedMinutes = Math.floor(minutes / 30) * 30;
-  const timestamp = now.clone().minutes(roundedMinutes).seconds(0).milliseconds(0).format("YYYY-MM-DD_HH-mm");
+  const now = dayjs().format("YYYY-MM-DD_HH-mm");
 
-  return `Build_main-agent-test-app - iOS:${timestamp}`;
+  return `Build_main-agent-test-app - iOS:${now}`;
 }
+
+generateDynamicBuildName(); // Call the function to ensure it runs and logs the output
 
 exports.config = {
   user: process.env.LT_USERNAME || "YOUR_USERNAME",

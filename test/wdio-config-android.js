@@ -1,12 +1,9 @@
-const moment = require("moment");
+const dayjs = require("dayjs");
 
 function generateDynamicBuildName() {
-  const now = moment();
-  const minutes = now.minutes();
-  const roundedMinutes = Math.floor(minutes / 30) * 30;
-  const timestamp = now.clone().minutes(roundedMinutes).seconds(0).milliseconds(0).format("YYYY-MM-DD_HH-mm");
+  const now = dayjs().format("YYYY-MM-DD_HH-mm");
 
-  return `Build_main-agent-test-app - android:${timestamp}`;
+  return `Build_main-agent-test-app - android:${now}`;
 }
 
 exports.config = {
