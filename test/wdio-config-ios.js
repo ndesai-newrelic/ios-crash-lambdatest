@@ -1,3 +1,13 @@
+const moment = require("moment");
+
+function generateDynamicBuildName() {
+  const now = moment();
+  const minutes = now.minutes();
+  const roundedMinutes = Math.floor(minutes / 30) * 30;
+  const timestamp = now.clone().minutes(roundedMinutes).seconds(0).milliseconds(0).format("YYYY-MM-DD_HH-mm");
+
+  return `Build_main-agent-test-app - iOS:${timestamp}`;
+}
 
 exports.config = {
   user: process.env.LT_USERNAME || "YOUR_USERNAME",
@@ -11,7 +21,7 @@ exports.config = {
   capabilities: [
     {
       "lt:options": {
-        build: "main-agent-test-app - ios",
+        build: generateDynamicBuildName(),
         network: false,
         devicelog: true,
         visual: true,
