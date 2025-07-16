@@ -107,7 +107,7 @@ jobs:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: ":robot: Failed to generate *main-agent-test-app Android* data" 
+                  text: ":robot: Failed to generate *main-agent-test-app-Android* data" 
                 accessory:
                   type: "button"
                   text:
