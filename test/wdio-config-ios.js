@@ -1,3 +1,12 @@
+const dayjs = require("dayjs");
+
+function generateDynamicBuildName() {
+  const now = dayjs().format("YYYY-MM-DD_HH-mm");
+
+  return `Build_main-agent-test-app - iOS:${now}`;
+}
+
+generateDynamicBuildName(); // Call the function to ensure it runs and logs the output
 
 exports.config = {
   user: process.env.LT_USERNAME || "YOUR_USERNAME",
@@ -11,7 +20,7 @@ exports.config = {
   capabilities: [
     {
       "lt:options": {
-        build: "main-agent-test-app - ios",
+        build: generateDynamicBuildName(),
         network: false,
         devicelog: true,
         visual: true,

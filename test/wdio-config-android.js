@@ -1,3 +1,11 @@
+const dayjs = require("dayjs");
+
+function generateDynamicBuildName() {
+  const now = dayjs().format("YYYY-MM-DD_HH-mm");
+
+  return `Build_main-agent-test-app - android:${now}`;
+}
+
 exports.config = {
   user: process.env.LT_USERNAME || "YOUR_USERNAME",
   key: process.env.LT_ACCESSKEY || "YOUR_ACCESS_KEY",
@@ -10,7 +18,7 @@ exports.config = {
   capabilities: [
     {
       "lt:options": {
-        build: "main-agent-test-app - android",
+        build: generateDynamicBuildName(),
         network: false,
         devicelog: true,
         visual: true,

@@ -55,7 +55,7 @@ jobs:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: ":apple: Failed to generate *iOS* data"
+                  text: ":apple: Failed to generate *main-agent-test-app-iOS* data"
                 accessory:
                   type: "button"
                   text:
@@ -107,7 +107,7 @@ jobs:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: ":robot: Failed to generate *Android* data" 
+                  text: ":robot: Failed to generate *main-agent-test-app-Android* data" 
                 accessory:
                   type: "button"
                   text:
