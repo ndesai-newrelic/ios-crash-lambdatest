@@ -22,7 +22,6 @@ describe("main agent test app - ios", () => {
     const typeS = await $("accessibility id:S");
     await typeS.click();
     await driver.setTimeouts(3000);
-    // for i in {1..3}; echo "test run $i"; do npm run test:wdio-ios; done
     const typeD = await $("accessibility id:d");
     await typeD.click();
     await driver.setTimeouts(3000);
