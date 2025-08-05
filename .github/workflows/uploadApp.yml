@@ -18,26 +18,6 @@ on:
 
 jobs:
 
-  build-main-agent-test-app-Android:
-    name: Build main-agent-test-app - Android
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./main-agent-test-apps/android
-      steps:
-        - name: Get the source
-          uses: actions/checkout@v4
-
-        - name: Set up JDK
-          uses: actions/setup-java@v4
-          with:
-            distribution: "zulu" # See 'Supported distributions' for available options
-            java-version: "17"
-            cache: "gradle"
-
-        - name: Change wrapper permissions
-          run: chmod +x ./gradlew
-
   upload-apps:
     name: Upload main agent test apps to LT
     runs-on: ubuntu-latest
