@@ -17,6 +17,7 @@ on:
     - cron: "0 0 1 * *"
 
 jobs:
+
   upload-apps:
     name: Upload main agent test apps to LT
     runs-on: ubuntu-latest
