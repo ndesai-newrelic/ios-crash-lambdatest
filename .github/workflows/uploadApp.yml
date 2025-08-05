@@ -62,31 +62,31 @@ jobs:
         if: ${{ failure() || cancelled() }}
         run: echo "[ RUNNER ] - failed to upload apps to LambdaTest"
 
-      - name: Notify failure
-        if: ${{ failure() || cancelled() }}
-        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
-        with:
-          webhook-type: incoming-webhook
-          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          payload: |
-            blocks:
-              - type: "header"
-                text:
-                  type: "plain_text"
-                  text: ":crying-sunglasses-cowboy: LambdaTest Upload Failed"
-              - type: "divider"
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "Something went wrong while uploading the main-agent-test-apps to LambdaTest. Please check the logs for more details." 
-                accessory:
-                  type: "button"
-                  text:
-                    type: "plain_text"
-                    text: "View logs"
-                    emoji: true
-                  value: "view_logs"
-                  url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-                  action_id: "button-action"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # - name: Notify failure
+      #   if: ${{ failure() || cancelled() }}
+      #   uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
+      #   with:
+      #     webhook-type: incoming-webhook
+      #     webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #     payload: |
+      #       blocks:
+      #         - type: "header"
+      #           text:
+      #             type: "plain_text"
+      #             text: ":crying-sunglasses-cowboy: LambdaTest Upload Failed"
+      #         - type: "divider"
+      #         - type: "section"
+      #           text:
+      #             type: "mrkdwn"
+      #             text: "Something went wrong while uploading the main-agent-test-apps to LambdaTest. Please check the logs for more details." 
+      #           accessory:
+      #             type: "button"
+      #             text:
+      #               type: "plain_text"
+      #               text: "View logs"
+      #               emoji: true
+      #             value: "view_logs"
+      #             url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      #             action_id: "button-action"
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
