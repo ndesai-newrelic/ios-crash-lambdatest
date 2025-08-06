@@ -10,6 +10,7 @@ import { appToken, agentConfiguration } from "./newrelic";
 
 NewRelic.startAgent(appToken, agentConfiguration);
 NewRelic.setJSAppVersion(appVersion.version);
+NewRelic.setUserId("one@one.com");
 
 // This file should only import and register the root. No components or exports
 // should be added here.
