@@ -3,7 +3,7 @@ const dayjs = require("dayjs");
 function generateDynamicBuildName() {
   const now = dayjs().format("YYYY-MM-DD_HH-mm");
 
-  return `Build_main-agent-test-app - android:${now}`;
+  return `Build_main-agent-test-app - android:${now}--JBJ:test`;
 }
 
 exports.config = {
@@ -27,7 +27,7 @@ exports.config = {
         deviceName: "Pixel 9 Pro",
         appiumVersion: "1.22.3",
         platformVersion: "15",
-        app: "ANDROIDAPP", // custom_id
+        app: "ANDROIDAPP_JBJ_TEST", // custom_id
       },
     },
   ],

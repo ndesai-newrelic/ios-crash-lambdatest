@@ -3,7 +3,9 @@ describe("main agent test app - android", () => {
     // wait for the app to load
     await driver.setTimeouts(5000);
 
-    const openHome = await driver.$('-android uiautomator:new UiSelector().text("")');
+    const openHome = await driver.$(
+      '-android uiautomator:new UiSelector().text("")'
+    );
     await openHome.waitForExist({ timeout: 30000 });
     await openHome.click();
   });
@@ -13,7 +15,9 @@ describe("main agent test app - android", () => {
     await openTodo.click();
     await driver.setTimeouts(3000);
 
-    const typeTodo = await driver.$('-android uiautomator:new UiSelector().resourceId("text-input-flat-label-inactive")');
+    const typeTodo = await driver.$(
+      '-android uiautomator:new UiSelector().resourceId("text-input-flat-label-inactive")'
+    );
     await typeTodo.click();
     await driver.setTimeouts(3000);
 
@@ -27,23 +31,44 @@ describe("main agent test app - android", () => {
   });
 
   it("Clicks around the Explore tab", async () => {
+    const openCrash = await driver.$("accessibility id:Crash");
+    await openCrash.waitForExist({ timeout: 30000 });
+    await openCrash.click();
+    await driver.setTimeouts(3000);
+
+    const clickHex = await driver.$(
+      '-android uiautomator:new UiSelector().text("HANDLEDEXCEPTION")'
+    );
+    await clickHex.waitForExist({ timeout: 30000 });
+    await clickHex.click();
+    await driver.setTimeouts(3000);
+
+    await clickHex.click();
+    await driver.setTimeouts(3000);
+
     const openExplore = await driver.$("accessibility id:, Explore");
     await openExplore.click();
     await driver.setTimeouts(3000);
 
-    const clickGoodHttp = await driver.$('-android uiautomator:new UiSelector().text("GOOD HTTP REQUEST")');
+    const clickGoodHttp = await driver.$(
+      '-android uiautomator:new UiSelector().text("GOOD HTTP REQUEST")'
+    );
     await clickGoodHttp.waitForExist({ timeout: 30000 });
     await clickGoodHttp.click();
     await driver.setTimeouts(3000);
 
-    const clickDtRequest = await driver.$('-android uiautomator:new UiSelector().text("DISTRIBUTED TRACING REQUEST")');
+    const clickDtRequest = await driver.$(
+      '-android uiautomator:new UiSelector().text("DISTRIBUTED TRACING REQUEST")'
+    );
     await clickDtRequest.waitForExist({ timeout: 30000 });
 
-    const delayedRequest = await driver.$("accessibility id:Delayed Http Request");
+    const delayedRequest = await driver.$(
+      "accessibility id:Delayed Http Request"
+    );
     await delayedRequest.waitForDisplayed({ timeout: 50000 });
     await delayedRequest.click();
     await driver.setTimeouts(5000);
-    
+
     await delayedRequest.click();
     await driver.setTimeouts(5000);
 
@@ -52,10 +77,14 @@ describe("main agent test app - android", () => {
     await driver.setTimeouts(3000);
     await clickGoodHttp.click();
     await driver.setTimeouts(3000);
-    const clickReset = await driver.$('-android uiautomator:new UiSelector().text("RESET")');
+    const clickReset = await driver.$(
+      '-android uiautomator:new UiSelector().text("RESET")'
+    );
     await clickReset.click();
     await driver.setTimeouts(3000);
-    const clickBadHttp = await driver.$('-android uiautomator:new UiSelector().text("BAD HTTP REQUEST")');
+    const clickBadHttp = await driver.$(
+      '-android uiautomator:new UiSelector().text("BAD HTTP REQUEST")'
+    );
     await clickBadHttp.waitForExist({ timeout: 30000 });
     await clickBadHttp.click();
     await driver.setTimeouts(3000);
@@ -85,10 +114,11 @@ describe("main agent test app - android", () => {
     await clickGoodHttp.click();
     await driver.setTimeouts(3000);
 
-    await clickBadHttp.click();
-    await driver.setTimeouts(3000);
-    await clickBadHttp.click();
-    await driver.setTimeouts(3000);
+    //Decreasing so I can find this set of sessions in session replay
+    // await clickBadHttp.click();
+    // await driver.setTimeouts(3000);
+    // await clickBadHttp.click();
+    // await driver.setTimeouts(3000);
 
     await clickDtRequest.click();
     await driver.setTimeouts(3000);
@@ -109,7 +139,9 @@ describe("main agent test app - android", () => {
     await openGoogle.click();
     await driver.setTimeouts(5000);
 
-    const dismissGoogle = await driver.$("id:com.android.chrome:id/signin_fre_dismiss_button");
+    const dismissGoogle = await driver.$(
+      "id:com.android.chrome:id/signin_fre_dismiss_button"
+    );
     await dismissGoogle.waitForExist({ timeout: 50000 });
     await dismissGoogle.click();
     await driver.setTimeouts(3000);
@@ -149,7 +181,9 @@ describe("main agent test app - android", () => {
     await openCrash.click();
     await driver.setTimeouts(3000);
 
-    const clickRangeError = await driver.$('-android uiautomator:new UiSelector().text("RANGE ERROR")');
+    const clickRangeError = await driver.$(
+      '-android uiautomator:new UiSelector().text("RANGE ERROR")'
+    );
     await clickRangeError.waitForExist({ timeout: 30000 });
     await clickRangeError.click();
     await driver.setTimeouts(5000);
@@ -163,7 +197,9 @@ describe("main agent test app - android", () => {
     await openCrash.click();
     await driver.setTimeouts(3000);
 
-    const clickReferenceError = await driver.$('-android uiautomator:new UiSelector().text("REFERENCE ERROR")');
+    const clickReferenceError = await driver.$(
+      '-android uiautomator:new UiSelector().text("REFERENCE ERROR")'
+    );
     await clickReferenceError.waitForExist({ timeout: 30000 });
     await clickReferenceError.click();
     await driver.setTimeouts(5000);
@@ -177,7 +213,9 @@ describe("main agent test app - android", () => {
     await openCrash.click();
     await driver.setTimeouts(3000);
 
-    const clickURIError = await driver.$('-android uiautomator:new UiSelector().text("URI ERROR")');
+    const clickURIError = await driver.$(
+      '-android uiautomator:new UiSelector().text("URI ERROR")'
+    );
     await clickURIError.waitForExist({ timeout: 30000 });
     await clickURIError.click();
     await driver.setTimeouts(5000);
@@ -191,7 +229,9 @@ describe("main agent test app - android", () => {
     await openCrash.click();
     await driver.setTimeouts(3000);
 
-    const clickEvalError = await driver.$('-android uiautomator:new UiSelector().text("EVAL ERROR")');
+    const clickEvalError = await driver.$(
+      '-android uiautomator:new UiSelector().text("EVAL ERROR")'
+    );
     await clickEvalError.waitForExist({ timeout: 30000 });
     await clickEvalError.click();
     await driver.setTimeouts(5000);
@@ -206,7 +246,9 @@ describe("main agent test app - android", () => {
     await driver.setTimeouts(3000);
 
     // Simulate ANR
-    const clickSimulateANR = await driver.$('-android uiautomator:new UiSelector().text("SIMULATE ANR")');
+    const clickSimulateANR = await driver.$(
+      '-android uiautomator:new UiSelector().text("SIMULATE ANR")'
+    );
     await clickSimulateANR.waitForExist({ timeout: 30000 });
     await clickSimulateANR.click();
     await driver.pause(30000); // required to simulate ANR
@@ -223,8 +265,10 @@ describe("main agent test app - android", () => {
   it("Opens app", async () => {
     // wait for the app to load
     await driver.setTimeouts(5000);
-    
-    const home = await driver.$('-android uiautomator:new UiSelector().text("")');
+
+    const home = await driver.$(
+      '-android uiautomator:new UiSelector().text("")'
+    );
     await home.waitForExist({ timeout: 30000 });
     await home.click();
   });
