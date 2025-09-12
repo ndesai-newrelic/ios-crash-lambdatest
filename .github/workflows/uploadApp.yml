@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mainagenttestapp
-          path: /Users/runner/Library/Developer/Xcode/DerivedData/mainagenttestapp-aiutyigxigajkbcjspvvdvuiqmit/Build/Products/Release-iphonesimulator/test-ios.zip
+          path: /Users/runner/Library/Developer/Xcode/DerivedData/mainagenttestapp-aiutyigxigajkbcjspvvdvuiqmit/Build/Products/Release-iphonesimulator/mainagenttestapp.zip
           compression-level: 0
           retention-days: 1
 
