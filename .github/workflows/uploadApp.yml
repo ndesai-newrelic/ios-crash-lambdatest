@@ -68,7 +68,7 @@ jobs:
       - name: Upload iOS app
         uses: actions/upload-artifact@v4
         with:
-          name: mainagenttestapp
+          name: mainagenttestapp-ios
           path: /Users/runner/Library/Developer/Xcode/DerivedData/mainagenttestapp-aiutyigxigajkbcjspvvdvuiqmit/Build/Products/Release-iphonesimulator/mainagenttestapp.zip
           compression-level: 0
           retention-days: 1
@@ -98,7 +98,7 @@ jobs:
       - name: Upload android app
         uses: actions/upload-artifact@v4
         with:
-          name: mainagenttestapp
+          name: mainagenttestapp-android
           path: ${{ github.workspace }}/android/app/build/outputs/apk/release/app-release.apk
           retention-days: 1
 
@@ -119,13 +119,13 @@ jobs:
       - name: Download iOS artifact
         uses: actions/download-artifact@v4
         with:
-          name: mainagenttestapp
+          name: mainagenttestapp-ios
           path: ${{ github.workspace }}/builds
 
       - name: Download android artifact
         uses: actions/download-artifact@v4
         with:
-          name: mainagenttestapp
+          name: mainagenttestapp-android
           path: ${{ github.workspace }}/builds
 
       - name: Run upload script

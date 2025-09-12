@@ -32,12 +32,12 @@ function uploadFileToLambdaTest(name, path) {
 Promise.all([
   uploadFileToLambdaTest(
     "main-agent-test-app-iOS",
-    `${targetDir}/mainagenttestapp.zip`,
+    `${targetDir}/mainagenttestapp-ios.zip`,
     // "IOSAPP"
   ),
   uploadFileToLambdaTest(
     "main-agent-test-app-Android",
-    `${targetDir}/mainagenttestapp.apk`,
+    `${targetDir}/mainagenttestapp-android.apk`,
     // "ANDROIDAPP"
   ),
 ])
