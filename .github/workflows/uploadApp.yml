@@ -63,13 +63,13 @@ jobs:
           cd ../..
           cd /Users/runner/Library/Developer/Xcode/DerivedData/mainagenttestapp-aiutyigxigajkbcjspvvdvuiqmit/Build/Products/Release-iphonesimulator/
           ls
-          zip -r mainagenttestapp.zip mainagenttestapp.app
+          zip -r mainagenttestapp-ios.zip mainagenttestapp.app
 
       - name: Upload iOS app
         uses: actions/upload-artifact@v4
         with:
           name: mainagenttestapp-ios
-          path: /Users/runner/Library/Developer/Xcode/DerivedData/mainagenttestapp-aiutyigxigajkbcjspvvdvuiqmit/Build/Products/Release-iphonesimulator/mainagenttestapp.zip
+          path: /Users/runner/Library/Developer/Xcode/DerivedData/mainagenttestapp-aiutyigxigajkbcjspvvdvuiqmit/Build/Products/Release-iphonesimulator/mainagenttestapp-ios.zip
           compression-level: 0
           retention-days: 1
 
