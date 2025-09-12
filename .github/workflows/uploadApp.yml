@@ -104,6 +104,7 @@ jobs:
 
   upload-apps:
     name: Upload main agent test apps to LT
+    needs: [build-ios, build-android]
     runs-on: ubuntu-latest
     env:
       # TODO: get team sso access to log into service account
