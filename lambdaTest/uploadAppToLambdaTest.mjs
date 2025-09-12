@@ -37,7 +37,7 @@ Promise.all([
   ),
   uploadFileToLambdaTest(
     "main-agent-test-app-Android",
-    `${targetDir}/mainagenttestapp-android.apk`,
+    `${targetDir}/app-release.apk`,
     // "ANDROIDAPP"
   ),
 ])
