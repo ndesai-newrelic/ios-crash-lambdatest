@@ -7,8 +7,8 @@ dotenv.config();
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const targetDir = path.resolve(__dirname, "../builds");
-
-function uploadFileToLambdaTest(name, path, customId) {
+//TODO: , customId
+function uploadFileToLambdaTest(name, path) {
   const file = fs.readFileSync(path);
 
   //Create body for the fetch
@@ -16,7 +16,7 @@ function uploadFileToLambdaTest(name, path, customId) {
   form.append("name", name);
   form.append("appFile", new File([file], path));
   form.append("visibility", "team");
-  form.append("custom_id", customId);
+  // form.append("custom_id", customId);
 
   //Upload the file to LT
   return fetch("https://manual-api.lambdatest.com/app/upload/virtualDevice", {
@@ -33,12 +33,12 @@ Promise.all([
   uploadFileToLambdaTest(
     "main-agent-test-app-iOS",
     `${targetDir}/mainagenttestapp.zip`,
-    "IOSAPP"
+    // "IOSAPP"
   ),
   uploadFileToLambdaTest(
     "main-agent-test-app-Android",
     `${targetDir}/mainagenttestapp.apk`,
-    "ANDROIDAPP"
+    // "ANDROIDAPP"
   ),
 ])
   .then(([iosResponse, androidResponse]) =>
