@@ -16,7 +16,7 @@ function uploadFileToLambdaTest(name, path) {
   form.append("name", name);
   form.append("appFile", new File([file], path));
   form.append("visibility", "team");
-  // form.append("custom_id", customId);
+  form.append("custom_id", customId);
 
   //Upload the file to LT
   return fetch("https://manual-api.lambdatest.com/app/upload/virtualDevice", {
@@ -33,12 +33,12 @@ Promise.all([
   uploadFileToLambdaTest(
     "main-agent-test-app-iOS",
     `${targetDir}/mainagenttestapp-ios.zip`,
-    // "IOSAPP"
+    "IOSAPP"
   ),
   uploadFileToLambdaTest(
     "main-agent-test-app-Android",
     `${targetDir}/app-release.apk`,
-    // "ANDROIDAPP"
+    "ANDROIDAPP"
   ),
 ])
   .then(([iosResponse, androidResponse]) =>
