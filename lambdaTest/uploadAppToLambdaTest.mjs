@@ -7,8 +7,8 @@ dotenv.config();
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const targetDir = path.resolve(__dirname, "../builds");
-//TODO: , customId
-function uploadFileToLambdaTest(name, path) {
+ 
+function uploadFileToLambdaTest(name, path, customId) {
   const file = fs.readFileSync(path);
 
   //Create body for the fetch
