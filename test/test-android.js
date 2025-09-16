@@ -31,9 +31,8 @@ describe("main agent test app - android", () => {
   });
 
   it("Clicks around the Explore tab", async () => {
-    const openCrash = await driver.$("accessibility id:Crash");
-    await openCrash.waitForExist({ timeout: 30000 });
-    await openCrash.click();
+    const openExplore = await driver.$("accessibility id:, Explore");
+    await openExplore.click();
     await driver.setTimeouts(3000);
 
     const clickHex = await driver.$(
@@ -41,14 +40,10 @@ describe("main agent test app - android", () => {
     );
     await clickHex.waitForExist({ timeout: 30000 });
     await clickHex.click();
-    await driver.setTimeouts(3000);
+    await driver.setTimeouts(5000);
 
     await clickHex.click();
-    await driver.setTimeouts(3000);
-
-    const openExplore = await driver.$("accessibility id:, Explore");
-    await openExplore.click();
-    await driver.setTimeouts(3000);
+    await driver.setTimeouts(5000);
 
     const clickGoodHttp = await driver.$(
       '-android uiautomator:new UiSelector().text("GOOD HTTP REQUEST")'
@@ -91,6 +86,9 @@ describe("main agent test app - android", () => {
     await clickBadHttp.click();
     await driver.setTimeouts(3000);
 
+    await clickHex.click();
+    await driver.setTimeouts(5000);
+
     await clickDtRequest.click();
     await driver.setTimeouts(3000);
     await delayedRequest.click();
@@ -114,11 +112,10 @@ describe("main agent test app - android", () => {
     await clickGoodHttp.click();
     await driver.setTimeouts(3000);
 
-    //Decreasing so I can find this set of sessions in session replay
-    // await clickBadHttp.click();
-    // await driver.setTimeouts(3000);
-    // await clickBadHttp.click();
-    // await driver.setTimeouts(3000);
+    await clickBadHttp.click();
+    await driver.setTimeouts(3000);
+    await clickBadHttp.click();
+    await driver.setTimeouts(3000);
 
     await clickDtRequest.click();
     await driver.setTimeouts(3000);
