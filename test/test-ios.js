@@ -2,7 +2,7 @@ describe("main agent test app - ios", () => {
   it("Opens app", async () => {
     // wait for the app to load
     await driver.setTimeouts(5000);
-    
+
     const home = await $("id:Home");
     await home.waitForExist({ timeout: 30000 });
     await home.click();
@@ -38,14 +38,16 @@ describe("main agent test app - ios", () => {
     await closeKeyboard2.click();
     await driver.setTimeouts(3000);
   });
-  
+
   it("Clicks around the Explore tab", async () => {
     const exploreTab = await $("accessibility id:Explore");
     await exploreTab.waitForExist({ timeout: 30000 });
     await exploreTab.click();
     await driver.setTimeouts(5000);
 
-    const googlelink = await $('-ios class chain:**/XCUIElementTypeStaticText[`name == "Google"`][2]');
+    const googlelink = await $(
+      '-ios class chain:**/XCUIElementTypeStaticText[`name == "Google"`][2]'
+    );
     await googlelink.waitForExist({ timeout: 30000 });
     await googlelink.click();
     await driver.setTimeouts(5000);
@@ -55,12 +57,16 @@ describe("main agent test app - ios", () => {
     await googleTopBar.click();
     await driver.setTimeouts(5000);
 
-    const closeGoogle = await driver.$('-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]');
+    const closeGoogle = await driver.$(
+      '-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]'
+    );
     await closeGoogle.waitForExist({ timeout: 30000 });
     await closeGoogle.click();
     await driver.setTimeouts(5000);
 
-    const newrelicLink = await $('-ios class chain:**/XCUIElementTypeStaticText[`name == "New Relic"`][2]');
+    const newrelicLink = await $(
+      '-ios class chain:**/XCUIElementTypeStaticText[`name == "New Relic"`][2]'
+    );
     await newrelicLink.waitForExist({ timeout: 30000 });
     await newrelicLink.click();
     await driver.setTimeouts(5000);
@@ -70,12 +76,16 @@ describe("main agent test app - ios", () => {
     await NRtopBar.click();
     await driver.setTimeouts(5000);
 
-    const closeNR = await $('-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]');
+    const closeNR = await $(
+      '-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]'
+    );
     await closeNR.waitForExist({ timeout: 30000 });
     await closeNR.click();
     await driver.setTimeouts(5000);
-    
-    const expoLink = await $('-ios class chain:**/XCUIElementTypeStaticText[`name == "Expo"`][2]');
+
+    const expoLink = await $(
+      '-ios class chain:**/XCUIElementTypeStaticText[`name == "Expo"`][2]'
+    );
     await expoLink.waitForExist({ timeout: 30000 });
     await expoLink.click();
     await driver.setTimeouts(5000);
@@ -85,9 +95,16 @@ describe("main agent test app - ios", () => {
     await expoTopBar.click();
     await driver.setTimeouts(5000);
 
-    const closeExpo = await $('-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]');
+    const closeExpo = await $(
+      '-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]'
+    );
     await closeExpo.waitForExist({ timeout: 30000 });
     await closeExpo.click();
+    await driver.setTimeouts(5000);
+
+    const hexClick = await $("accessibility id:HandledException");
+    await hexClick.waitForExist({ timeout: 30000 });
+    await hexClick.click();
     await driver.setTimeouts(5000);
 
     const goodRequest = await $("accessibility id:Good Http Request");
@@ -95,7 +112,9 @@ describe("main agent test app - ios", () => {
     await goodRequest.click();
     await driver.setTimeouts(5000);
 
-    const dtRequest = await driver.$("accessibility id:Distributed Tracing Request");
+    const dtRequest = await driver.$(
+      "accessibility id:Distributed Tracing Request"
+    );
     await dtRequest.waitForExist({ timeout: 30000 });
     await dtRequest.click();
     await driver.setTimeouts(5000);
@@ -110,7 +129,9 @@ describe("main agent test app - ios", () => {
     await badRequest.click();
     await driver.setTimeouts(5000);
 
-    const delayedRequest = await driver.$("accessibility id:Delayed Http Request");
+    const delayedRequest = await driver.$(
+      "accessibility id:Delayed Http Request"
+    );
     await delayedRequest.waitForExist({ timeout: 30000 });
     await delayedRequest.click();
     await driver.setTimeouts(5000);
@@ -134,10 +155,14 @@ describe("main agent test app - ios", () => {
     await driver.setTimeouts(5000);
     await delayedRequest.click();
     await driver.setTimeouts(5000);
+    await hexClick.click();
+    await driver.setTimeouts(5000);
 
     await driver.executeScript("mobile:pressButton", [{ name: "home" }]);
     await driver.setTimeouts(5000);
-    await driver.execute("mobile: launchApp", { bundleId: "com.newrelic.mainagenttestapp",});
+    await driver.execute("mobile: launchApp", {
+      bundleId: "com.newrelic.mainagenttestapp",
+    });
     await driver.setTimeouts(5000);
 
     await goodRequest.click();
@@ -152,6 +177,8 @@ describe("main agent test app - ios", () => {
     await driver.setTimeouts(3000);
     await goodRequest.click();
     await driver.setTimeouts(3000);
+    await hexClick.click();
+    await driver.setTimeouts(5000);
 
     await delayedRequest.click();
     await driver.setTimeouts(5000);
@@ -160,7 +187,9 @@ describe("main agent test app - ios", () => {
 
     await driver.executeScript("mobile:pressButton", [{ name: "home" }]);
     await driver.setTimeouts(5000);
-    await driver.execute("mobile: launchApp", { bundleId: "com.newrelic.mainagenttestapp",  });
+    await driver.execute("mobile: launchApp", {
+      bundleId: "com.newrelic.mainagenttestapp",
+    });
     await driver.setTimeouts(5000);
 
     await dtRequest.click();
@@ -177,7 +206,9 @@ describe("main agent test app - ios", () => {
 
     await driver.executeScript("mobile:pressButton", [{ name: "home" }]);
     await driver.setTimeouts(5000);
-    await driver.execute("mobile: launchApp", { bundleId: "com.newrelic.mainagenttestapp", });
+    await driver.execute("mobile: launchApp", {
+      bundleId: "com.newrelic.mainagenttestapp",
+    });
     await driver.setTimeouts(5000);
   });
 
@@ -192,7 +223,9 @@ describe("main agent test app - ios", () => {
     await uriError.click();
     await driver.setTimeouts(5000);
 
-    await driver.execute("mobile: launchApp", { bundleId: "com.newrelic.mainagenttestapp",});
+    await driver.execute("mobile: launchApp", {
+      bundleId: "com.newrelic.mainagenttestapp",
+    });
     await driver.setTimeouts(5000);
 
     await crashTab.waitForExist({ timeout: 30000 });
@@ -204,7 +237,9 @@ describe("main agent test app - ios", () => {
     await typeError.click();
     await driver.setTimeouts(5000);
 
-    await driver.execute("mobile: launchApp", { bundleId: "com.newrelic.mainagenttestapp",});
+    await driver.execute("mobile: launchApp", {
+      bundleId: "com.newrelic.mainagenttestapp",
+    });
     await driver.setTimeouts(5000);
 
     await crashTab.waitForExist({ timeout: 30000 });
@@ -216,7 +251,9 @@ describe("main agent test app - ios", () => {
     await evalError.click();
     await driver.setTimeouts(5000);
 
-    await driver.execute("mobile: launchApp", { bundleId: "com.newrelic.mainagenttestapp",});
+    await driver.execute("mobile: launchApp", {
+      bundleId: "com.newrelic.mainagenttestapp",
+    });
     await driver.setTimeouts(5000);
   });
 
