@@ -82,19 +82,6 @@ export default function crash() {
             NewRelic.crashNow("Crash now - Type Error");
           }}
         />
-        <Button
-          title="HandledException"
-          accessibilityLabel="HandledException"
-          onPress={() => {
-            try {
-              var foo = {};
-              /* @ts-expect-error type mismatch */
-              foo.bar();
-            } catch (e: any) {
-              NewRelic.recordError(e);
-            }
-          }}
-        />
       </View>
     </SafeAreaView>
   );

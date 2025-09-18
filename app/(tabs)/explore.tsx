@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Button,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, View, Text, Button, SafeAreaView } from "react-native";
 
 import { ExternalLink } from "../../components/ExternalLink";
 import { ThemedText } from "../../components/ThemedText";
@@ -79,7 +73,7 @@ export default function TabTwoScreen() {
         console.error(error);
       });
   };
-  
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.title}>
@@ -117,6 +111,20 @@ export default function TabTwoScreen() {
         />
         <Separator />
         <Button title="Reset" onPress={() => setResult("")} />
+        <Separator />
+        <Button
+          title="HandledException"
+          accessibilityLabel="HandledException"
+          onPress={() => {
+            try {
+              var foo = {};
+              /* @ts-expect-error type mismatch */
+              foo.bar();
+            } catch (e: any) {
+              NewRelic.recordError(e);
+            }
+          }}
+        />
         <Text>Your Result: {result}</Text>
       </View>
     </SafeAreaView>
