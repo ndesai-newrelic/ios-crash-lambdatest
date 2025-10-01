@@ -25,6 +25,7 @@ function uploadFileToLambdaTest(name, path, customId) {
       Authorization:
         "Basic " +
         btoa(`${process.env.LAMBDA_USERNAME}:${process.env.LAMBDA_ACCESS_KEY}`),
+        //btoa(`${process.env.APP_EXP_LAMBDA_USERNAME}:${process.env.APP_EXP_LAMBDA_ACCESS_KEY}`),
     },
     body: form,
   });

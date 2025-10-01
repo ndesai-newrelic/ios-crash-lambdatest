@@ -9,8 +9,8 @@ function generateDynamicBuildName() {
 generateDynamicBuildName(); // Call the function to ensure it runs and logs the output
 
 exports.config = {
-  user: process.env.LT_USERNAME || "YOUR_USERNAME",
-  key: process.env.LT_ACCESSKEY || "YOUR_ACCESS_KEY",
+  user: process.env.APP_EXP_LAMBDA_USERNAME || "YOUR_USERNAME",
+  key: process.env.APP_EXP_LAMBDA_ACCESS_KEY || "YOUR_ACCESS_KEY",
 
   updateJob: false,
   specs: ["./test-ios.js"],
