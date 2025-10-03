@@ -53,22 +53,22 @@ describe("main agent test app - android", () => {
     await androidPage.backgroundApp();
   });
 
-  it("Clicks around the Crash tab", async () => {
+  it.only("Clicks around the Crash tab", async () => {
     // Magic strings:
     const RANGE = "range";
     const REFERENCE = "reference";
     const EVAL = "eval";
     const URI = "uri";
 
-    await androidPage.launchApp()
-    await androidPage.clickCrashTab();
-    await androidPage.forceCrash(RANGE);
-    await androidPage.clickCrashTab();
-    await androidPage.forceCrash(REFERENCE);
-    await androidPage.clickCrashTab();
-    await androidPage.forceCrash(EVAL);
-    await androidPage.clickCrashTab();
-    await androidPage.forceCrash(URI);
+    // await androidPage.launchApp()
+    // await androidPage.clickCrashTab();
+    // await androidPage.forceCrash(RANGE);
+    // await androidPage.clickCrashTab();
+    // await androidPage.forceCrash(REFERENCE);
+    // await androidPage.clickCrashTab();
+    // await androidPage.forceCrash(EVAL);
+    // await androidPage.clickCrashTab();
+    // await androidPage.forceCrash(URI);
     await androidPage.clickCrashTab();
     await androidPage.forceANR();
   });

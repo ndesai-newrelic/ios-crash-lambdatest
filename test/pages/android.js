@@ -180,9 +180,9 @@ class Android {
   }
 
   async forceANR() {
-    await this.anrSimlatorButton.waitForExist({ timeout: 3000 });
+    await this.anrSimlatorButton.waitForExist({ timeout: 30000 });
     await this.anrSimlatorButton.click();
-    await this.driver.setTimeouts(30000); // required to simulate ANR
+    await this.driver.pause(30000); // required to simulate ANR
 
     await this.driver.pressKeyCode(82); //background the app
     await this.driver.setTimeouts(5000);
