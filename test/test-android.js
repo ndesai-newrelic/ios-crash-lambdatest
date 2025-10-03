@@ -60,15 +60,15 @@ describe("main agent test app - android", () => {
     const EVAL = "eval";
     const URI = "uri";
 
-    // await androidPage.launchApp()
-    // await androidPage.clickCrashTab();
-    // await androidPage.forceCrash(RANGE);
-    // await androidPage.clickCrashTab();
-    // await androidPage.forceCrash(REFERENCE);
-    // await androidPage.clickCrashTab();
-    // await androidPage.forceCrash(EVAL);
-    // await androidPage.clickCrashTab();
-    // await androidPage.forceCrash(URI);
+    await androidPage.launchApp()
+    await androidPage.clickCrashTab();
+    await androidPage.forceCrash(RANGE);
+    await androidPage.clickCrashTab();
+    await androidPage.forceCrash(REFERENCE);
+    await androidPage.clickCrashTab();
+    await androidPage.forceCrash(EVAL);
+    await androidPage.clickCrashTab();
+    await androidPage.forceCrash(URI);
     await androidPage.clickCrashTab();
     await androidPage.forceANR();
   });
