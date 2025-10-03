@@ -9,9 +9,9 @@ class iOS {
     return this.driver.$("id:Home");
   }
 
-  // get background() {
-  //   return this.driver.executeScript("mobile:pressButton", [{ name: "home" }]);
-  // }
+  get background() {
+    return this.driver.executeScript("mobile:pressButton", [{ name: "home" }]);
+  }
 
   // Todo tab Locators
   get todoTab() {
