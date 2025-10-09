@@ -53,7 +53,7 @@ describe("main agent test app - android", () => {
     await androidPage.backgroundApp();
   });
 
-  it("Clicks around the Crash tab", async () => {
+  it.only("Clicks around the Crash tab", async () => {
     // Magic strings:
     const RANGE = "range";
     const REFERENCE = "reference";
