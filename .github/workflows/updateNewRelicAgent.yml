@@ -1,18 +1,17 @@
 name: Update New Relic Agent
 
-# on:
-#   schedule:
-#     # Run every Monday at 9:00 AM UTC
-#     - cron: "0 9 * * 1"
-#   workflow_dispatch: # Allow manual trigger
-#   push:
-#     branches:
-#       - master
-#     paths:
-#       - "Expensestracker/**"
-#       - ".github/workflows/update-newrelic-agent.yml"
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch: # Allow manual trigger
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/updateNewRelicAgent.yml"
 
-# jobs:
+jobs:
 #   check-and-update:
 #     runs-on: ubuntu-latest
 #     permissions:
