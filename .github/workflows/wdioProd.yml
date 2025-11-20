@@ -24,6 +24,7 @@ jobs:
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
       CUSTOM_APP_ID_IOS: "IOSAPP_PROD"
       ENVIRONMENT: "prod"
+      IOS_APP_TOKEN: "AA0bc03a3ad543bbd9c967593a6eac7faf26b63421-NRMA"
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
       - name: Setup environment
@@ -77,6 +78,7 @@ jobs:
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
       CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_PROD"
       ENVIRONMENT: "prod"
+      ANDROID_APP_TOKEN: "AAe5ea2f069b2cb3a4dd642c0d9357601e45b71b53-NRMA"
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
       - name: Setup environment
