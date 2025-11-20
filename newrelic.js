@@ -11,6 +11,19 @@ if (Platform.OS === "ios") {
   appToken = process.env.ANDROID_APP_TOKEN;
 }
 
+const collectorAddress =
+  process.env.ENVIRONMENT === "prod"
+    ? "mobile-collector.newrelic.com"
+    : process.env.ENVIRONMENT === "eu-prod"
+    ? "mobile-collector.eu01.nr-data.net"
+    : "staging-mobile-collector.newrelic.com";
+const crashCollectorAddress =
+  process.env.ENVIRONMENT === "prod"
+    ? "mobile-crash.newrelic.com"
+    : process.env.ENVIRONMENT === "eu-prod"
+    ? "mobile-crash.eu01.nr-data.net"
+    : "staging-mobile-crash.newrelic.com";
+
 export const agentConfiguration = {
   //Android Specific
   // Optional:Enable or disable collection of event data.
@@ -44,8 +57,8 @@ export const agentConfiguration = {
 
   // Optional:Set a specific collector address for sending data. Omit this field for default address.
   // comment out below for production
-  collectorAddress: "staging-mobile-collector.newrelic.com",
+  collectorAddress,
 
   // Optional:Set a specific crash collector address for sending crashes. Omit this field for default address.
-  crashCollectorAddress: "staging-mobile-crash.newrelic.com",
+  crashCollectorAddress,
 };
