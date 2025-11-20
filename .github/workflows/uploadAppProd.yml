@@ -17,8 +17,8 @@ on:
       - main
 
   # Runs on the 1st of every month
-  schedule:
-    - cron: "0 0 1 * *"
+  # schedule:
+  #   - cron: "0 0 1 * *"
 
 jobs:
   build-ios:
