@@ -7,7 +7,7 @@ dotenv.config();
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const targetDir = path.resolve(__dirname, "../builds");
- 
+
 function uploadFileToLambdaTest(name, path, customId) {
   const file = fs.readFileSync(path);
 
@@ -33,12 +33,12 @@ Promise.all([
   uploadFileToLambdaTest(
     "main-agent-test-app-iOS",
     `${targetDir}/mainagenttestapp-ios.zip`,
-    "IOSAPP"
+    process.env.CUSTOM_APP_ID_IOS
   ),
   uploadFileToLambdaTest(
     "main-agent-test-app-Android",
     `${targetDir}/app-release.apk`,
-    "ANDROIDAPP"
+    process.env.CUSTOM_APP_ID_ANDROID
   ),
 ])
   .then(([iosResponse, androidResponse]) =>

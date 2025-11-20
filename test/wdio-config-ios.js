@@ -3,7 +3,7 @@ const dayjs = require("dayjs");
 function generateDynamicBuildName() {
   const now = dayjs().format("YYYY-MM-DD_HH-mm");
 
-  return `Build_main-agent-test-app - iOS:${now}`;
+  return `Build_main-agent-test-app-${process.env.ENVIRONMENT} - iOS:${now}`;
 }
 
 generateDynamicBuildName(); // Call the function to ensure it runs and logs the output
@@ -29,7 +29,7 @@ exports.config = {
         deviceName: "iPhone 15",
         appiumVersion: "1.22.3",
         platformVersion: "17.0",
-        app: "IOSAPP", // custom_id
+        app: process.env.CUSTOM_APP_ID_IOS, // custom_id
       },
     },
   ],
@@ -52,4 +52,3 @@ exports.config = {
     timeout: 100000,
   },
 };
-  
