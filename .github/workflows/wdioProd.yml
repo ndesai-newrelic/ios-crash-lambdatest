@@ -1,0 +1,13 @@
+name: "WDIO - Prod: automate iOS and Android tests"
+
+on:
+  # allows option to trigger workflow manually
+  workflow_dispatch:
+
+  # TODO: add scheduled execution of workflow once confirmed it's working manually
+  # schedule:
+  #   - cron: '0 * * * *' # runs hourly
+# TODO: set env vars
+# env:
+# TODO: add steps for installing packages and running npm script
+# jobs:
