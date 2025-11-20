@@ -24,11 +24,6 @@ jobs:
   build-ios:
     name: Build iOS app
     runs-on: macos-15
-    env:
-      APP_TOKEN: "AA0bc03a3ad543bbd9c967593a6eac7faf26b63421-NRMA"
-      CUSTOM_APP_ID_IOS: "IOSAPP_PROD"
-      CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_PROD"
-      ENVIRONMENT: "prod"
 
     steps:
       - name: Check out repository
@@ -80,11 +75,6 @@ jobs:
   build-android:
     name: Build Android app
     runs-on: ubuntu-latest
-    env:
-      APP_TOKEN: "AAe5ea2f069b2cb3a4dd642c0d9357601e45b71b53-NRMA"
-      CUSTOM_APP_ID_IOS: "IOSAPP_PROD"
-      CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_PROD"
-      ENVIRONMENT: "prod"
 
     steps:
       - name: Checkout repository
@@ -118,6 +108,8 @@ jobs:
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
+      IOS_APP_TOKEN: "AA0bc03a3ad543bbd9c967593a6eac7faf26b63421-NRMA"
+      ANDROID_APP_TOKEN: "AAe5ea2f069b2cb3a4dd642c0d9357601e45b71b53-NRMA"
       CUSTOM_APP_ID_IOS: "IOSAPP_PROD"
       CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_PROD"
       ENVIRONMENT: "prod"
@@ -162,7 +154,7 @@ jobs:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: Congrats! We survived another month to claim victory over LambdaTest's retention policy. The main-agent-test-apps have been successfully uploaded and are ready for testing.
+                  text: Congrats! We survived another month to claim victory over LambdaTest's retention policy. The main-agent-test-apps-prod have been successfully uploaded and are ready for testing.
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
@@ -186,7 +178,7 @@ jobs:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: "Something went wrong while uploading the main-agent-test-apps to LambdaTest. Please check the logs for more details." 
+                  text: "Something went wrong while uploading the main-agent-test-apps-prod to LambdaTest. Please check the logs for more details." 
                 accessory:
                   type: "button"
                   text:
