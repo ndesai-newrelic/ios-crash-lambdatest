@@ -31,12 +31,12 @@ function uploadFileToLambdaTest(name, path, customId) {
 }
 Promise.all([
   uploadFileToLambdaTest(
-    "main-agent-test-app-iOS",
+    `main-agent-test-app-iOS-${process.env.ENVIRONMENT}`,
     `${targetDir}/mainagenttestapp-ios.zip`,
     process.env.CUSTOM_APP_ID_IOS
   ),
   uploadFileToLambdaTest(
-    "main-agent-test-app-Android",
+    `main-agent-test-app-Android-${process.env.ENVIRONMENT}`,
     `${targetDir}/app-release.apk`,
     process.env.CUSTOM_APP_ID_ANDROID
   ),

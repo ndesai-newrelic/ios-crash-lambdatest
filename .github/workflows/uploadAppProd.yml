@@ -26,6 +26,9 @@ jobs:
     runs-on: macos-15
     env:
       APP_TOKEN: "AA0bc03a3ad543bbd9c967593a6eac7faf26b63421-NRMA"
+      CUSTOM_APP_ID_IOS: "IOSAPP_PROD"
+      CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_PROD"
+      ENVIRONMENT: "prod"
 
     steps:
       - name: Check out repository
@@ -79,6 +82,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APP_TOKEN: "AAe5ea2f069b2cb3a4dd642c0d9357601e45b71b53-NRMA"
+      CUSTOM_APP_ID_IOS: "IOSAPP_PROD"
+      CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_PROD"
+      ENVIRONMENT: "prod"
 
     steps:
       - name: Checkout repository
