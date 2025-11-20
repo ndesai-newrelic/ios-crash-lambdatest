@@ -1,15 +1,15 @@
 import NewRelic from "newrelic-react-native-agent";
-// import { Platform } from "react-native";
+import { Platform } from "react-native";
 
 export let appToken;
 
-appToken = process.env.APP_TOKEN;
-
-// if (Platform.OS === "ios") {
-//   appToken = "AA17fe6658e601c9f10eefc8f808c0763461b532d2-NRMA";
-// } else {
-//   appToken = "AA6ea739552a5cde5e301e44aad55ec695855a9d71-NRMA";
-// }
+if (Platform.OS === "ios") {
+  // appToken = "AA17fe6658e601c9f10eefc8f808c0763461b532d2-NRMA";
+  appToken = process.env.IOS_APP_TOKEN;
+} else {
+  // appToken = "AA6ea739552a5cde5e301e44aad55ec695855a9d71-NRMA";
+  appToken = process.env.ANDROID_APP_TOKEN;
+}
 
 export const agentConfiguration = {
   //Android Specific
