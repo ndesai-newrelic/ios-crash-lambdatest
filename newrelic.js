@@ -1,5 +1,6 @@
 import NewRelic from "newrelic-react-native-agent";
 import { Platform } from "react-native";
+import { APP_TOKEN, ENVIRONMENT } from "@env";
 
 export let appToken;
 
@@ -17,22 +18,22 @@ export let appToken;
 const pchoiAndroid = "AA56ff5439e21865920f5948207d72b173eec56a62-NRMA";
 const pchoiiOS = "AAa21d956691d382d1b6abe6511d67b4d3fb9e867c-NRMA";
 
-if (process.env.ENVIRONMENT === "prod") {
-  appToken = process.env.APP_TOKEN;
+if (ENVIRONMENT === "prod") {
+  appToken = APP_TOKEN;
 } else {
   appToken = Platform.OS === "ios" ? pchoiiOS : pchoiAndroid;
 }
 
 const collectorAddress =
-  process.env.ENVIRONMENT === "prod"
+  ENVIRONMENT === "prod"
     ? "mobile-collector.newrelic.com"
-    : process.env.ENVIRONMENT === "eu-prod"
+    : ENVIRONMENT === "eu-prod"
     ? "mobile-collector.eu01.nr-data.net"
     : "staging-mobile-collector.newrelic.com";
 const crashCollectorAddress =
-  process.env.ENVIRONMENT === "prod"
+  ENVIRONMENT === "prod"
     ? "mobile-crash.newrelic.com"
-    : process.env.ENVIRONMENT === "eu-prod"
+    : ENVIRONMENT === "eu-prod"
     ? "mobile-crash.eu01.nr-data.net"
     : "staging-mobile-crash.newrelic.com";
 
