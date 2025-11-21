@@ -17,8 +17,8 @@ on:
       - main
 
   # Runs on the 1st of every month
-  # schedule:
-  #   - cron: "0 0 1 * *"
+  schedule:
+    - cron: "0 0 1 * *"
 
 jobs:
   build-ios:
@@ -142,25 +142,25 @@ jobs:
         if: ${{ success() }}
         run: echo "[ RUNNER ] - successfully uploaded apps to LambdaTest"
 
-      # - name: Notify success
-      #   if: ${{ success() }}
-      #   uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v
-      #   with:
-      #     webhook-type: incoming-webhook
-      #     webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #     payload: |
-      #       blocks:
-      #         - type: "header"
-      #           text:
-      #             type: "plain_text"
-      #             text: ":frog-wow-scroll: LambdaTest Upload Successful"
-      #         - type: "divider"
-      #         - type: "section"
-      #           text:
-      #             type: "mrkdwn"
-      #             text: Congrats! We survived another month to claim victory over LambdaTest's retention policy. The main-agent-test-apps-eu have been successfully uploaded and are ready for testing.
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Notify success
+        if: ${{ success() }}
+        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v
+        with:
+          webhook-type: incoming-webhook
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            blocks:
+              - type: "header"
+                text:
+                  type: "plain_text"
+                  text: ":frog-wow-scroll: LambdaTest Upload Successful"
+              - type: "divider"
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: Congrats! We survived another month to claim victory over LambdaTest's retention policy. The main-agent-test-apps-eu have been successfully uploaded and are ready for testing.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       # - name: Log failure
       #   if: ${{ failure() || cancelled() }}

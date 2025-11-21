@@ -56,7 +56,7 @@ jobs:
             -sdk iphonesimulator \
             build
         env:
-          APP_TOKEN: "AAa21d956691d382d1b6abe6511d67b4d3fb9e867c-NRMA"
+          APP_TOKEN: "AA17fe6658e601c9f10eefc8f808c0763461b532d2-NRMA"
           ENVIRONMENT: "staging"
 
       - name: Compress iOS app
@@ -97,7 +97,7 @@ jobs:
           ./gradlew clean
           ./gradlew assembleRelease
         env:
-          APP_TOKEN: "AA56ff5439e21865920f5948207d72b173eec56a62-NRMA"
+          APP_TOKEN: "AA6ea739552a5cde5e301e44aad55ec695855a9d71-NRMA"
           ENVIRONMENT: "staging"
 
       - name: Upload android app
@@ -158,7 +158,7 @@ jobs:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: Congrats! We survived another month to claim victory over LambdaTest's retention policy. The main-agent-test-apps have been successfully uploaded and are ready for testing.
+                  text: Congrats! We survived another month to claim victory over LambdaTest's retention policy. The main-agent-test-apps (staging) have been successfully uploaded and are ready for testing.
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
@@ -182,7 +182,7 @@ jobs:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: "Something went wrong while uploading the main-agent-test-apps to LambdaTest. Please check the logs for more details." 
+                  text: "Something went wrong while uploading the main-agent-test-apps (staging) to LambdaTest. Please check the logs for more details." 
                 accessory:
                   type: "button"
                   text:

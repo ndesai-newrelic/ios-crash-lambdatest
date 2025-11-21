@@ -5,7 +5,7 @@
 # This is accomplished by triggering npm scripts that execute a suite of tests in parallel
 # The tests spin up simulated iOS and Android devices on LambdaTest that are instrumented with the Mobile agent
 
-name: "WDIO: automate iOS and Android tests"
+name: "WDIO - staging: automate iOS and Android tests"
 
 on:
   # enables option for workflow to be manually executed in Github UI
