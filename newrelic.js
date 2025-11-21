@@ -1,28 +1,7 @@
 import NewRelic from "newrelic-react-native-agent";
-import { Platform } from "react-native";
 import { APP_TOKEN, ENVIRONMENT } from "@env";
 
-export let appToken;
-
-// if (Platform.OS === "ios") {
-//   // appToken = "AA17fe6658e601c9f10eefc8f808c0763461b532d2-NRMA";
-//   appToken = process.env.IOS_APP_TOKEN;
-// } else {
-//   // appToken = "AA6ea739552a5cde5e301e44aad55ec695855a9d71-NRMA";
-//   appToken = process.env.ANDROID_APP_TOKEN;
-// }
-
-// const prodAndroid = "AAe5ea2f069b2cb3a4dd642c0d9357601e45b71b53-NRMA";
-// const prodiOS = "AA0bc03a3ad543bbd9c967593a6eac7faf26b63421-NRMA";
-
-const pchoiAndroid = "AA56ff5439e21865920f5948207d72b173eec56a62-NRMA";
-const pchoiiOS = "AAa21d956691d382d1b6abe6511d67b4d3fb9e867c-NRMA";
-
-if (ENVIRONMENT === "prod") {
-  appToken = APP_TOKEN;
-} else {
-  appToken = Platform.OS === "ios" ? pchoiiOS : pchoiAndroid;
-}
+export let appToken = APP_TOKEN;
 
 const collectorAddress =
   ENVIRONMENT === "prod"

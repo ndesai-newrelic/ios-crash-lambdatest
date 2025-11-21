@@ -6,22 +6,21 @@
 # This action triggers a node.js function that uploads the app to LambdaTest.
 # The function uses a `custom_id` to identify that app with a specific name rather than the default names provided upon upload, which will change per upload.
 
-name: Upload iOS and Android apps to LambdaTest
+name: Upload staging iOS and Android apps to LambdaTest
 
 on:
- # enables option for workflow to be manually executed in Github UI
- workflow_dispatch:
+  # enables option for workflow to be manually executed in Github UI
+  workflow_dispatch:
 
- push:
-   branches:
-     - main
+  push:
+    branches:
+      - main
 
- # Runs on the 1st of every month
- schedule:
-   - cron: "0 0 1 * *"
+  # Runs on the 1st of every month
+  schedule:
+    - cron: "0 0 1 * *"
 
 jobs:
-
   build-ios:
     name: Build iOS app
     runs-on: macos-15
@@ -32,7 +31,7 @@ jobs:
 
       - name: Setup environment
         uses: ./.github/actions/env-setup
-    
+
       - name: Select Xcode 16.4
         run: |
           sudo xcode-select -switch /Applications/Xcode_16.4.app
@@ -56,7 +55,10 @@ jobs:
             -configuration Release \
             -sdk iphonesimulator \
             build
-    
+        env:
+          APP_TOKEN: "AAa21d956691d382d1b6abe6511d67b4d3fb9e867c-NRMA"
+          ENVIRONMENT: "staging"
+
       - name: Compress iOS app
         run: |
           cd ~
@@ -94,6 +96,9 @@ jobs:
           cd android
           ./gradlew clean
           ./gradlew assembleRelease
+        env:
+          APP_TOKEN: "AA56ff5439e21865920f5948207d72b173eec56a62-NRMA"
+          ENVIRONMENT: "staging"
 
       - name: Upload android app
         uses: actions/upload-artifact@v4
@@ -109,6 +114,9 @@ jobs:
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
+      CUSTOM_APP_ID_IOS: "IOSAPP_STAGING"
+      CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_STAGING"
+      ENVIRONMENT: "staging"
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
 
@@ -186,4 +194,3 @@ jobs:
                   action_id: "button-action"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          
