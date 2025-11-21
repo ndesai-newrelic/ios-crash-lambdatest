@@ -56,7 +56,7 @@ jobs:
             -sdk iphonesimulator \
             build
         env:
-          APP_TOKEN: "eu01xx669aca379c814d04e6ad82a285885b12a2ab-NRMA"
+          APP_TOKEN: ${{ secrets.EU_IOS_APP_TOKEN }}
           ENVIRONMENT: "eu-prod"
 
       - name: Compress iOS app
@@ -97,7 +97,7 @@ jobs:
           ./gradlew clean
           ./gradlew assembleRelease
         env:
-          APP_TOKEN: "eu01xx7a2aa00f32d705c1904c2dca6b7b8ce00b32-NRMA"
+          APP_TOKEN: ${{ secrets.EU_ANDROID_APP_TOKEN }}
           ENVIRONMENT: "eu-prod"
 
       - name: Upload android app
