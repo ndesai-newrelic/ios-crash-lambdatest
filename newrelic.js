@@ -1,13 +1,20 @@
 import NewRelic from "newrelic-react-native-agent";
-import { Platform } from "react-native";
+import { APP_TOKEN, ENVIRONMENT } from "@env";
 
-export let appToken;
+export let appToken = APP_TOKEN;
 
-if (Platform.OS === "ios") {
-  appToken = "AA17fe6658e601c9f10eefc8f808c0763461b532d2-NRMA";
-} else {
-  appToken = "AA6ea739552a5cde5e301e44aad55ec695855a9d71-NRMA";
-}
+const collectorAddress =
+  ENVIRONMENT === "prod"
+    ? "mobile-collector.newrelic.com"
+    : ENVIRONMENT === "eu-prod"
+    ? "mobile-collector.eu01.nr-data.net"
+    : "staging-mobile-collector.newrelic.com";
+const crashCollectorAddress =
+  ENVIRONMENT === "prod"
+    ? "mobile-crash.newrelic.com"
+    : ENVIRONMENT === "eu-prod"
+    ? "mobile-crash.eu01.nr-data.net"
+    : "staging-mobile-crash.newrelic.com";
 
 export const agentConfiguration = {
   //Android Specific
@@ -42,8 +49,8 @@ export const agentConfiguration = {
 
   // Optional:Set a specific collector address for sending data. Omit this field for default address.
   // comment out below for production
-  collectorAddress: "staging-mobile-collector.newrelic.com",
+  collectorAddress,
 
   // Optional:Set a specific crash collector address for sending crashes. Omit this field for default address.
-  crashCollectorAddress: "staging-mobile-crash.newrelic.com",
+  crashCollectorAddress,
 };

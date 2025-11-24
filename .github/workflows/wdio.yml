@@ -5,7 +5,7 @@
 # This is accomplished by triggering npm scripts that execute a suite of tests in parallel
 # The tests spin up simulated iOS and Android devices on LambdaTest that are instrumented with the Mobile agent
 
-name: "WDIO: automate iOS and Android tests"
+name: "WDIO - staging: automate iOS and Android tests"
 
 on:
   # enables option for workflow to be manually executed in Github UI
@@ -22,6 +22,8 @@ jobs:
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
+      CUSTOM_APP_ID_IOS: "IOSAPP_STAGING"
+      ENVIRONMENT: "staging"
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
       - name: Setup environment
@@ -73,6 +75,8 @@ jobs:
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
+      CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_STAGING"
+      ENVIRONMENT: "staging"
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
       - name: Setup environment
@@ -105,7 +109,7 @@ jobs:
       #         - type: "section"
       #           text:
       #             type: "mrkdwn"
-      #             text: ":robot: Failed to generate *main-agent-test-app-Android* data" 
+      #             text: ":robot: Failed to generate *main-agent-test-app-Android* data"
       #           accessory:
       #             type: "button"
       #             text:
