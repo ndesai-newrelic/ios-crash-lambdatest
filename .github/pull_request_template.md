@@ -22,10 +22,3 @@ Nested test plan (cool use of markdown, but not strictly necessary, flat todo li
 - [ ] Test n:
     - [ ] Test methods with reference and new behavior if possible
      
-### Builds
-
-If changes were made to the iOS app:
-- [ ] The `builds/mainagenttestapp.zip` file was regenerated
-
-If changes were made to the Android app:
-- [ ] The `builds/mainagenttestapp.apk` file was regenerated

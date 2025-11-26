@@ -1,60 +1,82 @@
 name: Update New Relic Agent
 
 on:
-  schedule:
-    # Run every Monday at 9:00 AM UTC
-    - cron: "0 9 * * 1"
-  workflow_dispatch: # Allow manual trigger
+  # Allow manual trigger
+  workflow_dispatch: 
+
   push:
     branches:
-      - master
-    paths:
-      - ".github/workflows/updateNewRelicAgent.yml"
+      - main
 
+  # Run every Monday at 9:00 AM UTC
+  # schedule:
+  #   - cron: "0 9 * * 1"
+    
 jobs:
-#   check-and-update:
-#     runs-on: ubuntu-latest
-#     permissions:
-#       contents: write
-#       pull-requests: write
-#     defaults:
-#       run:
-#         working-directory: ./Expensestracker
+  check-and-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-#       - name: Get latest New Relic Android Agent version
-#         id: get-version
-#         run: |
-#           # Fetch the latest release version from Maven Central metadata XML
-#           # This is more reliable than the search API for getting the absolute latest version
-#           LATEST_VERSION=$(curl -s "https://repo1.maven.org/maven2/com/newrelic/agent/android/android-agent/maven-metadata.xml" | \
-#             grep -oP '<release>\K[^<]+' | head -1)
+      - name: Get latest New Relic Android Agent version
+        id: get-version-android
+        run: |
+          # Fetch the latest release version from Maven Central metadata XML
+          # This is more reliable than the search API for getting the absolute latest version
+          LATEST_VERSION=$(curl -s "https://repo1.maven.org/maven2/com/newrelic/agent/android/android-agent/maven-metadata.xml" | \
+            grep -oP '<release>\K[^<]+' | head -1)
 
-#           echo "Latest version: $LATEST_VERSION"
-#           echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+          echo "Latest version: $LATEST_VERSION"
+          echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
 
-#           # Get current version from build.gradle.kts
-#           CURRENT_VERSION=$(grep -oP 'com.newrelic.agent.android:android-agent:\K[^"]+' app/build.gradle.kts)
-#           echo "Current version: $CURRENT_VERSION"
-#           echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          # Get current version from build.gradle
+          cd android
+          CURRENT_VERSION=$(grep -oP "classpath ['\"]com\.newrelic\.agent\.android:agent-gradle-plugin:\K[^'\"]+(?=['\"])" build.gradle)
+          
+          echo "Current version: $CURRENT_VERSION"
+          echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
-#           # Check if update is needed (skip SNAPSHOT versions)
-#           if [[ "$CURRENT_VERSION" == *"SNAPSHOT"* ]]; then
-#             echo "Current version is SNAPSHOT, comparing with latest release"
-#           fi
+          # Check if update is needed (skip SNAPSHOT versions)
+          if [[ "$CURRENT_VERSION" == *"SNAPSHOT"* ]]; then
+            echo "Current version is SNAPSHOT, comparing with latest release"
+          fi
 
-#           if [ "$LATEST_VERSION" != "$CURRENT_VERSION" ] && [[ "$LATEST_VERSION" != "" ]]; then
-#             echo "update_needed=true" >> $GITHUB_OUTPUT
-#             echo "Update needed: $CURRENT_VERSION -> $LATEST_VERSION"
-#           else
-#             echo "update_needed=false" >> $GITHUB_OUTPUT
-#             echo "Already on latest version"
-#           fi
+          if [ "$LATEST_VERSION" != "$CURRENT_VERSION" ] && [[ "$LATEST_VERSION" != "" ]]; then
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+            echo "Update needed: $CURRENT_VERSION -> $LATEST_VERSION"
+          else
+            echo "update_needed=false" >> $GITHUB_OUTPUT
+            echo "Already on latest version"
+          fi
+
+      - name: Update New Relic React Native version  
+        id: get-version-react-native
+        run: |
+          cd ..
+          # Fetch latest version from NPM
+          LATEST_VERSION=$(npm view newrelic-react-native-agent version)
+
+          echo "LATEST React Native version: $LATEST_VERSION"
+          echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+
+          # Get the current version
+          echo "--- Current directory: $(pwd) ---"
+          echo "--- Files here: ---"
+          ls -la
+
+          CURRENT_VERSION=$(grep -oP "newrelic-react-native-agent@\K[^']+" package.json)
+
+          echo "Current version: $CURRENT_VERSION"
+          echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          
+          # Check if update is needed
 
 #       - name: Update New Relic agent version
 #         if: steps.get-version.outputs.update_needed == 'true'
@@ -62,11 +84,11 @@ jobs:
 #           LATEST_VERSION="${{ steps.get-version.outputs.latest_version }}"
 #           CURRENT_VERSION="${{ steps.get-version.outputs.current_version }}"
 
-#           # Update app/build.gradle.kts - android-agent dependency
-#           sed -i "s/com.newrelic.agent.android:android-agent:$CURRENT_VERSION/com.newrelic.agent.android:android-agent:$LATEST_VERSION/g" app/build.gradle.kts
+#           # Update app/build.gradle - android-agent dependency
+#           sed -i "s/com.newrelic.agent.android:agent-gradle-plugin:$CURRENT_VERSION/com.newrelic.agent.android:agent-gradle-plugin:$LATEST_VERSION/g" app/build.gradle
 
-#           # Update build.gradle.kts - agent-gradle-plugin classpath
-#           sed -i "s/com.newrelic.agent.android:agent-gradle-plugin:$CURRENT_VERSION/com.newrelic.agent.android:agent-gradle-plugin:$LATEST_VERSION/g" build.gradle.kts
+#           # Update build.gradle - agent-gradle-plugin classpath
+#           sed -i "s/com.newrelic.agent.android:agent-gradle-plugin:$CURRENT_VERSION/com.newrelic.agent.android:agent-gradle-plugin:$LATEST_VERSION/g" build.gradle
 
 #           echo "Updated New Relic agent from $CURRENT_VERSION to $LATEST_VERSION"
 
@@ -85,8 +107,8 @@ jobs:
 #             **Latest version:** `${{ steps.get-version.outputs.latest_version }}`
 
 #             ## Changes
-#             - Updated `com.newrelic.agent.android:android-agent` in `app/build.gradle.kts`
-#             - Updated `com.newrelic.agent.android:agent-gradle-plugin` in `build.gradle.kts`
+#             - Updated `com.newrelic.agent.android:android-agent` in `app/build.gradle`
+#             - Updated `com.newrelic.agent.android:agent-gradle-plugin` in `build.gradle`
 
 #             ## Release Notes
 #             View the release notes at: https://docs.newrelic.com/docs/release-notes/mobile-release-notes/android-release-notes/
@@ -100,12 +122,12 @@ jobs:
 #             automated
 #             newrelic
 
-#       - name: Summary
-#         if: steps.get-version.outputs.update_needed == 'true'
-#         run: |
-#           echo "✅ Created PR to update New Relic Android agent from ${{ steps.get-version.outputs.current_version }} to ${{ steps.get-version.outputs.latest_version }}"
+      - name: Summary
+        if: steps.get-version.outputs.update_needed == 'true'
+        run: |
+          echo "✅ Created PR to update New Relic Android agent from ${{ steps.get-version.outputs.current_version }} to ${{ steps.get-version.outputs.latest_version }}"
 
-#       - name: No Update Needed
-#         if: steps.get-version.outputs.update_needed == 'false'
-#         run: |
-#           echo "ℹ️ New Relic Android agent is already up to date (version: ${{ steps.get-version.outputs.current_version }})"
+      - name: No Update Needed
+        if: steps.get-version.outputs.update_needed == 'false'
+        run: |
+          echo "ℹ️ New Relic Android agent is already up to date (version: ${{ steps.get-version.outputs.current_version }})"
