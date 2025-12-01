@@ -59,24 +59,25 @@ jobs:
       - name: Update New Relic React Native version  
         id: get-version-react-native
         run: |
-          cd ..
           # Fetch latest version from NPM
           LATEST_VERSION=$(npm view newrelic-react-native-agent version)
 
           echo "LATEST React Native version: $LATEST_VERSION"
           echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
 
-          # Get the current version
-          echo "--- Current directory: $(pwd) ---"
-          echo "--- Files here: ---"
-          ls -la
-
-          CURRENT_VERSION=$(grep -oP "newrelic-react-native-agent@\K[^']+" package.json)
+          CURRENT_VERSION=$(grep 'newrelic-react-native-agent' package.json | grep -o '\^[0-9]\+\(\.[0-9]\+\)*')
 
           echo "Current version: $CURRENT_VERSION"
           echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           
           # Check if update is needed
+          if [ "$LATEST_VERSION" != "$CURRENT_VERSION" ] && [[ "$LATEST_VERSION" != "" ]]; then
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+            echo "Update needed: $CURRENT_VERSION -> $LATEST_VERSION"
+          else
+            echo "update_needed=false" >> $GITHUB_OUTPUT
+            echo "Already on latest version"
+          fi
 
 #       - name: Update New Relic agent version
 #         if: steps.get-version.outputs.update_needed == 'true'
