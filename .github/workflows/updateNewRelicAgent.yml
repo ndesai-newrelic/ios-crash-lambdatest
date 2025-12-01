@@ -89,11 +89,12 @@ jobs:
           REACT_NATIVE_CURRENT_VERSION="${{ steps.get-version-react-native.outputs.current_version }}"
 
           # Update build.gradle - agent-gradle-plugin classpath
-          sed -i "s/com.newrelic.agent.android:agent-gradle-plugin:$CURRENT_VERSION/com.newrelic.agent.android:agent-gradle-plugin:$LATEST_VERSION/g" build.gradle
+          cd android
+          sed -i "s/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_CURRENT_VERSION/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_LATEST_VERSION/g" build.gradle
 
           # Update package.json - newrelic-react-native-agent version
-          sed -i "s/\"newrelic-react-native-agent\": \"^$CURRENT_VERSION\"/\"newrelic-react-native-agent\": \"^$LATEST_VERSION\"/g" package.json
-
+          sed -i "s/\"newrelic-react-native-agent\": \"^$REACT_NATIVE_CURRENT_VERSION\"/\"newrelic-react-native-agent\": \"^$REACT_NATIVE_LATEST_VERSION\"/g" package.json
+          
           # Update pods
           # npx pod install --repo-update
 
