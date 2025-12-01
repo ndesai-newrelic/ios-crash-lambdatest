@@ -93,6 +93,7 @@ jobs:
           sed -i "s/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_CURRENT_VERSION/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_LATEST_VERSION/g" build.gradle
 
           # Update package.json - newrelic-react-native-agent version
+          cd ..
           sed -i "s/\"newrelic-react-native-agent\": \"^$REACT_NATIVE_CURRENT_VERSION\"/\"newrelic-react-native-agent\": \"^$REACT_NATIVE_LATEST_VERSION\"/g" package.json
           
           # Update pods
