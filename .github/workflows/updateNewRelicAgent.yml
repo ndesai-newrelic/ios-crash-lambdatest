@@ -65,7 +65,7 @@ jobs:
           echo "LATEST React Native version: $LATEST_VERSION"
           echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
 
-          CURRENT_VERSION=$(grep 'newrelic-react-native-agent' package.json | grep -o '\^[0-9]\+\(\.[0-9]\+\)*')
+          CURRENT_VERSION=$(grep 'newrelic-react-native-agent' package.json | grep -o '[0-9]\+\(\.[0-9]\+\)*')
 
           echo "Current version: $CURRENT_VERSION"
           echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
