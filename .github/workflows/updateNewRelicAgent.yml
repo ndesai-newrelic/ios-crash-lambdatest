@@ -99,7 +99,7 @@ jobs:
           # Update pods
           # npx pod install --repo-update
 
-          echo "Updated New Relic react-native agent from $CURRENT_VERSION to $LATEST_VERSION"
+          echo "Updated New Relic react-native agent from $REACT_NATIVE_CURRENT_VERSION to $REACT_NATIVE_LATEST_VERSION"
 
 #       - name: Create Pull Request
 #         if: steps.get-version.outputs.update_needed == 'true'
@@ -132,11 +132,11 @@ jobs:
 #             newrelic
 
       - name: Summary
-        if: steps.get-version.outputs.update_needed == 'true'
+        if: steps.get-version-react-native.outputs.update_needed || steps.get-version-android.outputs.update_needed == 'true'
         run: |
-          echo "✅ Created PR to update New Relic Android agent from ${{ steps.get-version.outputs.current_version }} to ${{ steps.get-version.outputs.latest_version }}"
+          echo "✅ Created PR to update New Relic react-native agent"
 
       - name: No Update Needed
-        if: steps.get-version.outputs.update_needed == 'false'
+        if: steps.get-version-react-native.outputs.update_needed == 'false' && steps.get-version-android.outputs.update_needed == 'false'
         run: |
-          echo "ℹ️ New Relic Android agent is already up to date (version: ${{ steps.get-version.outputs.current_version }})"
+          echo "ℹ️ New Relic react-native agent is already up to date (version: ${{ steps.get-version-react-native.outputs.current_version }})"
