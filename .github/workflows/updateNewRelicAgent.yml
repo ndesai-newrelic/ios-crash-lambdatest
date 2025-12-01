@@ -25,6 +25,29 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get latest New Relic React Native version  
+        id: get-version-react-native
+        run: |
+          # Fetch latest version from NPM
+          LATEST_VERSION=$(npm view newrelic-react-native-agent version)
+
+          echo "Latest React Native version: $LATEST_VERSION"
+          echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+
+          CURRENT_VERSION=$(grep 'newrelic-react-native-agent' package.json | grep -o '[0-9]\+\(\.[0-9]\+\)*')
+
+          echo "Current version: $CURRENT_VERSION"
+          echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          
+          # Check if update is needed
+          if [ "$LATEST_VERSION" != "$CURRENT_VERSION" ] && [[ "$LATEST_VERSION" != "" ]]; then
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+            echo "Update needed: $CURRENT_VERSION -> $LATEST_VERSION"
+          else
+            echo "update_needed=false" >> $GITHUB_OUTPUT
+            echo "Already on latest version"
+          fi
+
       - name: Get latest New Relic Android Agent version
         id: get-version-android
         run: |
@@ -56,37 +79,14 @@ jobs:
             echo "Already on latest version"
           fi
 
-      - name: Get latest New Relic React Native version  
-        id: get-version-react-native
-        run: |
-          # Fetch latest version from NPM
-          LATEST_VERSION=$(npm view newrelic-react-native-agent version)
-
-          echo "Latest React Native version: $LATEST_VERSION"
-          echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
-
-          CURRENT_VERSION=$(grep 'newrelic-react-native-agent' package.json | grep -o '[0-9]\+\(\.[0-9]\+\)*')
-
-          echo "Current version: $CURRENT_VERSION"
-          echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
-          
-          # Check if update is needed
-          if [ "$LATEST_VERSION" != "$CURRENT_VERSION" ] && [[ "$LATEST_VERSION" != "" ]]; then
-            echo "update_needed=true" >> $GITHUB_OUTPUT
-            echo "Update needed: $CURRENT_VERSION -> $LATEST_VERSION"
-          else
-            echo "update_needed=false" >> $GITHUB_OUTPUT
-            echo "Already on latest version"
-          fi
-
       - name: Update New Relic agent version
-        if: steps.get-version-react-native.outputs.update_needed || steps.get-version-android.outputs.update_needed == 'true'
+        if: steps.get-version-react-native.outputs.update_needed
         run: |
-          ANDROID_LATEST_VERSION="${{ steps.get-version-android.outputs.latest_version }}"
-          ANDROID_CURRENT_VERSION="${{ steps.get-version-android.outputs.current_version }}"
-
           REACT_NATIVE_LATEST_VERSION="${{ steps.get-version-react-native.outputs.latest_version }}"
           REACT_NATIVE_CURRENT_VERSION="${{ steps.get-version-react-native.outputs.current_version }}"
+
+          ANDROID_LATEST_VERSION="${{ steps.get-version-android.outputs.latest_version }}"
+          ANDROID_CURRENT_VERSION="${{ steps.get-version-android.outputs.current_version }}"
 
           # Update build.gradle - agent-gradle-plugin classpath
           cd android
@@ -134,7 +134,7 @@ jobs:
       - name: Summary
         if: steps.get-version-react-native.outputs.update_needed || steps.get-version-android.outputs.update_needed == 'true'
         run: |
-          echo "✅ Created PR to update New Relic react-native agent"
+          echo "✅ Created PR to update New Relic react-native agent & Android agent"
 
       - name: No Update Needed
         if: steps.get-version-react-native.outputs.update_needed == 'false' && steps.get-version-android.outputs.update_needed == 'false'
