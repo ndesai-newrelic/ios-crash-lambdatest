@@ -111,10 +111,8 @@ jobs:
           body: |
             ## Description
             This PR updates the New Relic react-native agent to the latest version.
-
             **Current version:** `${{ steps.get-version-react-native.outputs.current_version }}`
             **Latest version:** `${{ steps.get-version-react-native.outputs.latest_version }}`
-
             ## Changes
             - Update the New Relic react-native agent version in `package.json`
             - Updated `com.newrelic.agent.android:agent-gradle-plugin` in `build.gradle`
