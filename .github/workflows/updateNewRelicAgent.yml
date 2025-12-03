@@ -9,8 +9,8 @@ on:
       - main
 
   # Run every Monday at 9:00 AM UTC
-  # schedule:
-  #   - cron: "0 9 * * 1"
+  schedule:
+    - cron: "0 9 * * 1"
     
 jobs:
   check-and-update:
