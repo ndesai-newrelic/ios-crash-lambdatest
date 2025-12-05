@@ -59,11 +59,11 @@ PODS:
   - hermes-engine (0.76.9):
     - hermes-engine/Pre-built (= 0.76.9)
   - hermes-engine/Pre-built (0.76.9)
-  - newrelic-react-native-agent (1.5.11):
+  - newrelic-react-native-agent (1.5.12):
     - DoubleConversion
     - glog
     - hermes-engine
-    - NewRelicAgent (~> 7.5.11)
+    - NewRelicAgent (~> 7.6.0)
     - RCT-Folly (= 2024.10.14.00)
     - RCTRequired
     - RCTTypeSafety
@@ -81,7 +81,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - NewRelicAgent (7.5.11)
+  - NewRelicAgent (7.6.0)
   - RCT-Folly (2024.10.14.00):
     - boost
     - DoubleConversion
@@ -2189,8 +2189,8 @@ SPEC CHECKSUMS:
   fmt: 01b82d4ca6470831d1cc0852a1af644be019e8f6
   glog: 08b301085f15bcbb6ff8632a8ebaf239aae04e6a
   hermes-engine: 9e868dc7be781364296d6ee2f56d0c1a9ef0bb11
-  newrelic-react-native-agent: a72988340feebb2af9154eea55224c986324a46f
-  NewRelicAgent: e393930380a97c3b22c82f1ee71b931c89721a7f
+  newrelic-react-native-agent: f2fc95115e78fccf5502dce0167d15649600b702
+  NewRelicAgent: 96b6033df5e4c9aed0ffe7254430ba544edc216c
   RCT-Folly: ea9d9256ba7f9322ef911169a9f696e5857b9e17
   RCTDeprecation: ebe712bb05077934b16c6bf25228bdec34b64f83
   RCTRequired: ca91e5dd26b64f577b528044c962baf171c6b716
