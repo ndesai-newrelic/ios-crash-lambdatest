@@ -102,14 +102,14 @@ describe("main agent test app - ios", () => {
     await closeExpo.click();
     await driver.setTimeouts(5000);
 
-    const hexClick = await $("accessibility id:HandledException");
+    const hexClick = await $("accessibility id:Handled Exception");
     await hexClick.waitForExist({ timeout: 30000 });
     await hexClick.click();
     await driver.setTimeouts(5000);
 
-    const goodRequest = await $("accessibility id:Good Http Request");
-    await goodRequest.waitForExist({ timeout: 30000 });
-    await goodRequest.click();
+    const httpRequest = await $("accessibility id:Http Request");
+    await httpRequest.waitForExist({ timeout: 30000 });
+    await httpRequest.click();
     await driver.setTimeouts(5000);
 
     const dtRequest = await driver.$(
@@ -124,36 +124,36 @@ describe("main agent test app - ios", () => {
     await reset.click();
     await driver.setTimeouts(5000);
 
-    const badRequest = await $("accessibility id:Bad Http Request");
-    await badRequest.waitForExist({ timeout: 30000 });
-    await badRequest.click();
+    const httpError = await $("accessibility id:HTTP Request Error");
+    await httpError.waitForExist({ timeout: 30000 });
+    await httpError.click();
     await driver.setTimeouts(5000);
 
-    const delayedRequest = await driver.$(
-      "accessibility id:Delayed Http Request"
+    const networkFailure = await driver.$(
+      "accessibility id:Network Failure"
     );
-    await delayedRequest.waitForExist({ timeout: 30000 });
-    await delayedRequest.click();
+    await networkFailure.waitForExist({ timeout: 30000 });
+    await networkFailure.click();
     await driver.setTimeouts(5000);
 
-    await badRequest.click();
+    await httpError.click();
     await driver.setTimeouts(3000);
-    await badRequest.click();
+    await httpError.click();
     await driver.setTimeouts(3000);
-    await badRequest.click();
+    await httpError.click();
     await driver.setTimeouts(3000);
-    await badRequest.click();
+    await httpError.click();
     await driver.setTimeouts(3000);
-    await badRequest.click();
+    await httpError.click();
     await driver.setTimeouts(3000);
-    await badRequest.click();
+    await httpError.click();
     await driver.setTimeouts(3000);
-    await badRequest.click();
+    await httpError.click();
     await driver.setTimeouts(3000);
 
-    await delayedRequest.click();
+    await networkFailure.click();
     await driver.setTimeouts(5000);
-    await delayedRequest.click();
+    await networkFailure.click();
     await driver.setTimeouts(5000);
     await hexClick.click();
     await driver.setTimeouts(5000);
@@ -165,24 +165,24 @@ describe("main agent test app - ios", () => {
     });
     await driver.setTimeouts(5000);
 
-    await goodRequest.click();
+    await httpRequest.click();
     await driver.setTimeouts(3000);
-    await goodRequest.click();
+    await httpRequest.click();
     await driver.setTimeouts(3000);
-    await goodRequest.click();
+    await httpRequest.click();
     await driver.setTimeouts(3000);
-    await goodRequest.click();
+    await httpRequest.click();
     await driver.setTimeouts(3000);
-    await goodRequest.click();
+    await httpRequest.click();
     await driver.setTimeouts(3000);
-    await goodRequest.click();
+    await httpRequest.click();
     await driver.setTimeouts(3000);
     await hexClick.click();
     await driver.setTimeouts(5000);
 
-    await delayedRequest.click();
+    await networkFailure.click();
     await driver.setTimeouts(5000);
-    await delayedRequest.click();
+    await networkFailure.click();
     await driver.setTimeouts(5000);
 
     await driver.executeScript("mobile:pressButton", [{ name: "home" }]);

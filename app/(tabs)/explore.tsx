@@ -10,7 +10,7 @@ const Separator = () => <View style={styles.separator} />;
 export default function TabTwoScreen() {
   const [result, setResult] = useState("");
 
-  const badRequest = () => {
+  const HTTPRequestError = () => {
     fetch("https://leasestar-api.realpage.com/jsp/configElements")
       .then((response) => response.json())
       .then((json) => {
@@ -22,7 +22,7 @@ export default function TabTwoScreen() {
       });
   };
 
-  const goodRequest = () => {
+  const HTTPRequest = () => {
     fetch("https://jsonplaceholder.typicode.com/todos/1")
       .then((response) => response.json())
       .then((json) => {
@@ -59,7 +59,7 @@ export default function TabTwoScreen() {
     }
   };
 
-  const dtRequest = () => {
+  const NetworkFailure = () => {
     fetch(
       "https://ec2-54-183-227-129.us-west-1.compute.amazonaws.com:3001/webrequest"
     )
@@ -90,31 +90,31 @@ export default function TabTwoScreen() {
       <Separator />
       <View style={styles.buttons}>
         <Button
-          title="Good Http Request"
-          accessibilityLabel="Good Http Request"
-          onPress={() => goodRequest()}
+          title="HTTP Request"
+          accessibilityLabel="HTTP Request"
+          onPress={() => HTTPRequest()}
         />
         <Button
-          title="Bad Http Request"
-          accessibilityLabel="Bad Http Request"
-          onPress={() => badRequest()}
+          title="HTTP Request Error"
+          accessibilityLabel="HTTP Request Error"
+          onPress={() => HTTPRequestError()}
         />
         <Button
-          title="Delayed Http Request"
-          accessibilityLabel="Delayed Http Request"
+          title="Network Failure"
+          accessibilityLabel="Network Failure"
           onPress={() => delayedRequest()}
         />
         <Button
           title="Distributed Tracing Request"
           accessibilityLabel="Distributed Tracing Request"
-          onPress={() => dtRequest()}
+          onPress={() => NetworkFailure()}
         />
         <Separator />
         <Button title="Reset" onPress={() => setResult("")} />
         <Separator />
         <Button
-          title="HandledException"
-          accessibilityLabel="HandledException"
+          title="Handled Exception"
+          accessibilityLabel="Handled Exception"
           onPress={() => {
             try {
               var foo = {};

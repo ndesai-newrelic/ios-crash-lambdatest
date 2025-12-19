@@ -27,7 +27,8 @@ exports.config = {
         deviceName: "Pixel 9 Pro",
         appiumVersion: "1.22.3",
         platformVersion: "15",
-        app: process.env.CUSTOM_APP_ID_ANDROID, // custom_id
+        // app: process.env.CUSTOM_APP_ID_ANDROID, // custom_id
+        app: 'main-agent-jbj-test' // Custom ID for this specific test
       },
     },
   ],
