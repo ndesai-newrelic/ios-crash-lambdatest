@@ -36,7 +36,7 @@ describe("main agent test app - android", () => {
     await driver.setTimeouts(3000);
 
     const clickHex = await driver.$(
-      '-android uiautomator:new UiSelector().text("HANDLEDEXCEPTION")'
+      '-android uiautomator:new UiSelector().text("HANDLED EXCEPTION")'
     );
     await clickHex.waitForExist({ timeout: 30000 });
     await clickHex.click();
@@ -45,11 +45,11 @@ describe("main agent test app - android", () => {
     await clickHex.click();
     await driver.setTimeouts(5000);
 
-    const clickGoodHttp = await driver.$(
-      '-android uiautomator:new UiSelector().text("GOOD HTTP REQUEST")'
+    const clickHTTPRequest = await driver.$(
+      '-android uiautomator:new UiSelector().text("HTTP REQUEST")'
     );
-    await clickGoodHttp.waitForExist({ timeout: 30000 });
-    await clickGoodHttp.click();
+    await clickHTTPRequest.waitForExist({ timeout: 30000 });
+    await clickHTTPRequest.click();
     await driver.setTimeouts(3000);
 
     const clickDtRequest = await driver.$(
@@ -57,33 +57,33 @@ describe("main agent test app - android", () => {
     );
     await clickDtRequest.waitForExist({ timeout: 30000 });
 
-    const delayedRequest = await driver.$(
-      "accessibility id:Delayed Http Request"
+    const clickNetworkFailure = await driver.$(
+      "accessibility id:Network Failure"
     );
-    await delayedRequest.waitForDisplayed({ timeout: 50000 });
-    await delayedRequest.click();
+    await clickNetworkFailure.waitForDisplayed({ timeout: 50000 });
+    await clickNetworkFailure.click();
     await driver.setTimeouts(5000);
 
-    await delayedRequest.click();
+    await clickNetworkFailure.click();
     await driver.setTimeouts(5000);
 
     const background = await driver.$("id:android:id/navigationBarBackground");
     await background.click();
     await driver.setTimeouts(3000);
-    await clickGoodHttp.click();
+    await clickHTTPRequest.click();
     await driver.setTimeouts(3000);
     const clickReset = await driver.$(
       '-android uiautomator:new UiSelector().text("RESET")'
     );
     await clickReset.click();
     await driver.setTimeouts(3000);
-    const clickBadHttp = await driver.$(
-      '-android uiautomator:new UiSelector().text("BAD HTTP REQUEST")'
+    const clickHTTPError = await driver.$(
+      '-android uiautomator:new UiSelector().text("HTTP REQUEST ERROR")'
     );
-    await clickBadHttp.waitForExist({ timeout: 30000 });
-    await clickBadHttp.click();
+    await clickHTTPError.waitForExist({ timeout: 30000 });
+    await clickHTTPError.click();
     await driver.setTimeouts(3000);
-    await clickBadHttp.click();
+    await clickHTTPError.click();
     await driver.setTimeouts(3000);
 
     await clickHex.click();
@@ -91,32 +91,32 @@ describe("main agent test app - android", () => {
 
     await clickDtRequest.click();
     await driver.setTimeouts(3000);
-    await delayedRequest.click();
+    await clickNetworkFailure.click();
     await driver.setTimeouts(5000);
 
-    await clickGoodHttp.click();
+    await clickHTTPRequest.click();
     await driver.setTimeouts(3000);
-    await clickGoodHttp.click();
+    await clickHTTPRequest.click();
     await driver.setTimeouts(3000);
 
     await background.click();
     await driver.setTimeouts(3000);
 
-    await clickBadHttp.click();
+    await clickHTTPError.click();
     await driver.setTimeouts(3000);
-    await delayedRequest.click();
+    await clickNetworkFailure.click();
     await driver.setTimeouts(5000);
 
-    await clickGoodHttp.click();
+    await clickHTTPRequest.click();
     await driver.setTimeouts(3000);
-    await clickGoodHttp.click();
-    await driver.setTimeouts(3000);
-
-    await clickBadHttp.click();
-    await driver.setTimeouts(3000);
-    await clickBadHttp.click();
+    await clickHTTPRequest.click();
     await driver.setTimeouts(3000);
 
+    await clickHTTPError.click();
+    await driver.setTimeouts(3000);
+    await clickHTTPError.click();
+    await driver.setTimeouts(3000);
+
     await clickDtRequest.click();
     await driver.setTimeouts(3000);
     await clickDtRequest.click();
@@ -125,7 +125,7 @@ describe("main agent test app - android", () => {
     await driver.setTimeouts(3000);
     await clickDtRequest.click();
     await driver.setTimeouts(3000);
-    await delayedRequest.click();
+    await clickNetworkFailure.click();
     await driver.setTimeouts(5000);
 
     await background.click();
