@@ -52,11 +52,6 @@ describe("main agent test app - ios", () => {
     await googlelink.click();
     await driver.setTimeouts(5000);
 
-    const googleTopBar = await driver.$("accessibility id:TopBrowserBar");
-    await googleTopBar.waitForExist({ timeout: 30000 });
-    await googleTopBar.click();
-    await driver.setTimeouts(5000);
-
     const closeGoogle = await driver.$(
       '-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]'
     );
@@ -69,11 +64,6 @@ describe("main agent test app - ios", () => {
     );
     await newrelicLink.waitForExist({ timeout: 30000 });
     await newrelicLink.click();
-    await driver.setTimeouts(5000);
-
-    const NRtopBar = await driver.$("accessibility id:TopBrowserBar");
-    await NRtopBar.waitForExist({ timeout: 30000 });
-    await NRtopBar.click();
     await driver.setTimeouts(5000);
 
     const closeNR = await $(
@@ -90,11 +80,6 @@ describe("main agent test app - ios", () => {
     await expoLink.click();
     await driver.setTimeouts(5000);
 
-    const expoTopBar = await driver.$("accessibility id:TopBrowserBar");
-    await expoTopBar.waitForExist({ timeout: 30000 });
-    await expoTopBar.click();
-    await driver.setTimeouts(5000);
-
     const closeExpo = await $(
       '-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]'
     );
@@ -107,7 +92,7 @@ describe("main agent test app - ios", () => {
     await hexClick.click();
     await driver.setTimeouts(5000);
 
-    const httpRequest = await $("accessibility id:Http Request");
+    const httpRequest = await $("accessibility id:HTTP Request");
     await httpRequest.waitForExist({ timeout: 30000 });
     await httpRequest.click();
     await driver.setTimeouts(5000);

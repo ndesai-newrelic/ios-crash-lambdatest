@@ -28,7 +28,8 @@ exports.config = {
         platformName: "ios",
         deviceName: "iPhone 15",
         appiumVersion: "1.22.3",
-        platformVersion: "17.0",
+        platformVersion: "17.5",
+        devicelog: true,
         app: process.env.CUSTOM_APP_ID_IOS, // custom_id
       },
     },
