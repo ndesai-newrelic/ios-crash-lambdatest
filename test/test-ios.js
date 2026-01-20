@@ -1,4 +1,4 @@
-const { default: iOS } = require("./pages/iosPage");
+const iOS = require("./pages/iosPage");
 
 describe("main agent test app - ios", () => {
   let iOSPage;

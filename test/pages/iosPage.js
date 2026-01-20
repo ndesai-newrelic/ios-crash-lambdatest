@@ -168,4 +168,4 @@ class iOS  {
   }
 }
 
-export default iOS;
+module.exports = iOS;
