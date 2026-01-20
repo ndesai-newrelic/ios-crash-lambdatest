@@ -1,254 +1,81 @@
-describe("main agent test app - ios", () => {
-  it("Opens app", async () => {
-    // wait for the app to load
-    await driver.setTimeouts(5000);
+const { default: iOS } = require("./pages/iosPage");
 
-    const home = await $("id:Home");
-    await home.waitForExist({ timeout: 30000 });
-    await home.click();
-    await driver.setTimeouts(5000);
+describe("main agent test app - ios", () => {
+  let iOSPage;
+
+  beforeEach(() => {
+    iOSPage = new iOS(driver);
   });
 
   it("Opens the ToDo tab and adds todo", async () => {
-    const todo = await $("accessibility id:TodoList");
-    await todo.waitForExist({ timeout: 3000 });
-    await todo.click();
-    await driver.setTimeouts(3000);
-
-    const openKeyboard = await $("accessibility id:text-input-flat");
-    await openKeyboard.waitForExist({ timeout: 3000 });
-    await openKeyboard.click();
-    await driver.setTimeouts(3000);
-    const typeS = await $("accessibility id:S");
-    await typeS.click();
-    await driver.setTimeouts(3000);
-    const typeD = await $("accessibility id:d");
-    await typeD.click();
-    await driver.setTimeouts(3000);
-    const typeF = await $("accessibility id:f");
-    await typeF.click();
-    await driver.setTimeouts(3000);
-    const typeG = await $("accessibility id:g");
-    await typeG.click();
-    await driver.setTimeouts(3000);
-    const add = await $("accessibility id:Add");
-    await add.click();
-    await driver.setTimeouts(3000);
-    const closeKeyboard2 = await $("accessibility id:Return");
-    await closeKeyboard2.click();
-    await driver.setTimeouts(3000);
+    await iOSPage.clickTodoTab();
+    await iOSPage.addTodo();
   });
 
   it("Clicks around the Explore tab", async () => {
-    const exploreTab = await $("accessibility id:Explore");
-    await exploreTab.waitForExist({ timeout: 30000 });
-    await exploreTab.click();
-    await driver.setTimeouts(5000);
+    // Magic strings:
+    const HEX = "hex";
+    const GOOD = "goodHTTP";
+    const BAD = "badHTTP";
+    const DT = "dtRequest";
+    const DELAYED = "delayedHTTP";
 
-    const googlelink = await $(
-      '-ios class chain:**/XCUIElementTypeStaticText[`name == "Google"`][2]'
-    );
-    await googlelink.waitForExist({ timeout: 30000 });
-    await googlelink.click();
-    await driver.setTimeouts(5000);
+    await iOSPage.launchApp();
 
-    const closeGoogle = await driver.$(
-      '-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]'
-    );
-    await closeGoogle.waitForExist({ timeout: 30000 });
-    await closeGoogle.click();
-    await driver.setTimeouts(5000);
+    await iOSPage.clickExploreTab();
 
-    const newrelicLink = await $(
-      '-ios class chain:**/XCUIElementTypeStaticText[`name == "New Relic"`][2]'
-    );
-    await newrelicLink.waitForExist({ timeout: 30000 });
-    await newrelicLink.click();
-    await driver.setTimeouts(5000);
+    await iOSPage.waitAndClickExploreEventButton(HEX);
+    await iOSPage.waitAndClickExploreEventButton(GOOD);
+    await iOSPage.waitAndClickExploreEventButton(DT);
+    await iOSPage.waitAndClickExploreEventButton(BAD);
+    await iOSPage.waitAndClickExploreEventButton(DELAYED);
+    await iOSPage.waitAndClickExploreEventButton(BAD);
+    await iOSPage.waitAndClickExploreEventButton(BAD);
+    await iOSPage.waitAndClickExploreEventButton(BAD);
+    await iOSPage.waitAndClickExploreEventButton(BAD);
+    await iOSPage.waitAndClickExploreEventButton(BAD);
+    await iOSPage.waitAndClickExploreEventButton(BAD);
+    await iOSPage.waitAndClickExploreEventButton(BAD);
+    await iOSPage.waitAndClickExploreEventButton(DELAYED);
+    await iOSPage.waitAndClickExploreEventButton(DELAYED);
+    await iOSPage.waitAndClickExploreEventButton(HEX);
 
-    const closeNR = await $(
-      '-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]'
-    );
-    await closeNR.waitForExist({ timeout: 30000 });
-    await closeNR.click();
-    await driver.setTimeouts(5000);
+    await iOSPage.backgroundApp();
+    await iOSPage.launchApp();
 
-    const expoLink = await $(
-      '-ios class chain:**/XCUIElementTypeStaticText[`name == "Expo"`][2]'
-    );
-    await expoLink.waitForExist({ timeout: 30000 });
-    await expoLink.click();
-    await driver.setTimeouts(5000);
+    await iOSPage.waitAndClickExploreEventButton(GOOD);
+    await iOSPage.waitAndClickExploreEventButton(GOOD);
+    await iOSPage.waitAndClickExploreEventButton(GOOD);
+    await iOSPage.waitAndClickExploreEventButton(GOOD);
+    await iOSPage.waitAndClickExploreEventButton(GOOD);
+    await iOSPage.waitAndClickExploreEventButton(GOOD);
+    await iOSPage.waitAndClickExploreEventButton(GOOD);
+    await iOSPage.waitAndClickExploreEventButton(HEX);
+    await iOSPage.waitAndClickExploreEventButton(DELAYED);
+    await iOSPage.waitAndClickExploreEventButton(DELAYED);
 
-    const closeExpo = await $(
-      '-ios class chain:**/XCUIElementTypeButton[`name == "Done"`]'
-    );
-    await closeExpo.waitForExist({ timeout: 30000 });
-    await closeExpo.click();
-    await driver.setTimeouts(5000);
+    await iOSPage.backgroundApp();
+    await iOSPage.launchApp();
 
-    const hexClick = await $("accessibility id:Handled Exception");
-    await hexClick.waitForExist({ timeout: 30000 });
-    await hexClick.click();
-    await driver.setTimeouts(5000);
-
-    const httpRequest = await $("accessibility id:HTTP Request");
-    await httpRequest.waitForExist({ timeout: 30000 });
-    await httpRequest.click();
-    await driver.setTimeouts(5000);
-
-    const dtRequest = await driver.$(
-      "accessibility id:Distributed Tracing Request"
-    );
-    await dtRequest.waitForExist({ timeout: 30000 });
-    await dtRequest.click();
-    await driver.setTimeouts(5000);
-
-    const reset = await driver.$("accessibility id:Reset");
-    await reset.waitForExist({ timeout: 30000 });
-    await reset.click();
-    await driver.setTimeouts(5000);
-
-    const httpError = await $("accessibility id:HTTP Request Error");
-    await httpError.waitForExist({ timeout: 30000 });
-    await httpError.click();
-    await driver.setTimeouts(5000);
-
-    const networkFailure = await driver.$(
-      "accessibility id:Network Failure"
-    );
-    await networkFailure.waitForExist({ timeout: 30000 });
-    await networkFailure.click();
-    await driver.setTimeouts(5000);
-
-    await httpError.click();
-    await driver.setTimeouts(3000);
-    await httpError.click();
-    await driver.setTimeouts(3000);
-    await httpError.click();
-    await driver.setTimeouts(3000);
-    await httpError.click();
-    await driver.setTimeouts(3000);
-    await httpError.click();
-    await driver.setTimeouts(3000);
-    await httpError.click();
-    await driver.setTimeouts(3000);
-    await httpError.click();
-    await driver.setTimeouts(3000);
-
-    await networkFailure.click();
-    await driver.setTimeouts(5000);
-    await networkFailure.click();
-    await driver.setTimeouts(5000);
-    await hexClick.click();
-    await driver.setTimeouts(5000);
-
-    await driver.executeScript("mobile:pressButton", [{ name: "home" }]);
-    await driver.setTimeouts(5000);
-    await driver.execute("mobile: launchApp", {
-      bundleId: "com.newrelic.mainagenttestapp",
-    });
-    await driver.setTimeouts(5000);
-
-    await httpRequest.click();
-    await driver.setTimeouts(3000);
-    await httpRequest.click();
-    await driver.setTimeouts(3000);
-    await httpRequest.click();
-    await driver.setTimeouts(3000);
-    await httpRequest.click();
-    await driver.setTimeouts(3000);
-    await httpRequest.click();
-    await driver.setTimeouts(3000);
-    await httpRequest.click();
-    await driver.setTimeouts(3000);
-    await hexClick.click();
-    await driver.setTimeouts(5000);
-
-    await networkFailure.click();
-    await driver.setTimeouts(5000);
-    await networkFailure.click();
-    await driver.setTimeouts(5000);
-
-    await driver.executeScript("mobile:pressButton", [{ name: "home" }]);
-    await driver.setTimeouts(5000);
-    await driver.execute("mobile: launchApp", {
-      bundleId: "com.newrelic.mainagenttestapp",
-    });
-    await driver.setTimeouts(5000);
-
-    await dtRequest.click();
-    await driver.setTimeouts(3000);
-    await dtRequest.click();
-    await driver.setTimeouts(3000);
-    await dtRequest.click();
-    await driver.setTimeouts(3000);
-    await dtRequest.click();
-    await driver.setTimeouts(3000);
-    await dtRequest.click();
-    await driver.setTimeouts(3000);
-    await dtRequest.click();
-
-    await driver.executeScript("mobile:pressButton", [{ name: "home" }]);
-    await driver.setTimeouts(5000);
-    await driver.execute("mobile: launchApp", {
-      bundleId: "com.newrelic.mainagenttestapp",
-    });
-    await driver.setTimeouts(5000);
+    await iOSPage.waitAndClickExploreEventButton(DT);
+    await iOSPage.waitAndClickExploreEventButton(DT);
+    await iOSPage.waitAndClickExploreEventButton(DT);
+    await iOSPage.waitAndClickExploreEventButton(DT);
+    await iOSPage.waitAndClickExploreEventButton(DT);
+    await iOSPage.waitAndClickExploreEventButton(DT);
   });
 
   it("Clicks around the Crash tab", async () => {
-    const crashTab = await $("accessibility id:Crash");
-    await crashTab.waitForExist({ timeout: 30000 });
-    await crashTab.click();
-    await driver.setTimeouts(5000);
+    // Magic strings:
+    const URI = "uri";
+    const TYPE = "type";
+    const EVAL = "eval";
 
-    const uriError = await $("accessibility id:URI Error");
-    await uriError.waitForExist({ timeout: 30000 });
-    await uriError.click();
-    await driver.setTimeouts(5000);
-
-    await driver.execute("mobile: launchApp", {
-      bundleId: "com.newrelic.mainagenttestapp",
-    });
-    await driver.setTimeouts(5000);
-
-    await crashTab.waitForExist({ timeout: 30000 });
-    await crashTab.click();
-    await driver.setTimeouts(3000);
-
-    const typeError = await $("accessibility id:Type Error");
-    await typeError.waitForExist({ timeout: 30000 });
-    await typeError.click();
-    await driver.setTimeouts(5000);
-
-    await driver.execute("mobile: launchApp", {
-      bundleId: "com.newrelic.mainagenttestapp",
-    });
-    await driver.setTimeouts(5000);
-
-    await crashTab.waitForExist({ timeout: 30000 });
-    await crashTab.click();
-    await driver.setTimeouts(3000);
-
-    const evalError = await $("accessibility id:Eval Error");
-    await evalError.waitForExist({ timeout: 30000 });
-    await evalError.click();
-    await driver.setTimeouts(5000);
-
-    await driver.execute("mobile: launchApp", {
-      bundleId: "com.newrelic.mainagenttestapp",
-    });
-    await driver.setTimeouts(5000);
-  });
-
-  it("Opens app", async () => {
-    // wait for the app to load
-    await driver.setTimeouts(5000);
-
-    const home = await $("id:Home");
-    await home.waitForExist({ timeout: 30000 });
-    await home.click();
-    await driver.setTimeouts(3000);
+    await iOSPage.clickCrashTab();
+    await iOSPage.forceCrash(URI);
+    await iOSPage.clickCrashTab();
+    await iOSPage.forceCrash(TYPE);
+    await iOSPage.clickCrashTab();
+    await iOSPage.forceCrash(EVAL);
   });
 });
