@@ -39,12 +39,12 @@ class Android {
     );
   }
 
-  get goodHTTRequestButton() {
+  get HTTPRequestButton() {
     return this.driver.$(
       '-android uiautomator:new UiSelector().text("HTTP REQUEST")'
     );
   }
-  get badHTTPRequestButton() {
+  get HTTPRequestErrorButton() {
     return this.driver.$(
       '-android uiautomator:new UiSelector().text("HTTP REQUEST ERROR")'
     );
@@ -149,14 +149,13 @@ class Android {
   async waitAndClickExploreEventButton(eventName) {
     const buttons = {
       ["hex"]: () => this.hexButton,
-      ["goodHTTP"]: () => this.goodHTTRequestButton,
-      ["badHTTP"]: () => this.badHTTPRequestButton,
+      ["HTTPRequest"]: () => this.HTTPRequestButton,
+      ["HTTPRequestError"]: () => this.HTTPRequestErrorButton,
       ["delayedHTTP"]: () => this.delayedRequestButton,
       ["dtRequest"]: () => this.dtRequestButton,
     };
     await buttons[eventName]().waitForExist({ timeout: 5000 });
     await buttons[eventName]().click();
-    console.log("clicked ", eventName);
     await this.driver.setTimeouts(3000);
   }
 

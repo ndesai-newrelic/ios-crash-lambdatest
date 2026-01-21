@@ -39,20 +39,19 @@ class iOS  {
     return this.driver.$("accessibility id:Handled Exception");
   }
 
-  get goodHTTRequestButton() {
-    return this.driver.$("accessibility id:HTTP Request"); //HTTPRequest
+  get HTTRequestButton() {
+    return this.driver.$("accessibility id:HTTP Request");
   }
-  get badHTTPRequestButton() {
-    return this.driver.$("accessibility id:HTTP Request Error"); //HTTPRequestError
+  get HTTPRequestErrorButton() {
+    return this.driver.$("accessibility id:HTTP Request Error");
   }
 
   get dtRequestButton() {
-    return this.driver.$("accessibility id:Distributed Tracing Request"); //Distributed Tracing Request
-    // call the netwrok failure button
+    return this.driver.$("accessibility id:Distributed Tracing Request");
   }
 
   get delayedRequestButton() {
-    return this.driver.$("accessibility id:Network Failure"); // Delayed request
+    return this.driver.$("accessibility id:Network Failure");
   }
 
   // Crash tab locator
@@ -138,14 +137,13 @@ class iOS  {
   async waitAndClickExploreEventButton(eventName) {
     const buttons = {
       ["hex"]: () => this.hexButton,
-      ["goodHTTP"]: () => this.goodHTTRequestButton,
-      ["badHTTP"]: () => this.badHTTPRequestButton,
+      ["HTTPRequest"]: () => this.HTTRequestButton,
+      ["HTTPRequestError"]: () => this.HTTPRequestErrorButton,
       ["delayedHTTP"]: () => this.delayedRequestButton,
       ["dtRequest"]: () => this.dtRequestButton,
     };
     await buttons[eventName]().waitForExist({ timeout: 3000 });
     await buttons[eventName]().click();
-    console.log("clicked ", eventName);
     await this.driver.setTimeouts(3000);
   }
 

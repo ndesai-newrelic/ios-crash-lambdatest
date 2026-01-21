@@ -16,29 +16,29 @@ on:
     - cron: "*/30 * * * *"
 
 jobs:
-  ios-data:
-    name: Generate iOS data
+  ios-todo-data:
+    name: Generate iOS todo data
     runs-on: ubuntu-latest
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
       CUSTOM_APP_ID_IOS: "IOSAPP_STAGING"
       ENVIRONMENT: "staging"
+      TEST: "./ios-todo.js"
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
-      - name: Execute iOS tests
-        run: for i in {1..6}; do echo "test run $i"; npm run test:wdio-ios; done
+      - name: Execute iOS todo tests
+        run: for i in {1..2}; do echo "iOS TODO test run $i"; npm run test:wdio-ios; done
 
       - name: Log success
         if: ${{ success() }}
-        run: echo "[ RUNNER ] - successfully executed iOS tests"
-
+        run: echo "[ RUNNER ] - successfully executed iOS todo tests"
       - name: Log failure
         if: ${{ failure() || cancelled() }}
-        run: echo "[ RUNNER ] - failed to execute iOS tests"
+        run: echo "[ RUNNER ] - failed to execute iOS todo tests"
 
       # - name: Notify failure
       #   if: ${{ failure() || cancelled() }}
@@ -69,30 +69,30 @@ jobs:
       #   env:
       #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-  android-data:
-    name: Generate Android data
+  android-todo-data:
+    name: Generate Android todo data
     runs-on: ubuntu-latest
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
       CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_STAGING"
       ENVIRONMENT: "staging"
+      TEST: "./android-todo.js"
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
       - name: Execute Android tests
-        run: for i in {1..6}; do echo "test run $i"; npm run test:wdio-android; done
+        run: for i in {1..2}; do echo "Android TODO test run $i"; npm run test:wdio-android; done
 
       - name: Log success
         if: ${{ success() }}
-        run: echo "[ RUNNER ] - successfully executed Android tests"
+        run: echo "[ RUNNER ] - successfully executed Android todo tests"
 
       - name: Log failure
         if: ${{ failure() || cancelled() }}
-        run: echo "[ RUNNER ] - failed to execute Android tests"
-
+        run: echo "[ RUNNER ] - failed to execute Android todo tests"
       # - name: Notify failure
       #   if: ${{ failure() || cancelled() }}
       #   uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
@@ -121,3 +121,107 @@ jobs:
       #             action_id: "button-action"
       #   env:
       #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  ios-explore-data:
+    name: Generate iOS explore data
+    needs: [ios-todo-data, android-todo-data]
+    runs-on: ubuntu-latest
+    env:
+      LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
+      LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
+      CUSTOM_APP_ID_IOS: "IOSAPP_STAGING"
+      ENVIRONMENT: "staging"
+      TEST: "./ios-explore.js"
+    steps:
+      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - name: Setup environment
+        uses: ./.github/actions/env-setup
+
+      - name: Execute iOS explore tests
+        run: for i in {1..2}; do echo "iOS Explore test run $i"; npm run test:wdio-ios; done
+
+      - name: Log success
+        if: ${{ success() }}
+        run: echo "[ RUNNER ] - successfully executed iOS explore tests"
+
+      - name: Log failure
+        if: ${{ failure() || cancelled() }}
+        run: echo "[ RUNNER ] - failed to execute iOS explore tests"
+
+  android-explore-data:
+    name: Generate Android explore data
+    needs: [ios-todo-data, android-todo-data]
+    runs-on: ubuntu-latest
+    env:
+      LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
+      LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
+      CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_STAGING"
+      ENVIRONMENT: "staging"
+      TEST: "./android-explore.js"
+    steps:
+      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - name: Setup environment
+        uses: ./.github/actions/env-setup
+
+      - name: Execute Android explore tests
+        run: for i in {1..2}; do echo "Android Explore test run $i"; npm run test:wdio-android; done
+
+      - name: Log success
+        if: ${{ success() }}
+        run: echo "[ RUNNER ] - successfully executed Android explore tests"
+
+      - name: Log failure
+        if: ${{ failure() || cancelled() }}
+        run: echo "[ RUNNER ] - failed to execute Android explore tests"
+
+  ios-crash-data:
+    name: Generate iOS crash data
+    needs: [ios-explore-data, android-explore-data]
+    runs-on: ubuntu-latest
+    env:
+      LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
+      LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
+      CUSTOM_APP_ID_IOS: "IOSAPP_STAGING"
+      ENVIRONMENT: "staging"
+      TEST: "./ios-crash.js"
+    steps:
+      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - name: Setup environment
+        uses: ./.github/actions/env-setup
+
+      - name: Execute iOS crash tests
+        run: for i in {1..2}; do echo "iOS Crash test run $i"; npm run test:wdio-ios; done
+
+      - name: Log success
+        if: ${{ success() }}
+        run: echo "[ RUNNER ] - successfully executed iOS crash tests"
+
+      - name: Log failure
+        if: ${{ failure() || cancelled() }}
+        run: echo "[ RUNNER ] - failed to execute iOS crash tests"
+
+  android-crash-data:
+    name: Generate Android crash data
+    needs: [ios-explore-data, android-explore-data]
+    runs-on: ubuntu-latest
+    env:
+      LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
+      LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
+      CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_STAGING"
+      ENVIRONMENT: "staging"
+      TEST: "./android-crash.js"
+    steps:
+      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - name: Setup environment
+        uses: ./.github/actions/env-setup
+
+      - name: Execute Android crash tests
+        run: for i in {1..2}; do echo "Android Crash test run $i"; npm run test:wdio-android; done
+
+      - name: Log success
+        if: ${{ success() }}
+        run: echo "[ RUNNER ] - successfully executed Android crash tests"
+
+      - name: Log failure
+        if: ${{ failure() || cancelled() }}
+        run: echo "[ RUNNER ] - failed to execute Android crash tests"

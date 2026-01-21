@@ -13,7 +13,7 @@ exports.config = {
   key: process.env.LT_ACCESSKEY || "YOUR_ACCESS_KEY",
 
   updateJob: false,
-  specs: ["./test-ios.js"],
+  specs: [process.env.TEST], // test file to run
   exclude: [],
 
   maxInstances: 10,
