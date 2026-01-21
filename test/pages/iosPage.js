@@ -124,8 +124,6 @@ class iOS  {
     const typeL = await this.driver.$("accessibility id:c");
     await typeL.click();
     await this.driver.setTimeouts(3000);
-    await typeL.click();
-    await this.driver.setTimeouts(3000);
     const typeO = await this.driver.$("accessibility id:e");
     await typeO.click();
     await this.driver.setTimeouts(3000);
