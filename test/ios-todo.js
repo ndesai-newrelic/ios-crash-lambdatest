@@ -10,5 +10,7 @@ describe("main agent test app - ios", () => {
   it("Opens the ToDo tab and adds todo", async () => {
     await iOSPage.clickTodoTab();
     await iOSPage.addTodo();
+    
+    await iOSPage.backgroundApp();
   });
 });

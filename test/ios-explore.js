@@ -58,5 +58,7 @@ describe("main agent test app - ios", () => {
     await iOSPage.waitAndClickExploreEventButton(DT);
     await iOSPage.waitAndClickExploreEventButton(DT);
     await iOSPage.waitAndClickExploreEventButton(DT);
+    
+     await iOSPage.backgroundApp();
   });
 });

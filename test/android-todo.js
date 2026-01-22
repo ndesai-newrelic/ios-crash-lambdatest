@@ -11,5 +11,7 @@ describe("main agent test app - android", () => {
     await androidPage.launchApp();
     await androidPage.clickTodoTab();
     await androidPage.addTodo(["Hello"]);
+    
+    await androidPage.backgroundApp();
   });
 });

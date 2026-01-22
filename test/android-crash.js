@@ -25,5 +25,7 @@ describe("main agent test app - android", () => {
     await androidPage.forceCrash(URI);
     await androidPage.clickCrashTab();
     await androidPage.forceANR();
+    
+    await androidPage.backgroundApp();
   });
 });

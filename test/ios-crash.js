@@ -19,5 +19,7 @@ describe("main agent test app - ios", () => {
     await iOSPage.forceCrash(TYPE);
     await iOSPage.clickCrashTab();
     await iOSPage.forceCrash(EVAL);
+    
+     await iOSPage.backgroundApp();
   });
 });
