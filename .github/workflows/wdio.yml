@@ -5,7 +5,7 @@
 # This is accomplished by triggering npm scripts that execute a suite of tests in parallel
 # The tests spin up simulated iOS and Android devices on LambdaTest that are instrumented with the Mobile agent
 
-name: "WDIO - staging: automate iOS and Android tests"
+name: "WDIO - Staging: automate iOS and Android tests"
 
 on:
   # enables option for workflow to be manually executed in Github UI
@@ -36,6 +36,7 @@ jobs:
       - name: Log success
         if: ${{ success() }}
         run: echo "[ RUNNER ] - successfully executed iOS todo tests"
+
       - name: Log failure
         if: ${{ failure() || cancelled() }}
         run: echo "[ RUNNER ] - failed to execute iOS todo tests"
@@ -83,7 +84,7 @@ jobs:
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
-      - name: Execute Android tests
+      - name: Execute Android todo tests
         run: for i in {1..2}; do echo "Android TODO test run $i"; npm run test:wdio-android; done
 
       - name: Log success

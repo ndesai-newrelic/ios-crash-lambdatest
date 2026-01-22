@@ -124,10 +124,10 @@ class Android {
     await this.driver.setTimeouts(3000);
   }
 
-  // async backgroundApp() {
-  //   await this.driver.pressKeyCode(3);
-  //   await this.driver.setTimeouts(3000);
-  // }
+  async backgroundApp() {
+    await this.driver.pressKeyCode(3);
+    await this.driver.setTimeouts(3000);
+  }
 
   // Use me to add a todo to your to do list
   async addTodo(text) {
