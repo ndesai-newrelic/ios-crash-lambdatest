@@ -125,6 +125,7 @@ jobs:
   ios-explore-data:
     name: Generate iOS explore data
     needs: [ios-todo-data, android-todo-data]
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
@@ -151,6 +152,7 @@ jobs:
   android-explore-data:
     name: Generate Android explore data
     needs: [ios-todo-data, android-todo-data]
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
@@ -177,7 +179,7 @@ jobs:
   ios-crash-data:
     name: Generate iOS crash data
     needs: [ios-explore-data, android-explore-data]
-    runs-on: ubuntu-latest
+    if: ${{ always() }}
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
@@ -203,6 +205,7 @@ jobs:
   android-crash-data:
     name: Generate Android crash data
     needs: [ios-explore-data, android-explore-data]
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
