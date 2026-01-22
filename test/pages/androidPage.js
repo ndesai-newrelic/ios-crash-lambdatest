@@ -125,8 +125,7 @@ class Android {
   }
 
   async backgroundApp() {
-    await this.driver.setTimeouts(3000);
-    await this.driver.pressKeyCode(82);
+    await this.driver.pressKeyCode(3);
     await this.driver.setTimeouts(5000);
   }
 
