@@ -126,7 +126,7 @@ class Android {
 
   async backgroundApp() {
     await this.driver.pressKeyCode(3);
-    await this.driver.setTimeouts(5000);
+    await this.driver.setTimeouts(3000);
   }
 
   // Use me to add a todo to your to do list
@@ -167,7 +167,7 @@ class Android {
     await this.driver.setTimeouts(10000);
     await buttons[eventName]().waitForExist({ timeout: 3000 });
     await buttons[eventName]().click();
-    await this.driver.setTimeouts(7000);
+    await this.driver.setTimeouts(5000);
     await this.driver.terminateApp("com.anonymous.mainagenttestapp");
     await this.driver.setTimeouts(5000);
     await this.driver.activateApp("com.anonymous.mainagenttestapp");
