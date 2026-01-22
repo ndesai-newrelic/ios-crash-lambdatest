@@ -9,10 +9,6 @@ class Android {
     return this.driver.$('-android uiautomator:new UiSelector().text("")');
   }
 
-  get background() {
-    return this.driver.$("id:android:id/navigationBarBackground");
-  }
-
   // Todo tab Locators
   get todoTab() {
     return this.driver.$("accessibility id:Todo List");
@@ -129,7 +125,8 @@ class Android {
   }
 
   async backgroundApp() {
-    await this.background.click();
+    await this.driver.setTimeouts(3000);
+    await this.driver.pressKeyCode(82);
     await this.driver.setTimeouts(5000);
   }
 
