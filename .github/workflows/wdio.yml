@@ -180,6 +180,7 @@ jobs:
     name: Generate iOS crash data
     needs: [ios-explore-data, android-explore-data]
     if: ${{ always() }}
+    runs-on: ubuntu-latest
     env:
       LT_USERNAME: ${{ secrets.APP_EXP_LAMBDA_USERNAME }}
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
