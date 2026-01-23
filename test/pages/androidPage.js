@@ -108,37 +108,37 @@ class Android {
   async clickTodoTab() {
     await this.todoTab.waitForExist({ timeout: 30000 });
     await this.todoTab.click();
-    await this.driver.setTimeouts(3000);
+    await this.driver.pause(3000);
   }
 
   async clickExploreTab() {
     await this.exploreTab.waitForExist({ timeout: 30000 });
     await this.exploreTab.click();
-    await this.driver.setTimeouts(3000);
+    await this.driver.pause(3000);
   }
 
   async clickCrashTab() {
-    await this.driver.setTimeouts(3000);
+    await this.driver.pause(3000);
     await this.crashTab.waitForExist({ timeout: 30000 });
     await this.crashTab.click();
-    await this.driver.setTimeouts(3000);
+    await this.driver.pause(3000);
   }
 
   async backgroundApp() {
     await this.driver.pressKeyCode(3);
-    await this.driver.setTimeouts(3000);
+    await this.driver.pause(3000);
   }
 
   // Use me to add a todo to your to do list
   async addTodo(text) {
     await this.todoTextfield.waitForExist({ timeout: 30000 });
     await this.todoTextfield.click();
-    await this.driver.setTimeouts(3000);
+    await this.driver.pause(3000);
     await this.driver.sendKeys(text);
-    await this.driver.setTimeouts(3000);
+    await this.driver.pause(3000);
     await this.addButton.waitForExist({ timeout: 30000 });
     await this.addButton.click();
-    await this.driver.setTimeouts(3000);
+    await this.driver.pause(3000);
   }
 
   // Use me to click on a button on the Explore tab. In this case, `eventName` is the text of the button
@@ -152,7 +152,7 @@ class Android {
     };
     await buttons[eventName]().waitForExist({ timeout: 5000 });
     await buttons[eventName]().click();
-    await this.driver.setTimeouts(3000);
+    await this.driver.pause(3000);
   }
 
   // Use me to click on a button on the Crash tab. In this case, `eventName` is the type of crash
@@ -164,14 +164,14 @@ class Android {
       ["uri"]: () => this.uriErrorButton,
     };
 
-    await this.driver.setTimeouts(10000);
+    await this.driver.pause(10000);
     await buttons[eventName]().waitForExist({ timeout: 3000 });
     await buttons[eventName]().click();
-    await this.driver.setTimeouts(5000);
+    await this.driver.pause(5000);
     await this.driver.terminateApp("com.anonymous.mainagenttestapp");
-    await this.driver.setTimeouts(5000);
+    await this.driver.pause(5000);
     await this.driver.activateApp("com.anonymous.mainagenttestapp");
-    await this.driver.setTimeouts(5000);
+    await this.driver.pause(5000);
   }
 
   async forceANR() {
@@ -180,12 +180,39 @@ class Android {
     await this.driver.pause(30000); // required to simulate ANR
 
     await this.driver.pressKeyCode(82); //background the app
-    await this.driver.setTimeouts(5000);
+    await this.driver.pause(5000);
 
     await this.toast.waitForExist({ timeout: 30000 }); // Close the toast
     await this.toast.click();
     await this.driver.activateApp("com.anonymous.mainagenttestapp"); // Reactivate app to harvest the anr
-    await this.driver.setTimeouts(30000);
+    await this.driver.pause(30000);
+  }
+
+  async killTime() {
+  // total test time: 8+ minutes
+  // 6+ minutes = (20 iterations × 4 apps × ~5 seconds per app + pauses)
+   for (let i = 0; i < 15; i++) {
+      const apps = [
+        "com.android.chrome",
+        "com.google.android.gm",
+        "com.google.android.apps.maps",
+        "com.google.android.youtube",
+      ];
+
+      for (const appId of apps) {
+        try {
+          await this.driver.activateApp(appId);
+          await this.driver.pause(3000);
+          await this.driver.terminateApp(appId);
+          await this.driver.pause(2000);
+        } catch (error) {
+          console.log(`App ${appId} not available, skipping...`);
+        }
+      }
+
+      await this.driver.pressKeyCode(3);
+      await this.driver.pause(1000);
+    }
   }
 }
 

@@ -39,8 +39,8 @@ exports.config = {
   coloredLogs: true,
   screenshotPath: "./errorShots/",
   baseUrl: "",
-  waitforTimeout: 10000,
-  connectionRetryTimeout: 90000,
+  waitforTimeout: 600000,
+  connectionRetryTimeout: 600000,
   connectionRetryCount: 3,
   path: "/wd/hub",
   hostname: "mobile-hub.lambdatest.com",
@@ -50,6 +50,6 @@ exports.config = {
   framework: "mocha",
   mochaOpts: {
     ui: "bdd",
-    timeout: 100000,
+    timeout: 600000,
   },
 };

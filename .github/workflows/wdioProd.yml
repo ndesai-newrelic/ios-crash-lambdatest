@@ -24,6 +24,7 @@ jobs:
       LT_ACCESSKEY: ${{ secrets.APP_EXP_LAMBDA_ACCESS_KEY }}
       CUSTOM_APP_ID_IOS: "IOSAPP_PROD"
       ENVIRONMENT: "prod"
+      TEST: "./ios-todo.js"
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
       - name: Setup environment

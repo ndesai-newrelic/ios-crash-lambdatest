@@ -27,6 +27,8 @@ exports.config = {
         deviceName: "Pixel 9 Pro",
         appiumVersion: "1.22.3",
         platformVersion: "15",
+        // newCommandTimeout: 600000, // 10 minutes in milliseconds
+        // commandTimeouts: 600000,   // 10 minutes for individual commands
         app: process.env.CUSTOM_APP_ID_ANDROID, // custom_id
       },
     },
@@ -36,8 +38,8 @@ exports.config = {
   coloredLogs: true,
   screenshotPath: "./errorShots/",
   baseUrl: "",
-  waitforTimeout: 10000,
-  connectionRetryTimeout: 90000,
+  waitforTimeout: 600000,
+  connectionRetryTimeout: 600000,
   connectionRetryCount: 3,
   path: "/wd/hub",
   hostname: "mobile-hub.lambdatest.com",
@@ -47,6 +49,6 @@ exports.config = {
   framework: "mocha",
   mochaOpts: {
     ui: "bdd",
-    timeout: 100000,
+    timeout: 600000,
   },
 };

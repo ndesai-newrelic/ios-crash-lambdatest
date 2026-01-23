@@ -7,11 +7,15 @@ describe("main agent test app - android", () => {
     androidPage = new Android(driver);
   });
 
-  it("Opens the app, adds and deletes a todo", async () => {
+  it("Opens the app and adds a todo", async () => {
     await androidPage.launchApp();
     await androidPage.clickTodoTab();
     await androidPage.addTodo(["Hello"]);
     
     await androidPage.backgroundApp();
+  });
+
+  it("Loops through opening and closing apps on the phone", async () => {
+    await androidPage.killTime();
   });
 });
