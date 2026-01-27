@@ -13,4 +13,8 @@ describe("main agent test app - ios", () => {
     
     await iOSPage.backgroundApp();
   });
+
+  it("Loops through opening and closing apps on the phone", async () => {
+    await iOSPage.killTime();
+  });
 });

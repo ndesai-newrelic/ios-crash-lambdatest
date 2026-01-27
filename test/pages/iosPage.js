@@ -162,6 +162,31 @@ class iOS  {
     await this.launchApp();
     await this.driver.setTimeouts(10000);
   }
+
+  async killTime() {
+  // 7+ minutes = (15 iterations × 3 apps × ~5 seconds per app + pauses)
+   for (let i = 0; i < 15; i++) {
+      const apps = [
+        "Safari",
+        "Files",
+        "Messages",
+      ];
+
+      for (const appId of apps) {
+        try {
+          await this.driver.$("accessibility id:" + appId).click();
+          await this.driver.pause(3000);
+          await this.driver.executeScript("mobile:pressButton", [{ name: "home" }]);
+          await this.driver.pause(2000);
+        } catch (error) {
+          console.log(`App ${appId} not available, skipping...`);
+        }
+      }
+
+      await this.driver.executeScript("mobile:pressButton", [{ name: "home" }]);
+      await this.driver.pause(1000);
+    }
+  }
 }
 
 module.exports = iOS;

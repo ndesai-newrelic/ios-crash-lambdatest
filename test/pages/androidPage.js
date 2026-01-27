@@ -189,12 +189,10 @@ class Android {
   }
 
   async killTime() {
-  // total test time: 8+ minutes
-  // 6+ minutes = (20 iterations × 4 apps × ~5 seconds per app + pauses)
+  // 7+ minutes = (15 iterations × 3 apps × ~5 seconds per app + pauses)
    for (let i = 0; i < 15; i++) {
       const apps = [
         "com.android.chrome",
-        "com.google.android.gm",
         "com.google.android.apps.maps",
         "com.google.android.youtube",
       ];
