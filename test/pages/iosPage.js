@@ -175,16 +175,16 @@ class iOS  {
       for (const appId of apps) {
         try {
           await this.driver.$("accessibility id:" + appId).click();
-          await this.driver.pause(3000);
+          await this.driver.setTimeouts(3000);
           await this.driver.executeScript("mobile:pressButton", [{ name: "home" }]);
-          await this.driver.pause(2000);
+          await this.driver.setTimeouts(2000);
         } catch (error) {
           console.log(`App ${appId} not available, skipping...`);
         }
       }
 
       await this.driver.executeScript("mobile:pressButton", [{ name: "home" }]);
-      await this.driver.pause(1000);
+      await this.driver.setTimeouts(1000);
     }
   }
 }

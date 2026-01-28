@@ -27,8 +27,6 @@ exports.config = {
         deviceName: "Pixel 9 Pro",
         appiumVersion: "1.22.3",
         platformVersion: "15",
-        // newCommandTimeout: 600000, // 10 minutes in milliseconds
-        // commandTimeouts: 600000,   // 10 minutes for individual commands
         app: process.env.CUSTOM_APP_ID_ANDROID, // custom_id
       },
     },
@@ -45,7 +43,6 @@ exports.config = {
   hostname: "mobile-hub.lambdatest.com",
   port: 443,
   protocol: "https",
-
   framework: "mocha",
   mochaOpts: {
     ui: "bdd",

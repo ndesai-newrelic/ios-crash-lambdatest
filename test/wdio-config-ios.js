@@ -46,7 +46,6 @@ exports.config = {
   hostname: "mobile-hub.lambdatest.com",
   port: 443,
   protocol: "https",
-
   framework: "mocha",
   mochaOpts: {
     ui: "bdd",
