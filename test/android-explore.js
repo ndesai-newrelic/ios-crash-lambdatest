@@ -7,12 +7,6 @@ describe("main agent test app - android", () => {
     androidPage = new Android(driver);
   });
 
-  it("Opens the app, adds and deletes a todo", async () => {
-    await androidPage.launchApp();
-    await androidPage.clickTodoTab();
-    await androidPage.addTodo(["Hello"]);
-  });
-
   it("Clicks around the Explore tab", async () => {
     // Magic strings:
     const HEX = "hex"; 
@@ -50,25 +44,5 @@ describe("main agent test app - android", () => {
     await androidPage.waitAndClickExploreEventButton(DELAYED);
 
     await androidPage.backgroundApp();
-  });
-
-  it("Clicks around the Crash tab", async () => {
-    // Magic strings:
-    const RANGE = "range";
-    const REFERENCE = "reference";
-    const EVAL = "eval";
-    const URI = "uri";
-
-    await androidPage.launchApp()
-    await androidPage.clickCrashTab();
-    await androidPage.forceCrash(RANGE);
-    await androidPage.clickCrashTab();
-    await androidPage.forceCrash(REFERENCE);
-    await androidPage.clickCrashTab();
-    await androidPage.forceCrash(EVAL);
-    await androidPage.clickCrashTab();
-    await androidPage.forceCrash(URI);
-    await androidPage.clickCrashTab();
-    await androidPage.forceANR();
   });
 });

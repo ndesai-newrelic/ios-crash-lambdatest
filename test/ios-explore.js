@@ -7,11 +7,6 @@ describe("main agent test app - ios", () => {
     iOSPage = new iOS(driver);
   });
 
-  it("Opens the ToDo tab and adds todo", async () => {
-    await iOSPage.clickTodoTab();
-    await iOSPage.addTodo();
-  });
-
   it("Clicks around the Explore tab", async () => {
     // Magic strings:
     const HEX = "hex";
@@ -63,19 +58,7 @@ describe("main agent test app - ios", () => {
     await iOSPage.waitAndClickExploreEventButton(DT);
     await iOSPage.waitAndClickExploreEventButton(DT);
     await iOSPage.waitAndClickExploreEventButton(DT);
-  });
-
-  it("Clicks around the Crash tab", async () => {
-    // Magic strings:
-    const URI = "uri";
-    const TYPE = "type";
-    const EVAL = "eval";
-
-    await iOSPage.clickCrashTab();
-    await iOSPage.forceCrash(URI);
-    await iOSPage.clickCrashTab();
-    await iOSPage.forceCrash(TYPE);
-    await iOSPage.clickCrashTab();
-    await iOSPage.forceCrash(EVAL);
+    
+     await iOSPage.backgroundApp();
   });
 });

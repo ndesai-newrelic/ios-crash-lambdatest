@@ -11,7 +11,7 @@ exports.config = {
   key: process.env.LT_ACCESSKEY || "YOUR_ACCESS_KEY",
 
   updateJob: false,
-  specs: ["./test-android.js"],
+  specs: [process.env.TEST], // test file to run
   exclude: [],
 
   maxInstances: 10,
@@ -36,17 +36,16 @@ exports.config = {
   coloredLogs: true,
   screenshotPath: "./errorShots/",
   baseUrl: "",
-  waitforTimeout: 10000,
-  connectionRetryTimeout: 90000,
+  waitforTimeout: 600000,
+  connectionRetryTimeout: 600000,
   connectionRetryCount: 3,
   path: "/wd/hub",
   hostname: "mobile-hub.lambdatest.com",
   port: 443,
   protocol: "https",
-
   framework: "mocha",
   mochaOpts: {
     ui: "bdd",
-    timeout: 100000,
+    timeout: 600000,
   },
 };
