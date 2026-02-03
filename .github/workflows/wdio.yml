@@ -11,9 +11,9 @@ on:
   # enables option for workflow to be manually executed in Github UI
   workflow_dispatch:
 
-  # enables scheduled execution every 30 minutes
+  # enables scheduled execution every 25 minutes
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/25 * * * *"
 
 jobs:
   ios-todo-data:
