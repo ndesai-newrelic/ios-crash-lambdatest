@@ -55,11 +55,11 @@ jobs:
           REACT_NATIVE_CURRENT_VERSION="${{ steps.get-version-react-native.outputs.current_version }}"
           
           # Update version
+          npm install
           npm update newrelic-react-native-agent
+          cd ios 
           ls
-          cd ios && pod install
-          # npx pod install --repo-update
-          # pod update NewRelicAgent
+          pod install --repo-update
 
           echo "Updated New Relic react-native agent from $REACT_NATIVE_CURRENT_VERSION to $REACT_NATIVE_LATEST_VERSION"
 
