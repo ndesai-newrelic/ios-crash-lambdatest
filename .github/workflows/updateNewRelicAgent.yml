@@ -59,6 +59,7 @@ jobs:
           
           # Update 
           npm update newrelic-react-native-agent
+          ls
           cd ios
           pod install --repo-update
           pod update NewRelicAgent
