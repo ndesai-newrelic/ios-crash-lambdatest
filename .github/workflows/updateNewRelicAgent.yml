@@ -56,7 +56,9 @@ jobs:
           
           # Update version
           npm update newrelic-react-native-agent
-          npx pod install --repo-update
+          ls
+          cd ios && pod install --repo-update
+          # npx pod install --repo-update
           # pod update NewRelicAgent
 
           echo "Updated New Relic react-native agent from $REACT_NATIVE_CURRENT_VERSION to $REACT_NATIVE_LATEST_VERSION"
