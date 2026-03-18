@@ -14,7 +14,7 @@ on:
     
 jobs:
   check-and-update:
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     permissions:
       contents: write
       pull-requests: write
@@ -88,19 +88,30 @@ jobs:
           ANDROID_LATEST_VERSION="${{ steps.get-version-android.outputs.latest_version }}"
           ANDROID_CURRENT_VERSION="${{ steps.get-version-android.outputs.current_version }}"
 
-          # Install dependencies
+      - name: Select Xcode 16.4
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_16.4.app
+
+      - name: Install dependencies
+        run: |
           npm install
           cd ios && pod install
 
-          # Update newrelic-react-native-agent version
-          npm update newrelic-react-native-agent
-          # cd ..
-          # sed -i "s/\"newrelic-react-native-agent\": \"^$REACT_NATIVE_CURRENT_VERSION\"/\"newrelic-react-native-agent\": \"^$REACT_NATIVE_LATEST_VERSION\"/g" package.json
-          
-          # Update pods
-          npx pod install --repo-update
+      - name: Clean iOS app
+        run: |
+          cd ios
+          xcodebuild clean -workspace mainagenttestapp.xcworkspace -scheme mainagenttestapp
+          pod update
+          cd ..
 
-          # Update build.gradle - agent-gradle-plugin classpath
+      - name: Update newrelic-react-native-agent version
+        run: |
+          npm update newrelic-react-native-agent
+          cd ios && pod install --repo-update
+          cd ..
+
+      - name: Update build.gradle - agent-gradle-plugin classpath
+        run: |
           cd android
           sed -i "s/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_CURRENT_VERSION/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_LATEST_VERSION/g" build.gradle
 
