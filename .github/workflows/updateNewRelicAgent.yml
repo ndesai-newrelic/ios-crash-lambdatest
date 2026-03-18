@@ -110,12 +110,21 @@ jobs:
           cd ios && pod install --repo-update
           cd ..
 
-      - name: Update build.gradle - agent-gradle-plugin classpath
+      - name: Update build.gradle - agent-gradle-plugin
         run: |
           cd android
-          sed -i "s/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_CURRENT_VERSION/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_LATEST_VERSION/g" build.gradle
+          
+          # Escape special characters in versions for sed
+          ANDROID_CURRENT_ESCAPED=$(echo "$ANDROID_CURRENT_VERSION" | sed 's/[[\.*^$()+?{|]/\\&/g')
+          ANDROID_LATEST_ESCAPED=$(echo "$ANDROID_LATEST_VERSION" | sed 's/[[\.*^$()+?{|]/\\&/g')
+          
+          # Update the version using sed with proper escaping
+          sed -i.bak "s/agent-gradle-plugin:${ANDROID_CURRENT_ESCAPED}/agent-gradle-plugin:${ANDROID_LATEST_ESCAPED}/g" build.gradle
+          
+          # Remove backup file
+          rm -f build.gradle.bak
 
-          echo "Updated New Relic react-native agent from $REACT_NATIVE_CURRENT_VERSION to $REACT_NATIVE_LATEST_VERSION"
+          echo "Updated New Relic Android agent from $ANDROID_CURRENT_VERSION to $ANDROID_LATEST_VERSION"
 
       - name: Create Pull Request
         if: steps.get-version-react-native.outputs.update_needed == 'true'
