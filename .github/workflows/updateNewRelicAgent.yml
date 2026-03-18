@@ -54,14 +54,14 @@ jobs:
           # Fetch the latest release version from Maven Central metadata XML
           # This is more reliable than the search API for getting the absolute latest version
           LATEST_VERSION=$(curl -s "https://repo1.maven.org/maven2/com/newrelic/agent/android/android-agent/maven-metadata.xml" | \
-            grep -oP '<release>\K[^<]+' | head -1)
+            sed -n 's/.*<release>\([^<]*\)<\/release>.*/\1/p' | head -1)
 
           echo "Latest version: $LATEST_VERSION"
           echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
 
           # Get current version from build.gradle
           cd android
-          CURRENT_VERSION=$(grep -oP "classpath ['\"]com\.newrelic\.agent\.android:agent-gradle-plugin:\K[^'\"]+(?=['\"])" build.gradle)
+          CURRENT_VERSION=$(grep -E "classpath ['\"]com\.newrelic\.agent\.android:agent-gradle-plugin:" build.gradle | sed -E "s/.*:([^'\"]+)['\"].*/\1/")
           
           echo "Current version: $CURRENT_VERSION"
           echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
