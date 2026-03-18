@@ -61,7 +61,7 @@ jobs:
 
           # Get current version from build.gradle
           cd android
-          CURRENT_VERSION=$(grep "com.newrelic.agent.android:agent-gradle-plugin" build.gradle | sed "s/.*agent-gradle-plugin:\([^'\"]*\).*/\1/")
+          CURRENT_VERSION=$(grep "agent-gradle-plugin" build.gradle | awk -F: '{print $NF}' | tr -d "'" | tr -d '"')
           
           echo "Current version: $CURRENT_VERSION"
           echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
