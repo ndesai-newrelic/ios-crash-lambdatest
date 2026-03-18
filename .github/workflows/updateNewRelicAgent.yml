@@ -118,7 +118,7 @@ jobs:
           cd android
           
           # Update the version using sed with proper escaping
-          sed -i "s/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_CURRENT_VERSION/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_LATEST_VERSION/g" build.gradle
+          sed -i '' "s/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_CURRENT_VERSION/com.newrelic.agent.android:agent-gradle-plugin:$ANDROID_LATEST_VERSION/g" build.gradle
           
           echo "Updated New Relic react-native agent from $REACT_NATIVE_CURRENT_VERSION to $REACT_NATIVE_LATEST_VERSION"
 
