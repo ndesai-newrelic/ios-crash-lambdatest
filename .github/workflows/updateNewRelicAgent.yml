@@ -90,6 +90,7 @@ jobs:
 
           # Install dependencies
           npm install
+          cd ios && pod install
 
           # Update newrelic-react-native-agent version
           npm update newrelic-react-native-agent
