@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2
+        uses: actions/checkout@v6
 
       - name: Setup environment
         uses: ./.github/actions/env-setup
@@ -81,7 +81,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set Up JDK
         uses: actions/setup-java@v4
@@ -118,7 +118,7 @@ jobs:
       CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_STAGING"
       ENVIRONMENT: "staging"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
 
       - name: Setup environment
         uses: ./.github/actions/env-setup

@@ -26,7 +26,7 @@ jobs:
       ENVIRONMENT: "eu-prod"
       TEST: "./ios-todo.js"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
@@ -79,7 +79,7 @@ jobs:
       ENVIRONMENT: "eu-prod"
       TEST: "./android-todo.js"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
@@ -135,7 +135,7 @@ jobs:
         ENVIRONMENT: "eu-prod"
         TEST: "./ios-explore.js"
       steps:
-        - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+        - uses: actions/checkout@v6
         - name: Setup environment
           uses: ./.github/actions/env-setup
 
@@ -162,7 +162,7 @@ jobs:
       ENVIRONMENT: "eu-prod"
       TEST: "./android-explore.js"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
@@ -189,7 +189,7 @@ jobs:
       ENVIRONMENT: "eu-prod"
       TEST: "./ios-crash.js"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
@@ -216,7 +216,7 @@ jobs:
       ENVIRONMENT: "eu-prod"
       TEST: "./android-crash.js"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
