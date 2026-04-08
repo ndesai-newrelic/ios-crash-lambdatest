@@ -68,7 +68,7 @@ jobs:
           zip -r mainagenttestapp-ios.zip mainagenttestapp.app
 
       - name: Upload iOS app
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: mainagenttestapp-ios
           path: /Users/runner/Library/Developer/Xcode/DerivedData/mainagenttestapp-aiutyigxigajkbcjspvvdvuiqmit/Build/Products/Release-iphonesimulator/mainagenttestapp-ios.zip
@@ -84,7 +84,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set Up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: "zulu" # See 'Supported distributions' for available options
           java-version: "17"
@@ -101,7 +101,7 @@ jobs:
           ENVIRONMENT: "staging"
 
       - name: Upload android app
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: mainagenttestapp-android
           path: ${{ github.workspace }}/android/app/build/outputs/apk/release/app-release.apk
@@ -124,13 +124,13 @@ jobs:
         uses: ./.github/actions/env-setup
 
       - name: Download iOS artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: mainagenttestapp-ios
           path: ${{ github.workspace }}/builds
 
       - name: Download android artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: mainagenttestapp-android
           path: ${{ github.workspace }}/builds
