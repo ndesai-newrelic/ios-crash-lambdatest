@@ -107,7 +107,7 @@ jobs:
       - name: Update newrelic-react-native-agent version
         run: |
           npm update newrelic-react-native-agent
-          cd ios && pod install --repo-update
+          cd ios && pod install --repo-update && pod update NewRelicAgent
           cd ..
 
       - name: Update build.gradle - agent-gradle-plugin
