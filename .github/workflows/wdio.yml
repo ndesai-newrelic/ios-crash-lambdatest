@@ -43,7 +43,7 @@ jobs:
 
       # - name: Notify failure
       #   if: ${{ failure() || cancelled() }}
-      #   uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
+      #   uses: slackapi/slack-github-action@v3
       #   with:
       #     webhook-type: incoming-webhook
       #     webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -96,7 +96,7 @@ jobs:
         run: echo "[ RUNNER ] - failed to execute Android todo tests"
       # - name: Notify failure
       #   if: ${{ failure() || cancelled() }}
-      #   uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
+      #   uses: slackapi/slack-github-action@v3
       #   with:
       #     webhook-type: incoming-webhook
       #     webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
