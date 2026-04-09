@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -107,7 +107,7 @@ jobs:
       - name: Update newrelic-react-native-agent version
         run: |
           npm update newrelic-react-native-agent
-          cd ios && pod install --repo-update
+          cd ios && pod install --repo-update && pod update NewRelicAgent
           cd ..
 
       - name: Update build.gradle - agent-gradle-plugin
@@ -126,9 +126,9 @@ jobs:
 
       - name: Create Pull Request
         if: steps.get-version-react-native.outputs.update_needed == 'true'
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.AGENT_PAT }}
           commit-message: "chore: Update New Relic react-native agent to ${{ steps.get-version-react-native.outputs.latest_version }}"
           title: "chore: Update New Relic react-native agent to ${{ steps.get-version-react-native.outputs.latest_version }}"
           body: |

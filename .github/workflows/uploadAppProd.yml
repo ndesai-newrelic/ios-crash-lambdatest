@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2
+        uses: actions/checkout@v6
 
       - name: Setup environment
         uses: ./.github/actions/env-setup
@@ -68,7 +68,7 @@ jobs:
           zip -r mainagenttestapp-ios.zip mainagenttestapp.app
 
       - name: Upload iOS app
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: mainagenttestapp-ios
           path: /Users/runner/Library/Developer/Xcode/DerivedData/mainagenttestapp-aiutyigxigajkbcjspvvdvuiqmit/Build/Products/Release-iphonesimulator/mainagenttestapp-ios.zip
@@ -81,10 +81,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set Up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: "zulu" # See 'Supported distributions' for available options
           java-version: "17"
@@ -101,7 +101,7 @@ jobs:
           ENVIRONMENT: "prod"
 
       - name: Upload android app
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: mainagenttestapp-android
           path: ${{ github.workspace }}/android/app/build/outputs/apk/release/app-release.apk
@@ -118,19 +118,19 @@ jobs:
       CUSTOM_APP_ID_ANDROID: "ANDROIDAPP_PROD"
       ENVIRONMENT: "prod"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
 
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
       - name: Download iOS artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: mainagenttestapp-ios
           path: ${{ github.workspace }}/builds
 
       - name: Download android artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: mainagenttestapp-android
           path: ${{ github.workspace }}/builds
@@ -144,7 +144,7 @@ jobs:
 
       - name: Notify success
         if: ${{ success() }}
-        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v
+        uses: slackapi/slack-github-action@v3
         with:
           webhook-type: incoming-webhook
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -168,7 +168,7 @@ jobs:
 
       # - name: Notify failure
       #   if: ${{ failure() || cancelled() }}
-      #   uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
+      #   uses: slackapi/slack-github-action@v3
       #   with:
       #     webhook-type: incoming-webhook
       #     webhook: ${{ secrets.SLACK_WEBHOOK_URL }}

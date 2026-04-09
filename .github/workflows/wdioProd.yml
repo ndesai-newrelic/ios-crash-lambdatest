@@ -26,7 +26,7 @@ jobs:
       ENVIRONMENT: "prod"
       TEST: "./ios-todo.js"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
@@ -43,7 +43,7 @@ jobs:
 
       # - name: Notify failure
       #   if: ${{ failure() || cancelled() }}
-      #   uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
+      #   uses: slackapi/slack-github-action@v3
       #   with:
       #     webhook-type: incoming-webhook
       #     webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -80,7 +80,7 @@ jobs:
       ENVIRONMENT: "prod"
       TEST: "./android-todo.js"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
@@ -97,7 +97,7 @@ jobs:
 
       # - name: Notify failure
       #   if: ${{ failure() || cancelled() }}
-      #   uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # pin@v2
+      #   uses: slackapi/slack-github-action@v3
       #   with:
       #     webhook-type: incoming-webhook
       #     webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -136,7 +136,7 @@ jobs:
         ENVIRONMENT: "prod"
         TEST: "./ios-explore.js"
       steps:
-        - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+        - uses: actions/checkout@v6
         - name: Setup environment
           uses: ./.github/actions/env-setup
 
@@ -163,7 +163,7 @@ jobs:
       ENVIRONMENT: "prod"
       TEST: "./android-explore.js"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
@@ -190,7 +190,7 @@ jobs:
       ENVIRONMENT: "prod"
       TEST: "./ios-crash.js"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
@@ -217,7 +217,7 @@ jobs:
       ENVIRONMENT: "prod"
       TEST: "./android-crash.js"
     steps:
-      - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # pin@v4
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/env-setup
 
