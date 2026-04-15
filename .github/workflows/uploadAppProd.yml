@@ -39,7 +39,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          cd ios && pod install --repo-update && pod update
+          cd ios && pod install --repo-update && pod update NewRelicAgent
 
       - name: Clean iOS app
         run: |
