@@ -2,13 +2,13 @@
 # Designed to run in a fork where CUSTOM_APP_ID_IOS points at the fork owner's
 # own uploaded app (not the shared IOSAPP_STAGING).
 
-name: "iOS crash - hourly data generation"
+name: "iOS crash - every 30 min data generation"
 
 on:
   workflow_dispatch:
   schedule:
-    # Top of every hour, offset to :17 to avoid GitHub's :00 scheduler rush
-    - cron: "17 * * * *"
+    # Every 30 minutes, offset off :00/:30 to avoid GitHub's scheduler rush
+    - cron: "13,43 * * * *"
 
 jobs:
   ios-crash-data:

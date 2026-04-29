@@ -12,6 +12,9 @@ describe("main agent test app - ios", () => {
     const URI = "uri";
     const TYPE = "type";
     const EVAL = "eval";
+    const RANGE = "range";
+    const REFERENCE = "reference";
+  
 
     await iOSPage.clickCrashTab();
     await iOSPage.forceCrash(URI);
@@ -19,6 +22,10 @@ describe("main agent test app - ios", () => {
     await iOSPage.forceCrash(TYPE);
     await iOSPage.clickCrashTab();
     await iOSPage.forceCrash(EVAL);
+    await iOSPage.clickCrashTab();
+    await iOSPage.forceCrash(RANGE);
+    await iOSPage.clickCrashTab();
+    await iOSPage.forceCrash(REFERENCE);
     
      await iOSPage.backgroundApp();
   });
