@@ -72,6 +72,14 @@ class iOS  {
     return this.driver.$("accessibility id:Eval Error");
   }
 
+  get rangeErrorButton() {
+    return this.driver.$("accessibility id:Range Error");
+  }
+
+  get referenceErrorButton() {
+    return this.driver.$("accessibility id:Reference Error");
+  }
+
   // Methods
 
   async launchApp() {
@@ -153,6 +161,8 @@ class iOS  {
       ["uri"]: () => this.uriErrorButton,
       ["type"]: () => this.typeErrorButton,
       ["eval"]: () => this.evalErrorButton,
+      ["range"]: () => this.rangeErrorButton,
+      ["reference"]: () => this.referenceErrorButton,
     };
 
     await this.driver.setTimeouts(10000);
