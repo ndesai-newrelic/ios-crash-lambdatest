@@ -1,0 +1,38 @@
+# Hourly iOS crash data generation against a user-configured LambdaTest app.
+# Designed to run in a fork where CUSTOM_APP_ID_IOS points at the fork owner's
+# own uploaded app (not the shared IOSAPP_STAGING).
+
+name: "iOS crash - hourly data generation"
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Top of every hour, offset to :17 to avoid GitHub's :00 scheduler rush
+    - cron: "17 * * * *"
+
+jobs:
+  ios-crash-data:
+    name: Generate iOS crash data
+    runs-on: ubuntu-latest
+    env:
+      LT_USERNAME:       ${{ secrets.LT_USERNAME }}
+      LT_ACCESSKEY:      ${{ secrets.LT_ACCESSKEY }}
+      CUSTOM_APP_ID_IOS: ${{ vars.CUSTOM_APP_ID_IOS }}
+      ENVIRONMENT:       ${{ vars.ENVIRONMENT || 'staging' }}
+      TEST:              "./ios-crash.js"
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup environment
+        uses: ./.github/actions/env-setup
+
+      - name: Execute iOS crash tests
+        run: npm run test:wdio-ios
+
+      - name: Log success
+        if: ${{ success() }}
+        run: echo "[ RUNNER ] - successfully executed iOS crash tests"
+
+      - name: Log failure
+        if: ${{ failure() || cancelled() }}
+        run: echo "[ RUNNER ] - failed to execute iOS crash tests"
