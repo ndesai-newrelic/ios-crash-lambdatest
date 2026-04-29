@@ -88,6 +88,14 @@ class Android {
     );
   }
 
+   get typeErrorButton() {
+    return this.driver.$(
+      '-android uiautomator:new UiSelector().text("TYPE ERROR")'
+    );
+  }
+
+
+
   get anrSimlatorButton() {
     return this.driver.$(
       '-android uiautomator:new UiSelector().text("SIMULATE ANR")'
@@ -162,6 +170,7 @@ class Android {
       ["reference"]: () => this.referenceErrorButton,
       ["eval"]: () => this.evalErrorButton,
       ["uri"]: () => this.uriErrorButton,
+      ["type"]: () => this.typeErrorButton,
     };
 
     await this.driver.setTimeouts(10000);

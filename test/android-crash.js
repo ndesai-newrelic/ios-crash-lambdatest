@@ -13,6 +13,7 @@ describe("main agent test app - android", () => {
     const REFERENCE = "reference";
     const EVAL = "eval";
     const URI = "uri";
+    const Type = "type";
 
     await androidPage.launchApp()
     await androidPage.clickCrashTab();
@@ -24,7 +25,8 @@ describe("main agent test app - android", () => {
     await androidPage.clickCrashTab();
     await androidPage.forceCrash(URI);
     await androidPage.clickCrashTab();
-    await androidPage.forceANR();
+    await androidPage.forceCrash(Type);
+  
     
     await androidPage.backgroundApp();
   });
