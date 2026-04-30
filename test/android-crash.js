@@ -50,6 +50,10 @@ describe("main agent test app - android", () => {
     await navigateAndClickExploreEvents(androidPage, HEX, HTTPRequest, DELAYED, DT, HTTPRequestError);
     await androidPage.clickCrashTab();
     await androidPage.forceCrash(Type);
+  await navigateAndClickExploreEvents(androidPage, HEX, HTTPRequest, DELAYED, DT, HTTPRequestError);
+    await androidPage.clickCrashTab();
+    await androidPage.anrSimlatorStackOverFlowButton.click();
+
   
     
     await androidPage.backgroundApp();

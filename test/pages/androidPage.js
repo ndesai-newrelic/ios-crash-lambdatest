@@ -102,6 +102,12 @@ class Android {
     );
   }
 
+    get anrSimlatorStackOverFlowButton() {
+    return this.driver.$(
+      '-android uiautomator:new UiSelector().text("Simulate StackOverflow ANR")'
+    );
+  }
+
   get toast() {
     return this.driver.$("id:android:id/aerr_close");
   }
