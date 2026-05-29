@@ -1,14 +1,13 @@
-# Hourly iOS crash data generation against a user-configured LambdaTest app.
-# Designed to run in a fork where CUSTOM_APP_ID_IOS points at the fork owner's
-# own uploaded app (not the shared IOSAPP_STAGING).
+# Every-30-min iOS crash data generation against a user-configured LambdaTest
+# app. Triggered by cron-job.org on :13/:43 via the workflow_dispatch API —
+# GitHub's native scheduler was dropping runs to 1-5h gaps in this repo.
+# CUSTOM_APP_ID_IOS points at the fork owner's own uploaded app (not the
+# shared IOSAPP_STAGING).
 
 name: "iOS crash - every 30 min data generation"
 
 on:
   workflow_dispatch:
-  schedule:
-    # Every 30 minutes, offset off :00/:30 to avoid GitHub's scheduler rush
-    - cron: "13,43 * * * *"
 
 jobs:
   ios-crash-data:

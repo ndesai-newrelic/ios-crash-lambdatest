@@ -1,15 +1,13 @@
 # Every-30-min Android crash data generation against a user-configured
-# LambdaTest app. Mirrors iosCrashHourly.yml; staggered cron (:28/:58)
-# offsets it from the iOS runs (:13/:43) so the two don't hit LambdaTest
-# in the same minute.
+# LambdaTest app. Mirrors iosCrashHourly.yml. Triggered by cron-job.org on
+# :28/:58 via the workflow_dispatch API (offset from the iOS workflow's
+# :13/:43 so the two don't hit LambdaTest in the same minute) — GitHub's
+# native scheduler was dropping runs to 1-5h gaps in this repo.
 
 name: "Android crash - every 30 min data generation"
 
 on:
   workflow_dispatch:
-  schedule:
-    # Every 30 min at :28 and :58, offset from iOS runs and off the :00/:30 rush
-    - cron: "28,58 * * * *"
 
 jobs:
   android-crash-data:
