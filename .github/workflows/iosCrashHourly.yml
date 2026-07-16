@@ -1,8 +1,14 @@
 # Every-30-min iOS crash data generation against a user-configured LambdaTest
-# app. Triggered by cron-job.org on :13/:43 via the workflow_dispatch API —
-# GitHub's native scheduler was dropping runs to 1-5h gaps in this repo.
-# CUSTOM_APP_ID_IOS points at the fork owner's own uploaded app (not the
-# shared IOSAPP_STAGING).
+# app. Now triggers at the same time as androidCrashHourly.yml via
+# cron-job.org's workflow_dispatch API (previously offset to :13/:43 vs
+# Android's :28/:58 to avoid hitting LambdaTest in the same minute — that
+# stagger is gone now that each platform runs two apps in parallel matrix
+# jobs instead of one, see below). GitHub's native scheduler was dropping
+# runs to 1-5h gaps in this repo, hence cron-job.org.
+#
+# Runs against both CUSTOM_APP_ID_IOS (primary, the fork owner's own
+# uploaded app — not the shared IOSAPP_STAGING) and CUSTOM_APP_ID_IOS_ERROR
+# (error-scenario app) as parallel matrix jobs.
 
 name: "iOS crash - every 30 min data generation"
 
@@ -11,12 +17,20 @@ on:
 
 jobs:
   ios-crash-data:
-    name: Generate iOS crash data
+    name: Generate iOS crash data (${{ matrix.label }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: primary
+            app_id_var: CUSTOM_APP_ID_IOS
+          - label: error
+            app_id_var: CUSTOM_APP_ID_IOS_ERROR
     env:
       LT_USERNAME:       ${{ secrets.LT_USERNAME }}
       LT_ACCESSKEY:      ${{ secrets.LT_ACCESSKEY }}
-      CUSTOM_APP_ID_IOS: ${{ vars.CUSTOM_APP_ID_IOS }}
+      CUSTOM_APP_ID_IOS: ${{ vars[matrix.app_id_var] }}
       ENVIRONMENT:       ${{ vars.ENVIRONMENT || 'staging' }}
       TEST:              "./ios-crash.js"
     steps:
@@ -30,8 +44,8 @@ jobs:
 
       - name: Log success
         if: ${{ success() }}
-        run: echo "[ RUNNER ] - successfully executed iOS crash tests"
+        run: echo "[ RUNNER ] - successfully executed iOS crash tests (${{ matrix.label }})"
 
       - name: Log failure
         if: ${{ failure() || cancelled() }}
-        run: echo "[ RUNNER ] - failed to execute iOS crash tests"
+        run: echo "[ RUNNER ] - failed to execute iOS crash tests (${{ matrix.label }})"

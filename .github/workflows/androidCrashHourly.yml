@@ -1,8 +1,13 @@
 # Every-30-min Android crash data generation against a user-configured
-# LambdaTest app. Mirrors iosCrashHourly.yml. Triggered by cron-job.org on
-# :28/:58 via the workflow_dispatch API (offset from the iOS workflow's
-# :13/:43 so the two don't hit LambdaTest in the same minute) — GitHub's
-# native scheduler was dropping runs to 1-5h gaps in this repo.
+# LambdaTest app. Mirrors iosCrashHourly.yml and now triggers at the same
+# time as it via cron-job.org's workflow_dispatch API (previously offset to
+# :28/:58 vs iOS's :13/:43 to avoid hitting LambdaTest in the same minute —
+# that stagger is gone now that each platform runs two apps in parallel
+# matrix jobs instead of one, see below). GitHub's native scheduler was
+# dropping runs to 1-5h gaps in this repo, hence cron-job.org.
+#
+# Runs against both CUSTOM_APP_ID_ANDROID (primary) and
+# CUSTOM_APP_ID_ANDROID_ERROR (error-scenario app) as parallel matrix jobs.
 
 name: "Android crash - every 30 min data generation"
 
@@ -11,12 +16,20 @@ on:
 
 jobs:
   android-crash-data:
-    name: Generate Android crash data
+    name: Generate Android crash data (${{ matrix.label }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: primary
+            app_id_var: CUSTOM_APP_ID_ANDROID
+          - label: error
+            app_id_var: CUSTOM_APP_ID_ANDROID_ERROR
     env:
       LT_USERNAME:           ${{ secrets.LT_USERNAME }}
       LT_ACCESSKEY:          ${{ secrets.LT_ACCESSKEY }}
-      CUSTOM_APP_ID_ANDROID: ${{ vars.CUSTOM_APP_ID_ANDROID }}
+      CUSTOM_APP_ID_ANDROID: ${{ vars[matrix.app_id_var] }}
       ENVIRONMENT:           ${{ vars.ENVIRONMENT || 'staging' }}
       TEST:                  "./android-crash.js"
     steps:
@@ -30,8 +43,8 @@ jobs:
 
       - name: Log success
         if: ${{ success() }}
-        run: echo "[ RUNNER ] - successfully executed Android crash tests"
+        run: echo "[ RUNNER ] - successfully executed Android crash tests (${{ matrix.label }})"
 
       - name: Log failure
         if: ${{ failure() || cancelled() }}
-        run: echo "[ RUNNER ] - failed to execute Android crash tests"
+        run: echo "[ RUNNER ] - failed to execute Android crash tests (${{ matrix.label }})"
