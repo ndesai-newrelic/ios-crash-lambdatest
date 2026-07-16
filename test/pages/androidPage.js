@@ -26,7 +26,7 @@ class Android {
   // Explore tab locators
 
   get exploreTab() {
-    return this.driver.$("accessibility id:, Explore");
+    return this.driver.$("accessibility id:Explore");
   }
 
   get hexButton() {
