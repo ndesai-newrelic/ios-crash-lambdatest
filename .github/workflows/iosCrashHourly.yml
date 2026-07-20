@@ -6,9 +6,10 @@
 # jobs instead of one, see below). GitHub's native scheduler was dropping
 # runs to 1-5h gaps in this repo, hence cron-job.org.
 #
-# Runs against both CUSTOM_APP_ID_IOS (primary, the fork owner's own
-# uploaded app — not the shared IOSAPP_STAGING) and CUSTOM_APP_ID_IOS_ERROR
-# (error-scenario app) as parallel matrix jobs.
+# Runs against CUSTOM_APP_ID_IOS (primary, the fork owner's own uploaded
+# app — not the shared IOSAPP_STAGING), CUSTOM_APP_ID_IOS_ERROR
+# (error-scenario app), and CUSTOM_APP_ID_IOS_MISMATCH_SYMBOL
+# (symbol-mismatch-scenario app) as parallel matrix jobs.
 
 name: "iOS crash - every 30 min data generation"
 
@@ -27,6 +28,8 @@ jobs:
             app_id_var: CUSTOM_APP_ID_IOS
           - label: error
             app_id_var: CUSTOM_APP_ID_IOS_ERROR
+          - label: mismatch-symbol
+            app_id_var: CUSTOM_APP_ID_IOS_MISMATCH_SYMBOL
     env:
       LT_USERNAME:       ${{ secrets.LT_USERNAME }}
       LT_ACCESSKEY:      ${{ secrets.LT_ACCESSKEY }}

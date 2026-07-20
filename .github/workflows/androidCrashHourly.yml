@@ -6,8 +6,9 @@
 # matrix jobs instead of one, see below). GitHub's native scheduler was
 # dropping runs to 1-5h gaps in this repo, hence cron-job.org.
 #
-# Runs against both CUSTOM_APP_ID_ANDROID (primary) and
-# CUSTOM_APP_ID_ANDROID_ERROR (error-scenario app) as parallel matrix jobs.
+# Runs against CUSTOM_APP_ID_ANDROID (primary), CUSTOM_APP_ID_ANDROID_ERROR
+# (error-scenario app), and CUSTOM_APP_ID_ANDROID_MISMATCH_SYMBOL
+# (symbol-mismatch-scenario app) as parallel matrix jobs.
 
 name: "Android crash - every 30 min data generation"
 
@@ -26,6 +27,8 @@ jobs:
             app_id_var: CUSTOM_APP_ID_ANDROID
           - label: error
             app_id_var: CUSTOM_APP_ID_ANDROID_ERROR
+          - label: mismatch-symbol
+            app_id_var: CUSTOM_APP_ID_ANDROID_MISMATCH_SYMBOL
     env:
       LT_USERNAME:           ${{ secrets.LT_USERNAME }}
       LT_ACCESSKEY:          ${{ secrets.LT_ACCESSKEY }}
