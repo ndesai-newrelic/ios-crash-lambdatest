@@ -6,7 +6,7 @@ class Android {
   // LOCATORS
   // Universal app locators
   get home() {
-    return this.driver.$('-android uiautomator:new UiSelector().text("")');
+    return this.driver.$("accessibility id:Home");
   }
 
   // Todo tab Locators
